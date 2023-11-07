@@ -4,7 +4,7 @@
 
 이은실, 양현정, 명길식, 김현호 의 팀프로젝트 😊
 
-<h3 id="infoProject">📜(n)on-blogging</h3>
+<h3 id="infoProject">📜(n)on-blogging?</h3>
 ~소개~
 
 <h3 id="useTechStack">✏️사용 기술</h3>
