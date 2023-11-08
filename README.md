@@ -10,24 +10,25 @@
 여러분은 다른 사람들과의 Communication을 통해 행복할 것이고.<br />(n)on blogging은 당신을 도울 것입니다.<br />
 ✿ Enjoy & Happy to BLog '◡'✿</p>
 
-<h3 id="useTechStack">✏️사용 기술</h3>
-<h4>
-<li>EJS</li>
-<li> <img src="https://img.shields.io/badge/HTML-E34F26?style=flat&logo=HTML5&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=CSS3&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/Nodemon-76D04B?style=flat&logo=Nodemon&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white"/>
-</li>
-<li> <img src="https://img.shields.io/badge/mySql-4479A1?style=flat&logo=mySql&logoColor=white"/>
-</li>
-</h4>
+<h3 id="useTechStack">✏️사용 기술 및 툴</h3>
+<div>
+  <p>EJS</p>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/Nodemon-76D04B?style=flat&logo=nodemon&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/Express-FFFFFF?style=flat&logo=express&logoColor=black" />
+  <br />
+  <img src="https://img.shields.io/badge/mySql-4479A1?style=flat&logo=mysql&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=flat&logo=Visual%20Studio%20Code&logoColor=white" />
+</div>
 
 <h3 id="getStart">✏️설치 방법</h3>
 
