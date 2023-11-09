@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.render("login.ejs");
 });
 
-app.get("/join", (req, res) => {
+app.get("/user/signup", (req, res) => {
   res.render("userCreate.ejs");
 });
 
