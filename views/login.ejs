@@ -11,8 +11,14 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <style>
+    *{
+      font-family: 'Noto Serif KR', serif;
+    }
     body {
       background-color: #ece8e4;
     }
@@ -29,7 +35,7 @@
   }
   ::placeholder {
     text-align: center;
-    color: #ccc9c6;
+    color: #717123;
   }
 
   #main{
@@ -39,11 +45,11 @@
 
   </style>
   <body>
-    <div id="main" class="mx-auto py-5" style="width: 30%;">
-      <a href="" style="display: flex;"><img src="../static/logo.png" width="170px" class="mx-auto" /></a>
+    <div id="main" class="mx-auto py-5 mt-5" style="width: 30%;">
+      <a href="" style="display: flex;"><img src="logo.png" width="170px" class="mx-auto" /></a>
         
 
-        <Form class="py-3 " >
+        <Form class="py-3">
           <input
             type="text"
             name="idBox"
@@ -58,7 +64,7 @@
             class="mb-2 form-control"
             style="border: none; "
           />
-        <div class="btnBox">
+        <div class="btnBox text-center mx-auto py-3" style="width: fit-content;" >
           <button
             type="button"
             class="btn mb-2 custom-margin "
