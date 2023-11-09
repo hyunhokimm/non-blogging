@@ -11,5 +11,5 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db.register = require("./user")(sequelize, Sequelize);
+db.register = require("./User")(sequelizeß, Sequelize);
 module.exports = db;
