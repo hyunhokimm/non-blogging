@@ -11,28 +11,34 @@
   </style>
   <body style="background-color: #ece8e4;">
 
-    <div class=" container" style="width: 50%;height: 100vh; margin-top:20% ">
+    <div class=" container" style="width: 40%; height: 100vh; margin-top:10% ">
       <section>
-        <a href="/login">
-          <img src="../static/logo.png" style="height: 50px;" alt="">
+        
+        <a href="/login" style="display: flex;">
+          <img src="/logo.png" style="height: 70px;" class="mb-5 mx-auto" alt="">
         </a>
         <form>
-          <div class="mb-3">
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          <div class="mb-2">
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
           </div>
-          <div class="mb-3">
-            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
+          <div class="mb-2">
+            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="PW">
           </div>
-          <div class="mb-3">
-            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Re:password">
+          <div class="mb-2">
+            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Check PW">
           </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nick-name">
+          <div class="mb-2">
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nick-name">
           </div>
-          <div style="display: flex;">
-            <a style="margin-bottom: 10px;"  href="login">Log in</a>
-          </div>
-          <button class="btn" style="width: 100%;color:white; background-color:#ae7f5f">Join us</button>
+
+          <button class="btn mb-2" style="width: 100%;color:white; background-color:#ae7f5f">Join us</button>
+          
+            <div style="display: flex;   ">
+
+                <p style="margin-right: 5px; font-size:15px; ">회원등록 되어있다면</p>
+                 <a   href="login">Log in</a>
+            </div>
+
         </form>
       </section>
     </div>
