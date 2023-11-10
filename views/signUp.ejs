@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join us</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      * {
+        font-family: "Noto Serif KR", serif;
+        color: #78715e;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #ece8e4">
+    <div class="container" style="width: 45%; height: 100vh; margin-top: 10%">
+      <section>
+        <a href="/login" style="display: flex">
+          <div>
+            <img
+              src="/logo.png"
+              style="width: 100%"
+              class="mb-5 mx-auto"
+              alt="non-blog"
+            />
+          </div>
+        </a>
+        <form>
+          <div class="mb-2">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+            />
+          </div>
+          <div class="mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="PW"
+            />
+          </div>
+          <div class="mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="chpassword"
+              placeholder="Check PW"
+            />
+          </div>
+          <div style="color: rgb(236, 63, 63)" id="err"></div>
+          <div class="mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nick-name"
+            />
+          </div>
+
+          <button
+            type="button"
+            onclick="signUp()"
+            class="btn mb-2"
+            style="width: 100%; color: white; background-color: #ae7f5f"
+          >
+            Join us
+          </button>
+        </form>
+        <div style="display: flex; justify-content: end">
+          <div
+            style="
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              margin-bottom: 5px;
+            "
+          >
+            <p
+              style="
+                margin: 5px;
+
+                font-size: 15px;
+                align-items: center;
+              "
+            >
+              회원등록 되어있다면
+            </p>
+            <a href="/">Log in</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
+      const signUp = async () => {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const chpassword = document.getElementById("chpassword").value;
+        const name = document.getElementById("name").value;
+        document.getElementById("err").innerHTML = "";
+
+        if (password != chpassword) {
+          document.getElementById("err").innerHTML =
+            "비밀번호는 같아야 합니다.";
+        }
+        const user = {
+          email,
+          password,
+          name,
+        };
+
+        axios({
+          method: "post",
+          url: "/user/signup",
+          data: user,
+        })
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
