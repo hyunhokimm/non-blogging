@@ -141,8 +141,8 @@
         const blogging = () => {
           document.getElementById("err").innerHTML = "";
           const title = document.getElementById("title").value;
-          const blog = $("#summernote").summernote("code");
-          const userBlog = { title, blog, form };
+          const content = $("#summernote").summernote("code");
+          const userBlog = { title, content, form };
           if (!form.get("file")) {
             document.getElementById("err").innerHTML = "사진을 올려주세요.";
           }

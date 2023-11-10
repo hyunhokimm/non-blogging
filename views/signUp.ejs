@@ -110,7 +110,7 @@
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const chpassword = document.getElementById("chpassword").value;
-        const name = document.getElementById("name").value;
+        const nickname = document.getElementById("name").value;
         document.getElementById("err").innerHTML = "";
 
         if (password != chpassword) {
@@ -120,7 +120,7 @@
         const user = {
           email,
           password,
-          name,
+          nickname,
         };
 
         axios({
