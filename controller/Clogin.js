@@ -1,4 +1,4 @@
-const { User } = require("../model/index");
+const { User } = require("../model/User");
 
 exports.index = (req, res) => {
   console.log(req.headers.cookie);
