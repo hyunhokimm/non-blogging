@@ -68,7 +68,7 @@
           /></a>
 
           <div class="fw-bold d-flex" id="nav">
-            <a class="nav-link me-3" aria-current="page" href="/">Home</a>
+            <a class="nav-link me-3" aria-current="page" href="/allblog">Home</a>
             <a class="nav-link me-3" href="/blog">Blogging</a>
             <a class="nav-link me-3" href="/myblog">My blog</a>
             <a class="nav-link me-3" href="/myinfo">My info</a>
@@ -145,12 +145,14 @@
           const title = document.getElementById("title").value;
           const content = $("#summernote").summernote("code");
           const userBlog = { title, content, form };
+
           if (!form.get("file")) {
             document.getElementById("err").innerHTML = "사진을 올려주세요.";
           }
           axios({
             method: "post",
             url: "/post",
+
             data: userBlog,
           })
             .then((result) => {
@@ -187,8 +189,6 @@
           if (file) {
             form.append("file", file);
           }
-          console.log("here");
-          // axios 이미지 파일 업로드 필요함
         });
       </script>
       <script
