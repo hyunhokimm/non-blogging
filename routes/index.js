@@ -1,6 +1,6 @@
 const express = require("express");
 const login = require("../controller/Clogin");
-const signup = require("../controller/Csiagnup");
+const signup = require("../controller/Csignup");
 const allblog = require("../controller/Chome");
 const postContent = require("../controller/Cblogging")
 const router = express.Router();
