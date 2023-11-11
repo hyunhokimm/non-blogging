@@ -1,4 +1,4 @@
-function postModel(sequelize, DataTypes) {
+function postTable(sequelize, DataTypes) {
     return sequelize.define(
         "post", {
             // id 기본키로 설정
@@ -35,4 +35,4 @@ function postModel(sequelize, DataTypes) {
     );
 }
 
-module.exports = postModel;
+module.exports = postTable;
