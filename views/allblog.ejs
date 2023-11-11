@@ -68,7 +68,7 @@
       height: 299px;
       z-index: 2;
       overflow:hidden;
-      background-color: blue;
+      /* background-color: blue; */
       left: 0px;
       top: 0px;
     }
@@ -90,6 +90,29 @@
     .msg {
       z-index: 100;
       color: black;
+    }
+    #welcome{
+      position: absolute;
+      left: 640px;
+    }
+
+    #whatDay{
+      position: absolute;
+      top: 100px;
+      left: 640px;
+
+    }
+    #clock{
+      font-size: 400%;
+      position: absolute;
+      top: 120px;
+      left:630px;
+    }
+
+    #whatTopic{
+      position: absolute;
+      top: 230px;
+      left: 640px;
     }
     /* .myBox{
       height: 1200px;
@@ -129,11 +152,13 @@
       <!-- 상단 박스 영역 -->
       <div class="topBox mx-auto ">
         <div class="topBoxMsg ">
-          <div class="d-flex  mb-3">
-            <div class="me-auto p-2 "><div class="imageBox">img</div></div>
+          <div class="d-flex  mb-3 positon-relative">
+            <div class="me-auto p-2 ">
+             <div class="imageBox">img</div>
+            </div>
             <div class="p-2 " id="welcome">Welcome to nonbloging.</div>
-            <div class="showTimeJs" id="clock"></div>
             <div class="showDate" id="whatDay">오늘 날짜?</div>
+            <div class="showTimeJs" id="clock" ></div>
             <div class="blogTopic" id="whatTopic">What's today's blog topic?</div>
             
           </div>
