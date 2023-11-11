@@ -3,6 +3,7 @@ const { signup } = require("../model/User");
 
 // 회원가입 페이지
 exports.signUpPage = (req, res) => {
+
     // 회원가입 뷰
     res.render("signUp");
 }
