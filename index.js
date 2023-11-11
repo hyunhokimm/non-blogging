@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/join", (req, res) => {
-  res.render("userCreate.ejs");
+  res.render("signUp.ejs");
 });
 
 app.listen(port, function () {

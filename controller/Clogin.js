@@ -1,4 +1,4 @@
-const { User } = require("../model/index");
+const { User } = require("../model/User");
 
 // login.ejs > 첫 페이지
 exports.index = (req, res) => {
