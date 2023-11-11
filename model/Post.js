@@ -1,8 +1,6 @@
-// Sequelize 모델 정의
 function postModel(sequelize, DataTypes) {
-    const posts = sequelize.define(
-        "post", 
-        {
+    return sequelize.define(
+        "post", {
             // id 기본키로 설정
             id: {
                 type: DataTypes.INTEGER,
@@ -29,19 +27,12 @@ function postModel(sequelize, DataTypes) {
                     key: "id"
                 }
             }
-        }, 
-        {
+        }, {
             tableName: "post",
             freezeTableName : true, 
             timestamps: false
-        }    
+        }
     );
-
-    // 모델 간의 관계 설정 
-    posts.belongsTo(User, { foreignKey: 'userId' });
-
-    // 모델 반환
-    return posts;
 }
 
 module.exports = postModel;
