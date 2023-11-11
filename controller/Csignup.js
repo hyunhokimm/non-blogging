@@ -10,6 +10,7 @@ exports.signUpPage = (req, res) => {
 
 // 회원가입 진행
 exports.signUpProcess = (req, res) => {
+    console.log(req.body)
     const data={
         email: req.body.email,
         nickname: req.body.nickname,
