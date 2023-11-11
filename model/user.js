@@ -1,4 +1,4 @@
-function register(Sequelize, DataTypes){
+function userTable(Sequelize, DataTypes){
     return Sequelize.define(
       "user", 
       { 
@@ -33,4 +33,4 @@ function register(Sequelize, DataTypes){
     );
   }
   
-  module.exports=register;
+  module.exports=userTable;

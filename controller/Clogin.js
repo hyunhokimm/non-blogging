@@ -1,13 +1,16 @@
-const { User } = require("../model/index");
+const { User } = require("../model/User");
 
+// login.ejs > 첫 페이지
 exports.index = (req, res) => {
-  console.log(req.headers.cookie);
   res.render("login");
 };
 
+// Login 성공 > myblog.ejs
 exports.login = (req, res) => {
-  res.render("signin");
+  res.render("myblog");
 };
+
+// Login 실패 > login.ejs
 exports.postLogin = (req, res) => {
   const { email, password } = req.body;
   const user = User.findOne({ where: { email, password } });
