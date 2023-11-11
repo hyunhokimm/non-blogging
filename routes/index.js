@@ -2,12 +2,11 @@ const express = require("express");
 const login = require("../controller/Clogin");
 const signup = require("../controller/Csignup");
 const allblog = require("../controller/Chome");
-const postContent = require("../controller/Cblogging")
+const postContent = require("../controller/Cblogging");
 const router = express.Router();
 
-
 // 로그인
-router.get("/user/login", login.signin);
+router.get("/user/login", login.login);
 router.post("/user/login", login.postLogin);
 
 // 회원가입

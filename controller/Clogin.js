@@ -1,14 +1,14 @@
 const { User } = require("../model/User");
 
-// login.ejs > 첫 페이지
-exports.index = (req, res) => {
+// login.ejs > main 페이지
+exports.login = (req, res) => {
   res.render("login");
 };
 
 // Login 성공 > myblog.ejs
-exports.login = (req, res) => {
-  res.render("myblog");
-};
+// exports.isLogin = (req, res) => {
+//   res.render("myblog");
+// };
 
 // Login 실패 > login.ejs
 exports.postLogin = (req, res) => {
