@@ -2,7 +2,7 @@ const { User } = require("../model/User");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
-  res.render("login");
+  res.render("login.ejs");
 };
 
 // Login 성공 > myblog.ejs

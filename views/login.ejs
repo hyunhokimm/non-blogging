@@ -47,7 +47,7 @@
     <div id="main" class="mx-auto py-5 mt-5" style="width: 30%">
       <a href="" style="display: flex">
         <img
-          src="/static/logo.png"
+          src="/logo.png"
           width="170px"
           class="mx-auto"
           alt="non-blog"
@@ -80,6 +80,7 @@
             type="button"
             class="btn mb-2 custom-margin mx-2"
             style="background-color: #ae7f5f; color: whitesmoke"
+            onclick="onJoin()"
           >
             Join
           </button>
@@ -91,5 +92,10 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const onJoin = ()=>{
+        location.href ='/user/signup'
+      }
+    </script>
   </body>
 </html>

@@ -26,7 +26,7 @@
   <body style="background-color: #ece8e4">
     <div class="container" style="width: 45%; height: 100vh; margin-top: 10%">
       <section>
-        <a href="/login" style="display: flex">
+        <a href="/user/login" style="display: flex; justify-content:center">
           <div>
             <img
               src="/logo.png"
@@ -99,13 +99,18 @@
             >
               회원등록 되어있다면
             </p>
-            <a href="/">Log in</a>
+            <a href="/user/login">Log in</a>
           </div>
         </div>
+        <button type="button" onclick="onNext()">다음페이지(없어질 버튼)</button>
       </section>
     </div>
     <script>
       //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
+
+      const onNext = ()=>{
+        location.href = '/notebook/allblog'
+      }
       const signUp = async () => {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;

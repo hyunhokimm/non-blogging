@@ -9,7 +9,7 @@ exports.postPage = (req, res) => {
     }).then((result) => {
         console.log("조회 ", result);
         if(result){
-            res.render("blogging", {data: result})
+            res.render("write", {data: result})
         }
         else{
             res.render("allblog");
