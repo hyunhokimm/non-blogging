@@ -1,12 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyInfo</title>
-</head>
-<body>
-    <h1>MyInfo</h1>
-    <h1>만들어야함</h1>
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div style="width: 60%; text-align: center; margin: 10rem auto">
+        <a href="/notebook/allblog">
+            <img
+              src="/logo.png"
+              alt="logo"
+              style="height: 4rem; margin-bottom: 1rem"
+            />
+        </a>
+      <div class="form-floating" style="margin-bottom: 1rem">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+        />
+        <label for="floatingPassword">Email</label>
+      </div>
+        <div class="form-floating" id="pw" style="margin-bottom: 1rem; display:none">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating" id="pwck" style="margin-bottom: 1rem; display:none">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Ck password</label>
+        </div>
+        <div class="form-floating" style="margin-bottom: 1.5rem">
+            <input
+            type="text"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            />
+            <label for="floatingPassword">Nickname</label>
+        </div>
+        <div
+          class="btn"
+          id="modify"
+          style="
+            width: 100%;
+            background-color: #ae7f5f;
+            margin-bottom: 1rem;
+            padding: 0.7rem 0;
+            border-radius: 20px;
+            text-align: center;
+            height: 3rem;
+            color: white;
+          "
+          onclick="modify()"
+        >
+          회원정보 수정하기
+        </div>
+        <div
+        class="btn"
+        id="complete"
+        style="
+        display:none;
+          width: 100%;
+          border: 2px solid  #ae7f5f;;
+          background-color: white;
+          margin-bottom: 1rem;
+          padding: 0.7rem 0;
+          border-radius: 20px;
+          text-align: center;
+          height: 3rem;
+          color: #ae7f5f;
+          font-weight:bold;
+        "
+        onclick="complete()"
+      >
+        수정 완료
+      </div>
+        <div
+          class="btn"
+          style="
+            width: 100%;
+            background-color: #ae7f5f;
+            margin-bottom: 1rem;
+            padding: 0.7rem 0;
+            border-radius: 20px;
+            text-align: center;
+            height: 3rem;
+            color: white;
+          "
+          onclick="cancle()"
+        >
+          취소 하기
+        </div>
+      </div>
+
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const modify = () => {
+        document.getElementById('pw').style.display=''
+        document.getElementById('pwck').style.display = ''
+        document.getElementById('complete').style.display = ''
+        document.getElementById('modify').style.display = 'none'
+       
+      };
+
+      const complete = ()=>{}
+
+      const cancle = () => {
+        location.href = "/notebook/allblog";
+      };
+    </script>
+  </body>
 </html>
