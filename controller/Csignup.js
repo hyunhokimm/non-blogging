@@ -1,5 +1,5 @@
 // 회원가입 데이터베이스 연결
-const { signup } = require("../model/User");
+const { signup } = require("../model");
 
 // 회원가입 페이지
 exports.signUpPage = (req, res) => {

@@ -1,4 +1,4 @@
-const { User } = require("../model/User");
+const { User } = require("../model/user");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
@@ -11,7 +11,7 @@ exports.login = (req, res) => {
 // };
 
 // Login 실패 > login.ejs
-exports.postLogin = (req, res) => {
+exports.isLogin = (req, res) => {
   const { email, password } = req.body;
   const user = User.findOne({ where: { email, password } });
   if (user) {
