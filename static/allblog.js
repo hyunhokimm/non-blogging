@@ -21,7 +21,7 @@ const IMG_NUMBER = 5;
 
 function getImage(imgNumber) {
   const image = new Image();
-  image.src = `/static/images/${imgNumber + 1}.jpg`;
+  image.src = `/images/${imgNumber + 1}.jpg`;
   image.classList.add("bgImage");
   imageBox.prepend(image);
 }

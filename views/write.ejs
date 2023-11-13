@@ -45,10 +45,7 @@
           color: #fff;
         }
       }
-      .box {
-        height: 300px;
-        width: 100%;
-      }
+
 
       #file {
         display: none;
@@ -63,43 +60,30 @@
         style="background-color: #ece8e4"
       >
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href="/notebook/allblog"
             ><img src="/logo.png" style="height: 40px" alt=""
           /></a>
 
           <div class="fw-bold d-flex" id="nav">
-            <a class="nav-link me-3" aria-current="page" href="/allblog">Home</a>
-            <a class="nav-link me-3" href="/blog">Blogging</a>
-            <a class="nav-link me-3" href="/myblog">My blog</a>
-            <a class="nav-link me-3" href="/myinfo">My info</a>
+            <a class="nav-link me-3"  href="/notebook/allblog">Home</a>
+            <a class="nav-link me-3" href="/notebook/">My blog</a>
+            <a class="nav-link me-3" href="/user/login">Logout</a>
+            <a class="nav-link me-3" href="/user/myinfo">My info</a>
           </div>
         </div>
       </nav>
       <section>
         <div style="padding: 80px">
-          <div
-            class="d-flex mb-3 justify-content-between align-items-center"
-            style="height: 300px"
-          >
-            <div style="width: 30%" class="d-flex">
-              <label
-                style="padding: 80px 10px"
-                class="btn-upload box fs-3 rounded-5"
-                for="file"
-                >사진 올리기</label
-              >
-              <input type="file" id="file" accept=".png, .jpeg" />
-            </div>
-            <div style="width: 50%">
-              <img
-                class="rounded-2"
-                style="max-width: 100%; height: auto"
-                id="imgbox"
-                alt=""
-              />
-            </div>
-          </div>
 
+         
+ 
+          <button
+          type="button"
+          class="btn btn-lg mb-3"
+          style="color: #ae7f5f; border:2px solid #ae7f5f; font-weight:bold;"
+        >
+          사진 올리기
+        </button>
           <div class="row">
             <div class="mb-3">
               <input
@@ -151,7 +135,7 @@
           }
           axios({
             method: "post",
-            url: "/post",
+            url: "/notebook/write",
 
             data: userBlog,
           })
