@@ -1,16 +1,16 @@
 {
   "development": {
     "host": "127.0.0.1:3306",
-    "database": "User",
+    "database": "non-blogging",
     "username": "non-blogging",
-    "password": "sesac231107$",
+    "password": "",
     "dialect": "mysql"
   },
-  "development": {
+  "production": {
     "host": "127.0.0.1:3306",
-    "database": "Post",
+    "database": "non-blogging",
     "username": "non-blogging",
-    "password": "sesac231107$",
+    "password": "",
     "dialect": "mysql"
   }
 }
