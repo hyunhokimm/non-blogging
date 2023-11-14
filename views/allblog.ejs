@@ -4,60 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
- 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+
   </head>
   <style>
     * {
       font-family: "Noto Serif KR", serif;
       color: #78715e;
     }
+
     body {
       background-color: #ece8e4;
       position: relative;
     }
+
     header {
-      background-color:  #e1ddd6;
+      background-color: #e1ddd6;
       position: fixed;
       z-index: 100;
       height: 40px;
       width: 100%;
     }
+
     nav {
       background-color: #e1ddd6;
     }
+
     main {
       min-height: 1500px;
     }
+
     footer {
       font-size: smaller;
       height: 140px;
       background-color: #78715e;
       text-align: center;
       color: whitesmoke;
-    
+
     }
-    .navbar{
-      margin-top: -1%;
-      width: 100%;
-        }
-    .line{
+
+    .line {
       position: relative;
       color: #78715e;
       top: -20px;
       opacity: 1;
     }
+
     .topBox {
       position: relative;
       top: 80px;
@@ -68,7 +63,8 @@
       z-index: 1;
       border: 1px solid #78715e;
     }
-    .topBoxContent{
+
+    .topBoxContent {
       position: absolute;
       right: -30px;
       z-index: 3;
@@ -78,15 +74,17 @@
       padding-top: 20px;
 
     }
+
     .imageBox {
       position: absolute;
       width: 60%;
       height: 299px;
       z-index: 2;
-      overflow:hidden;
+      overflow: hidden;
       left: 0px;
       top: 0px;
     }
+
     .topBar {
       position: relative;
       border: 1px solid #78715e;
@@ -95,18 +93,20 @@
       height: 37px;
       top: 81px;
     }
-    .blogBox{
+
+    .blogBox {
       position: relative;
       top: 100px;
       margin: 5px;
       padding: 1px;
     }
 
-    .blogTopic{
+    .blogTopic {
       position: relative;
       padding: 5px;
 
     }
+
     /* .profileBox{
       position: fixed;
       top: 10px;
@@ -114,179 +114,162 @@
     /* .myBox{
       bottom: 200px;
     } */
-    #clock{
+    #clock {
       font-size: 400%;
 
     }
-
   </style>
   <body>
-    <header class="my-1 ">
-      <nav class="navbar navbar-light">
-        <div class="mx-3 d-flex justify-content-start">
-          <a class="navbar-brand" href="/notebook/allblog"
-            ><img src="/logo.png" style="height: 40px" alt=""
-          /></a>
-        </div>
+    <header><%- include ('fragment/header') %></header>
+    <!-- <hr class="line"/> -->
 
-        <div class="mx-3 d-flex justify-content-end" id="nav">
-          <a class="nav-link me-2" aria-current="page" href="/notebook/allblog">Home</a>
-          <a class="nav-link me-2" href="/notebook">My blog</a>
-          <!-- <a class="nav-link me-3" href="/myinfo">My info</a> -->
-          <a class="nav-link me-2" href="/user/myinfo"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/></svg></a>
-        </div>
-      </nav>
-      <!-- <hr class="line"/> -->
-    </header>
     <!-- ------------main------------ -->
-  <main>
+    <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
       <div class="topBox mx-auto ">
         <div class="imageBox"></div>
         <div class="topBoxContent mx-1">
           <div id="welcome">Welcome to nonbloging.</div>
           <div class="showDate" id="whatDay">오늘 날짜?</div>
-          <div class="showTimeJs" id="clock" ></div>
-        </div>          
+          <div class="showTimeJs" id="clock"></div>
+        </div>
       </div>
 
 
       <!-- 아래 긴 박스 영역 -->
-        <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>
-     
+      <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>
+
       <!-- 블로그 박스 영역 -->
       <div class="blogBox">
         <!--왼쪽 프로필 영역  -->
-      <div class="row g-5 myBox mt-1 ">
-        <div class="row mb-12">
-          <div class="profileBox col-md-2 d-none d-lg-block">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-fixed" style="width: 230px;">
-              <div class="col p-4  d-flex flex-column position-static">
-                <h3 class="mb-0">profile</h3>             
-                <p class="card-text mb-auto">profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile  </p>
-              </div>
+        <div class="row g-5 myBox mt-1 ">
+          <div class="row mb-12">
+            <div class="profileBox col-md-2 d-none d-lg-block">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-fixed" style="width: 230px;">
+                <div class="col p-4  d-flex flex-column position-static">
+                  <h3 class="mb-0">profile</h3>
+                  <p class="card-text mb-auto">profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile </p>
+                </div>
                 <div class="col-auto d-none d-lg-block">
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>             
-              <p class="card-text mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-            </div>
-            <div class="col-auto">
-              <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-              <img src ="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>            
-              <p class="mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-            </div>
-            <div class="col-auto">
-              <img src ="" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
-            </div>
-          </div>
-        </div>     
-          <div class="col-md-2 d-none d-lg-block">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"></h3>             
-                <p class="card-text mb-auto"> </p>
+                </div>
               </div>
-                <div class="col-auto d-none d-lg-block">
             </div>
-          </div>
-        </div>
 
 
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>             
-              <p class="card-text mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-            </div>
-            <div class="col-auto">
-              <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-              <img src ="" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>            
-              <p class="mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-            </div>
-            <div class="col-auto">
-              <img src ="" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
-            </div>
-          </div>
-        </div>     
-          <div class="col-md-2 d-none d-lg-block">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"></h3>             
-                <p class="card-text mb-auto"> </p>
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
               </div>
+            </div>
+
+
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 d-none d-lg-block">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0"></h3>
+                  <p class="card-text mb-auto"> </p>
+                </div>
                 <div class="col-auto d-none d-lg-block">
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
 
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>             
-              <p class="card-text mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
+              </div>
             </div>
-            <div class="col-auto">
-              <img src ="" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
-            </div>
-          </div>
-        </div>
 
 
-        <div class="col-md-5">
-          <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <h3 class="mb-0">blog</h3>            
-              <p class="mb-auto">text text text text text text text text</p>
-              <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
+              </div>
             </div>
-            <div class="col-auto">
-              <img src ="" class="img-fluid" width="200" height="250"  preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" /></img>
+            <div class="col-md-2 d-none d-lg-block">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0"></h3>
+                  <p class="card-text mb-auto"> </p>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                </div>
+              </div>
             </div>
-          </div>
-        </div>                   
-  </main>
+
+
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="mb-auto">text text text text text text text text</p>
+                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+                </div>
+                <div class="col-auto">
+                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" /></img>
+                </div>
+              </div>
+            </div>
+    </main>
     <!-- ------------footer------------ -->
-    <footer>
+    <footer><%- include ('fragment/footer') %></footer>
+    <!-- <footer>
 <span style="color: whitesmoke;">
   <br/>
   &nbsp; non-blogging <br/>
@@ -295,8 +278,8 @@
   &nbsp; 대표번호: 1644-0000<br/>
   &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
 </span>
-    </footer>
+    </footer> -->
 
-  <script src="/allblog.js"></script>
+    <script src="/allblog.js"></script>
   </body>
 </html>

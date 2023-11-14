@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main</title>
-</head>
-<body>
-    <div style="height:500px;display: flex; justify-content:center; align-items:center; gap:40px">
-        <h1>maing 화면</h1>
-
-            <button type="button" onclick="onClick()">blogging 하러가기</button>
+  </head>
+  <body>
+    <div style="height: 500px; text-align: center; margin: 10rem">
+      <a href="/user/login">
+        <img src="/logo.png" alt="logo" style="height: 8rem" />
+      </a>
+      <h1>hihihihihihi</h1>
+      <div style="margin-bottom: 2rem">
+        blogin을 클릭하면 포스트 작성을 할 수 있습니다.
+      </div>
+      <button
+        style="
+          width: 5rem;
+          height: 2.7rem;
+          background-color: #ae7f5f;
+          border-radius: 20px;
+          border: 0;
+          cursor: pointer;
+          color: white;
+          font-size: 20px;
+        "
+        type="button"
+        onclick="onClick()"
+      >
+        go
+      </button>
     </div>
+  </body>
 
-</body>
-
-<script>
-    const onClick = ()=>{
-        location.href ='/user/login'
-    }
-</script>
+  <script>
+    const onClick = () => {
+      location.href = "/user/login";
+    };
+  </script>
 </html>
