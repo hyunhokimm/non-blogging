@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+
+  </head>
+  <style>
+    /* 상단 고정 */
+    * {
+      font-family: "Noto Serif KR", serif;
+      color: #78715e;
+    }
+
+    body {
+      background-color: #ece8e4;
+      position: relative;
+    }
+
+    header {
+      background-color: #e1ddd6;
+      position: fixed;
+      z-index: 100;
+      height: 40px;
+      width: 100%;
+    }
+
+    nav {
+      background-color: #e1ddd6;
+    }
+
+    main {
+      min-height: 2000px;
+    }
+
+    footer {
+      font-size: smaller;
+      height: 140px;
+      /* background-color: #78715e; */
+      text-align: center;
+      /* color: whitesmoke; */
+    }
+
+    .navbar {
+      margin-top: -1%;
+      width: 100%;
+    }
+
+    /* 변동 */
+    .thumbnailBox {
+      position: relative;
+      top: 80px;
+      height: 300px;
+      /* border: 1px solid #78715e; */
+    }
+
+    .postTitleBox {
+      position: relative;
+      top: 80px;
+      height: 60px;
+      border: 1px solid #78715e;
+    }
+
+    .ContentBox {
+      position: relative;
+      top: 80px;
+      height: 1000px;
+      border: 1px solid #78715e;
+    }
+
+    .commentBox {
+      position: relative;
+      top: 80px;
+      height: 500px;
+      border: 1px solid #78715e;
+    }
+
+    .comment {
+      font-weight: bolder;
+      font-size: larger;
+    }
+
+    .addComment {
+      border: 1px solid #78715e;
+      color: #78715e;
+    }
+
+    .addComment:hover {
+      border: 1px solid #78715e;
+      background-color: #78715e;
+      color: whitesmoke;
+    }
+
+    .polaroid {
+      background: #000;
+      /*Change this to a background image or remove*/
+      border: solid #fff;
+      border-width: 6px 6px 20px 6px;
+      box-shadow: 1px 1px 5px #333;
+      /* Standard blur at 5px. Increase for more depth */
+      -webkit-box-shadow: 1px 1px 5px #333;
+      -moz-box-shadow: 1px 1px 5px #333;
+      height: 250px;
+      /*Set to height of your image or desired div*/
+      width: 250px;
+      /*Set to width of your image or desired div*/
+    }
+  </style>
+  <body>
+    <!-- ------------header------------ -->
+    <header class="my-1">
+      <nav class="navbar navbar-light">
+        <div class="mx-3 d-flex justify-content-start">
+          <a class="navbar-brand" href="#"><img src="/static/logo.png" style="height: 40px" alt="" /></a>
+        </div>
+
+        <div class="mx-3 d-flex justify-content-end" id="nav">
+          <a class="nav-link me-2" aria-current="page" href="/">Home</a>
+          <a class="nav-link me-2" href="/myblog">My blog</a>
+          <a class="nav-link me-2" href="/myinfo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+            </svg></a>
+        </div>
+      </nav>
+    </header>
+    <!-- ------------main------------ -->
+    <main>
+      <!-- 썸네일 영역 -->
+      <div class="container thumbnailBox mx-auto m-1" id="thumbnailBox">
+        <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-responsive center-block d-block mx-auto polaroid" />
+
+        <!-- ------------게시글 수정 삭제 버튼------------ -->
+        <div align="right">
+          <button type="button" onclick="" class="btn addComment justify-content-end">수정</button>
+          <button type="button" onclick="" class="btn addComment justify-content-end">삭제</button>
+        </div>
+      </div>
+
+      <!-- ------------제목 영역------------ -->
+      <div class="container postTitleBox mx-auto m-1">
+        <h1 class="display-6">제목 빈 값. 틀 고정.글자수 제한</h1>
+
+      </div>
+      <!-- ------------게시글 영역------------ -->
+      <div class="container ContentBox mx-auto m-1">
+        작성된 글 데이터를 가져와야 한다. 근데 글 길이에 따라 달라지니 높이값을
+        고정시킬수는 없다. 높이값 제외한
+        틀만 잡아놓고 데이터로 넣기
+      </div>
+      <!-- ------------댓글 영역------------ -->
+      <div class="container commentBox mx-auto m-1">
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label comment ">Comment</label>
+          <!-- table-->
+          <table class="table table-hover table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row"></th>
+                <td colspan="2">
+                  <p class="pb-1 mb-0 small lh-sm">
+                    <strong class="d-block ">@username3</strong>
+                    Today’s special moments are tomorrow’s memories. - Aladdin
+                  </p>
+                  <hr>
+                </td>
+                <td>02:05</td>
+              </tr>
+
+              <tr>
+                <th scope="row"></th>
+                <td colspan="2">
+                  <p class="pb-1 mb-0 small lh-sm">
+                    <strong class="d-block ">@username3</strong>
+                    Today’s special moments are tomorrow’s memories. - Aladdin
+                  </p>
+                  <hr>
+                </td>
+                <td>02:05</td>
+              </tr>
+
+              <tr>
+                <th scope="row"></th>
+                <td colspan="2">
+                  <p class="pb-1 mb-0 small lh-sm">
+                    <strong class="d-block ">@username3</strong>
+                    Today’s special moments are tomorrow’s memories. - Aladdin
+                  </p>
+                  <hr>
+                </td>
+                <td>02:05</td>
+              </tr>
+
+            </tbody>
+          </table>
+          <textarea class="form-control" id="commentTextarea" rows="3" placeholder="댓글을 작성해주세요. 🙂"></textarea>
+        </div>
+
+        <div align="right">
+          <button type="button" onclick="addComment(), cleanComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
+        </div>
+
+        <!-- <div class="my-3 p-2 bg-body rounded shadow-sm ">
+        <div class="d-flex  pt-3">
+          <p class="pb-1 mb-0 small lh-sm">
+            <strong class="d-block ">@username1</strong>
+            You cannot be happy every day. But there are happy things every day. - Winnie the Pooh
+          </p>
+        </div>
+        <hr>
+        <div class="d-flex  pt-3">
+          <p class="pb-1 mb-0 small lh-sm">
+            <strong class="d-block ">@username2</strong>
+            To love someone, you have to love yourself first. - Beauty and the Beast
+          </p>
+        </div>
+        <hr>
+        <div class="d-flex  pt-3">
+          <p class="pb-1 mb-0 small lh-sm">
+            <strong class="d-block ">@username3</strong>
+            Today’s special moments are tomorrow’s memories. - Aladdin
+          </p>
+        </div>
+        <hr>
+      </div> -->
+      </div>
+
+    </main>
+    <!-- ------------footer------------ -->
+
+    <footer><%- include ('fragment/footer') %></footer>
+    <!-- <span style="color: whitesmoke">
+        <br />
+        &nbsp; non-blogging <br />
+        &nbsp; 사업자등록번호 : 000-00-00000<br />
+        &nbsp; 주소 : 서울특별시 용산구 한강로 <br />
+        &nbsp; 대표번호: 1644-0000<br />
+        &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
+      </span> -->
+
+    <!-- ------------script------------ -->
+    <script>
+      //썸네일 넣고 빼기 
+      // const thumbnailBox = document.getElementById("thumbnailBox")
+      // const data = {
+      //   백에서 가져온 데이터
+      // }
+      // if (!imageData) {
+      //   thumbnailBox.style.display ="none";
+      // } else if (imageData) {
+      //   thumbnailBox.style.display = "block";
+      // }
+
+      //댓글 등록하면서 입력된 text박스 비우기
+      function addComment() {
+        let comment = document.getElementById("commentTextarea").value;
+
+        const date = new Data();
+        const dateString = `${date.getMonth()+1}-${date.getDate()}`;
+
+        let tr = document.createElement("tr")
+
+
+      }
+
+      function cleanComment() {
+        document.getElementById("commentTextarea").value; = null;
+      }
+    </script>
+  </body>
+</html>
