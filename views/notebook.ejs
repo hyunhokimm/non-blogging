@@ -1,142 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My blog</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
- <style>
-    *{
-      font-family: 'Noto Serif KR', serif;
-      color: #78715e;
-      
-    }
-    #nav{
-        font-weight: 100;
-        background-color: #ece8e4;
-    }
-    #footer{
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Noto Serif KR", serif;
+        color: #78715e;
+      }
+
+      #footer {
         font-weight: 100;
         background-color: #ece8e4;
         padding: 20px;
-    }
- </style>
-</head>
-<body>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ece8e4;">
-
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/notebook/allblog"><img src="/logo.png" style="height: 40px;" alt=""></a>
-
-              <div class=" fw-bold d-flex " id="nav">
-                <a class="nav-link me-3"  href="/notebook/allblog">Home</a>
-                <a class="nav-link me-3" href="/user/login">Logout</a>
-                
-                <a class="nav-link me-3" href="/user/myinfo" >My info</a>
-              </div>
-             
-             </div>
-          </nav>
-          <section style="margin: 30px;">
-
-
-            
-
-              <div style=" display:flex ; align-items: center; margin-bottom: 50px; justify-content:space-between;" class="border rounded-1 p-3">
-                <img style=" height: auto; width:60%; ;" src="/images/2.jpg" alt="멋진풍경">
-                <div class="text-container">
-                  나의 대표 블로그
-                  <p style="margin-top: 10px;">주저리 주저리</p>
-                </div>
-              </div>
-              <div>
-
-                <button
-                type="button"
-                onclick="onblogging()" 
-                class="btn mb-4"
-                style="width: 100%; height:50px; color: white; background-color: #ae7f5f"
-              >
-                Blogging 하기
-              </button>
-
-              <div class="row " style="margin: 0 0.1%; ">
-                <div class="col-md-6">
-                  <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <h3 class="mb-0">blog</h3>             
-                      <p class="card-text mb-auto">text text text text text text text text</p>
-                      <a href="#">Go <b>cookie</b>'s blog</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                      <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <h3 class="mb-0">blog</h3>             
-                      <p class="card-text mb-auto">text text text text text text text text</p>
-                      <a href="#">Go <b>cookie</b>'s blog</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                      <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <h3 class="mb-0">blog</h3>             
-                      <p class="card-text mb-auto">text text text text text text text text</p>
-                      <a href="#">Go <b>cookie</b>'s blog</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                      <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <h3 class="mb-0">blog</h3>             
-                      <p class="card-text mb-auto">text text text text text text text text</p>
-                      <a href="#">Go <b>cookie</b>'s blog</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                      <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-          
-            
-          </section>
-          <footer >
-            <div id="footer" style="text-align: center;">
-            <p>non-blogging | 사업자등록번호 : 000-00-00000</p>
-            <p>주소 : 서울특별시 용산구 --동 | 대표번호 1644-0000</p>
-            <p>Copyright(c) 2023 non-blogging. All Rights Reserved.</p>
-    
-          </div>
-        </footer>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script>
-      const onblogging = ()=>{
-        location.href ='/notebook/write'
       }
-    </script>
-</body>
-</html>
+    </style>
+  </head>
+  <body style="background-color: #ece8e4">
+    <div>
+      <header><%- include ('fragment/header') %></header>
+      <section style="margin: 30px">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            justify-content: space-between;
+          "
+          class="border rounded-1 p-3"
+        >
+          <img
+            style="height: auto; width: 60%"
+            src="/images/2.jpg"
+            alt="멋진풍경"
+          />
+          <div class="text-container">
+            나의 대표 블로그
+            <p style="margin-top: 10px">주저리 주저리</p>
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            onclick="onblogging()"
+            class="btn mb-4"
+            style="
+              width: 100%;
+              height: 50px;
+              color: white;
+              background-color: #ae7f5f;
+            "
+          >
+            Blogging 하기
+          </button>
 
+          <div class="row" style="margin: 0 0.1%">
+            <div class="col-md-6">
+              <div
+                class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+              >
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">
+                    text text text text text text text text
+                  </p>
+                  <a href="#">Go <b>cookie</b>'s blog</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <svg
+                    class="bd-placeholder-img"
+                    width="200"
+                    height="250"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%">image</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+              >
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">
+                    text text text text text text text text
+                  </p>
+                  <a href="#">Go <b>cookie</b>'s blog</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <svg
+                    class="bd-placeholder-img"
+                    width="200"
+                    height="250"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%">image</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div
+                class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+              >
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">
+                    text text text text text text text text
+                  </p>
+                  <a href="#">Go <b>cookie</b>'s blog</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <svg
+                    class="bd-placeholder-img"
+                    width="200"
+                    height="250"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%">image</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+              >
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">blog</h3>
+                  <p class="card-text mb-auto">
+                    text text text text text text text text
+                  </p>
+                  <a href="#">Go <b>cookie</b>'s blog</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                  <svg
+                    class="bd-placeholder-img"
+                    width="200"
+                    height="250"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%">image</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <div id="footer" style="text-align: center">
+          <p>non-blogging | 사업자등록번호 : 000-00-00000</p>
+          <p>주소 : 서울특별시 용산구 --동 | 대표번호 1644-0000</p>
+          <p>Copyright(c) 2023 non-blogging. All Rights Reserved.</p>
+        </div>
+      </footer>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const onblogging = () => {
+        location.href = "/notebook/write";
+      };
+    </script>
+  </body>
+</html>
