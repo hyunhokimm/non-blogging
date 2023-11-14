@@ -5,5 +5,12 @@
     "username": "non-blogging",
     "password": "sesac231107$",
     "dialect": "mysql"
+  },
+  "development": {
+    "host": "127.0.0.1:3306",
+    "database": "Post",
+    "username": "non-blogging",
+    "password": "sesac231107$",
+    "dialect": "mysql"
   }
 }
