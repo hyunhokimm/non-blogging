@@ -110,10 +110,17 @@
       width: 250px;
       /*Set to width of your image or desired div*/
     }
+
+    .commentTextColor {
+      color: #78715e;
+
+    }
   </style>
   <body>
     <!-- ------------header------------ -->
-    <header class="my-1">
+    <header><%- include ('fragment/header') %></header>
+
+    <!-- <header class="my-1">
       <nav class="navbar navbar-light">
         <div class="mx-3 d-flex justify-content-start">
           <a class="navbar-brand" href="#"><img src="/static/logo.png" style="height: 40px" alt="" /></a>
@@ -127,7 +134,7 @@
             </svg></a>
         </div>
       </nav>
-    </header>
+    </header> -->
     <!-- ------------main------------ -->
     <main>
       <!-- 썸네일 영역 -->
@@ -160,10 +167,10 @@
           <table class="table table-hover table-borderless">
             <tbody>
               <tr>
-                <th scope="row"></th>
+                <!-- <th scope="row"></th> -->
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username3</strong>
+                    <strong class="d-block ">@username1</strong>
                     Today’s special moments are tomorrow’s memories. - Aladdin
                   </p>
                   <hr>
@@ -172,11 +179,11 @@
               </tr>
 
               <tr>
-                <th scope="row"></th>
+                <!-- <th scope="row"></th> -->
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username3</strong>
-                    Today’s special moments are tomorrow’s memories. - Aladdin
+                    <strong class="d-block ">@username2</strong>
+                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh
                   </p>
                   <hr>
                 </td>
@@ -184,49 +191,27 @@
               </tr>
 
               <tr>
-                <th scope="row"></th>
+                <!-- <th scope="row"></th> -->
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
                     <strong class="d-block ">@username3</strong>
-                    Today’s special moments are tomorrow’s memories. - Aladdin
+                    To love someone, you have to love yourself first. - Beauty and the Beast
                   </p>
                   <hr>
                 </td>
                 <td>02:05</td>
               </tr>
+              <tr>
 
             </tbody>
           </table>
-          <textarea class="form-control" id="commentTextarea" rows="3" placeholder="댓글을 작성해주세요. 🙂"></textarea>
+          <textarea class="form-control" id="commentTextarea" rows="3" placeholder="댓글을 작성해주세요."></textarea>
         </div>
 
         <div align="right">
-          <button type="button" onclick="addComment(), cleanComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
+          <div id="noComment"></div>
+          <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
         </div>
-
-        <!-- <div class="my-3 p-2 bg-body rounded shadow-sm ">
-        <div class="d-flex  pt-3">
-          <p class="pb-1 mb-0 small lh-sm">
-            <strong class="d-block ">@username1</strong>
-            You cannot be happy every day. But there are happy things every day. - Winnie the Pooh
-          </p>
-        </div>
-        <hr>
-        <div class="d-flex  pt-3">
-          <p class="pb-1 mb-0 small lh-sm">
-            <strong class="d-block ">@username2</strong>
-            To love someone, you have to love yourself first. - Beauty and the Beast
-          </p>
-        </div>
-        <hr>
-        <div class="d-flex  pt-3">
-          <p class="pb-1 mb-0 small lh-sm">
-            <strong class="d-block ">@username3</strong>
-            Today’s special moments are tomorrow’s memories. - Aladdin
-          </p>
-        </div>
-        <hr>
-      </div> -->
       </div>
 
     </main>
@@ -241,34 +226,93 @@
         &nbsp; 대표번호: 1644-0000<br />
         &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
       </span> -->
-
+    <tr>
+      <td colspan="2">
+        <p class="pb-1 mb-0 small lh-sm">
+          <strong class="d-block ">@username3</strong>
+          Today’s special moments are tomorrow’s memories. - Aladdin
+        </p>
+        <hr>
+      </td>
+      <td>02:05</td>
+    </tr>
     <!-- ------------script------------ -->
     <script>
       //썸네일 넣고 빼기 
-      // const thumbnailBox = document.getElementById("thumbnailBox")
-      // const data = {
-      //   백에서 가져온 데이터
-      // }
-      // if (!imageData) {
-      //   thumbnailBox.style.display ="none";
-      // } else if (imageData) {
-      //   thumbnailBox.style.display = "block";
-      // }
+      const thumbnailBox = document.getElementById("thumbnailBox")
 
-      //댓글 등록하면서 입력된 text박스 비우기
-      function addComment() {
-        let comment = document.getElementById("commentTextarea").value;
+      //이미지 안받아왔다면? (임시) ^^
+      // let imageData = "";
 
-        const date = new Data();
-        const dateString = `${date.getMonth()+1}-${date.getDate()}`;
-
-        let tr = document.createElement("tr")
-
-
+      if (!imageData) {
+        thumbnailBox.style.display = "none";
+      } else if (imageData) {
+        thumbnailBox.style.display = "block";
       }
 
-      function cleanComment() {
-        document.getElementById("commentTextarea").value; = null;
+      //댓글 작성 시간 가져오기
+      function getNowTime() {
+        let now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+
+        // Add leading zeros if necessary
+        hours = (hours < 10 ? "0" : "") + hours;
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+
+        return hours + ":" + minutes;
+      }
+
+      //댓글 등록
+      function addComment() {
+        let commentText = document.getElementById("commentTextarea").value;
+
+        //작성된 내용 없으면 false값 내보내서 작성 안되게 하기
+        let textElement = document.getElementById("noComment");
+        if (commentText.trim() === "") {
+          // Display a message prompting the user to enter a comment
+          textElement.textContent = "작성된 내용이 없습니다.😅";
+          return false;
+        } else {
+          // Clear the message
+          textElement.textContent = "";
+        }
+
+        //테이블 행 추가
+        let newRow = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.setAttribute("colSpan", "2");
+        let td2 = document.createElement("td");
+
+        let commentParagraph = document.createElement("p");
+        commentParagraph.classList.add("pb-1", "mb-0", "small", "lh-sm", "commentTextColor");
+        commentParagraph.style.color = "#78715e"; //왜 안되니^^
+
+
+
+        let strongUsername = document.createElement("strong");
+        strongUsername.classList.add("d-bock");
+        strongUsername.innerHTML = "@username"; //어떻게 가져오지^^
+        commentParagraph.appendChild(strongUsername);
+        commentParagraph.appendChild(document.createTextNode(commentText));
+
+        //댓글 내용 추가
+        td1.appendChild(commentParagraph);
+
+        td1.innerHTML = `${commentText}<hr/>`
+
+        td2.textContent = getNowTime();
+
+        newRow.appendChild(td1);
+        newRow.appendChild(td2);
+
+        let commentTableBox = document.querySelector("tbody");
+        commentTableBox.appendChild(newRow);
+
+        //작성된 내용 지우기
+        document.getElementById("commentTextarea").value = "";
+
       }
     </script>
   </body>
