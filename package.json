@@ -20,6 +20,7 @@
   "homepage": "https://github.com/hyunhokimm/non-blogging#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "cross-env": "^7.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "sequelize": "^6.34.0"
