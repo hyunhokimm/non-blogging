@@ -238,19 +238,19 @@
     </tr>
     <!-- ------------script------------ -->
     <script>
-      //썸네일 넣고 빼기 
+      //--------------------썸네일 넣고 빼기 
       const thumbnailBox = document.getElementById("thumbnailBox")
 
       //이미지 안받아왔다면? (임시) ^^
-      // let imageData = "";
+      // let imageId = "";
 
-      if (!imageData) {
+      if (!imageId) {
         thumbnailBox.style.display = "none";
-      } else if (imageData) {
+      } else if (imageId) {
         thumbnailBox.style.display = "block";
       }
 
-      //댓글 작성 시간 가져오기
+      //--------------------댓글 작성 시간 가져오기
       function getNowTime() {
         let now = new Date();
         let hours = now.getHours();
@@ -263,7 +263,7 @@
         return hours + ":" + minutes;
       }
 
-      //댓글 등록
+      //--------------------댓글 등록
       function addComment() {
         let commentText = document.getElementById("commentTextarea").value;
 
@@ -314,6 +314,37 @@
         document.getElementById("commentTextarea").value = "";
 
       }
+
+      //--------------------댓글 삭제 (본인 댓글만 삭제할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
+      //얘는 노트아이디랑은 별개. 댓글 자체의 아이디.
+      //user가 해당 댓글의 id값을 가지고 있는지에 따라 판단? 
+      //각 댓글의 id값을 login한 user가 가지고 있느다면 삭제 버튼이 보여야한다; 
+      //로그인한 유저(로그인한 값이 null이 아니면서)이면서 + 댓글작성자의 idr가 같아야 한다.
+      //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
+      //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
+
+
+
+      //--------------------게시글 수정 삭제 버튼 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
+      //user가 작성한 노트에 있는 noteId 유무에 따라.
+      //*user가 해당 noteId를 가지고 있느냐 없느냐.
+      function noteEditBtnShow() {
+
+      }
+
+
+      //--------------------게시글 수정 삭제 동작 (작성된 게시글 내용 데이터 가져와서 넣기.)
+      //이 동작이 가능하려면 위 함수 내용에 따라 버튼이 보여야 한다. 
+      //버튼 유무를 따져야 하니 async await 써야하나?
+      //위 함수가 실행되었을 때 hidden상태라면 return false;
+
+      //수정 > 게시글 작성 페이지로 이동 write.ejs
+      //이거 어케하지.............
+      //게시글 작성하면서 noteId값 생성된다. 해당 페이지 자체의 내용을 그대로 가져와야 하니 그 주소로 이동..
+
+      //삭제 > 삭제되고 내 블로그로 페이지 이동 notebook.ejs
+      //삭제하시겠습니까 alert창 보여주고 확인하면 내 블로그 페이지로 이동 notebook.ejs
+      //데이터에서도 삭제 이 페이지에는 뭐가이렇게 많지 제일 복잡한페이지걸렸다... 
     </script>
   </body>
 </html>
