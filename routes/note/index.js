@@ -5,29 +5,29 @@ const noteRoute = express.Router();
 // const { noteId } = require("../../controller/Cmypost");
 
 // 모든 블로그
-noteRoute.get("/notebook/allblog", (req, res) => {
+noteRoute.get("/allblog", (req, res) => {
   res.render("allblog");
 });
 // // 수정될 코드
 // noteRoute.get("/allblog", home);
 
 // 나의 게시글들
-noteRoute.get("/notebook", (req, res) => {
+noteRoute.get("/", (req, res) => {
   res.render("notebook");
 });
 // 수정될 코드
 // noteRoute.get("/", notebook)
 
 //나의 블로그 작성
-noteRoute.get("/notebook/write", (req, res) => {
+noteRoute.get("/write", (req, res) => {
   res.render("write");
 });
 // 수정될 코드
 // noteRoute.get("/write", write)
 
-noteRoute.post("/notebook/write", (req, res) => {
-  res.render("write");
-});
+// noteRoute.post("/write", (req, res) => {
+//   res.render("write");
+// });
 // 수정될 코드
 // noteRoute.post("/notebook/write", write);
 // });
@@ -85,14 +85,14 @@ noteRoute.post("/notebook/write", (req, res) => {
 // });
 
 // 게시물 삭제 기능
-router.delete("/notebook/:noteId", async (req, res, next) => {
-  const { noteId } = req.params;
-  try {
-    await Post.delete({ noteId });
-    res.send("Success Delete");
-  } catch (err) {
-    next(err);
-  }
-});
+// router.delete("/notebook/:noteId", async (req, res, next) => {
+//   const { noteId } = req.params;
+//   try {
+//     await Post.delete({ noteId });
+//     res.send("Success Delete");
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = noteRoute;
