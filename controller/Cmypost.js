@@ -1,28 +1,45 @@
-const { postTable } = require("../model");
+const notebook = require("../model");
 
-// 글 하나 가져오기
-exports.notePage = (req, res) => {
-    const noteId = req.params.noteId;
-
-    if(!noteId){
-        res.render("index");
-        return false;
+// 게시물 상세 페이지
+exports.note = async (req, res, next) => {
+  try {
+    const { noteId } = req.params;
+    const note = await notebook.findOne({ noteId }); // 게시글 검색
+    if (!note) {
+      throw new Error("Nonote"); //render("nonote")예정
     }
 
-    postTable.findOne({
-        where: {
-            noteId: noteId,
-        }
-    }).then((result) => {
-        console.log("조회 ", result);
-        if(result){
-            res.render("note", {note: result});
-        }
-        else{
-            res.render("signup");
-        }
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).send("접근 오류 발생");
-    })
+    res.render("/notebook/nonote", { post });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// 게시물 수정 페이지
+exports.editNote = async (req, res, next) => {
+  const { noteId } = req.params;
+  const { title, content } = req.body;
+  const note = await notebook.findOneAndUpdate(
+    { noteId },
+    {
+      title,
+      content,
+    }
+  ); // noteId 검색해서 내용을 title, content로 변경
+  if (!note) {
+    throw new Error("nonote");
+  }
+
+  res.rendirect(`/notebook/:${noteId}`, { note });
+};
+
+// 게시물 삭제 기능
+exports.deleteNote = async (req, res, next) => {
+  const { noteId } = req.params;
+  try {
+    await notebook.delete({ noteId });
+    res.send("Success Delete"); // alert 삭제되엇슴당 띄우기!
+  } catch (err) {
+    next(err);
+  }
 };
