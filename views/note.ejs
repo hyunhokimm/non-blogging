@@ -97,6 +97,18 @@
       color: whitesmoke;
     }
 
+    .editOkComment {
+      border: 1px solid #78715e;
+      background-color: #78715e;
+      color: whitesmoke;
+
+
+      .editOkComment:hover {
+        border: 1px solid #78715e;
+        color: #78715e;
+      }
+    }
+
     .polaroid {
       background: #000;
       /*Change this to a background image or remove*/
@@ -332,7 +344,6 @@
 
       function deleteComment() {
         let delButton = document.querySelectorAll("#deleteCommentBtn");
-        //댓글이 여러개 있을 경우를 생각해서 forEach로 돌려야 한다고 한다. (주석은 마지막에 지울게요!)
         delButton.forEach(function(delBtn) {
           delBtn.addEventListener("click", function() {
             let findRow = this.closest('tr');
@@ -350,31 +361,48 @@
           });
       }
       //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
-      // let editButton = document.querySelectorAll("#editCommentBtn");
-      // editButton.addEventListener("click", function() {
-      //   console.log("this?", this);
-      //   editComment(commentParagraph);
-
-      // });
-
-      // function editComment(commentParagraph) {
-      //   let currentText = commentParagraph.textContent.trim();
-      //   let editTextarea = document.createElement("textarea");
-      //   editTextarea.classList.add("form-control");
-      //   editTextarea.value = currentText;
-      // }
-
       function editComment() {
         let editButton = document.querySelectorAll("#editCommentBtn");
-        //댓글이 여러개 있을 경우를 생각해서 forEach로 돌려야 한다고 한다. (주석은 마지막에 지울게요!)
         editButton.forEach(function(editBtn) {
           editBtn.addEventListener("click", function() {
             commentParagraph = this.parentNode.parentNode.querySelector(".commentText");
             console.log("commentParagraph???", commentParagraph.textContent)
+
             let editTextarea = document.createElement("textarea");
             editTextarea.classList.add("form-control");
             commentParagraph.appendChild(editTextarea);
             editTextarea.value = commentParagraph.textContent;
+            //작성한 값으로 부모 노드 교체
+            commentParagraph.parentNode.replaceChild(editTextarea, commentParagraph);
+
+            //수정완료 버튼 추가
+            let saveButton = document.createElement("button");
+
+            this.parentNode.appendChild(saveButton);
+            saveButton.textContent = "수정 완료";
+            saveButton.classList.add("btn", "save-comment", "editOkComment");
+
+            //수정완료 버튼 이벤트
+            saveButton.addEventListener("click", function() {
+              saveEditedComment(editTextarea, commentParagraph);
+            });
+
+            //댓글 수정 버튼 클릭 이벤트
+            function saveEditedComment(editTextarea, commentParagraph) {
+              let editedText = editTextarea.value;
+
+              let addNewComment = document.createElement("p");
+              addNewComment.classList.add("pb-1", "mb-0", "small", "lh-sm");
+              addNewComment.appendChild(document.createTextNode(editedText));
+
+              editTextarea.parentNode.replaceChild(addNewComment, editTextarea);
+
+              saveButton.remove();
+
+            }
+            editComment();
+            //근데 왜 수정하고 또 수정하기는 안되냐..
+
 
           })
         });
