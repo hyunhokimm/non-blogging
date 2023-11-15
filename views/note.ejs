@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   </head>
   <style>
@@ -188,30 +189,20 @@
                   <hr>
                 </td>
                 <td>02:05</td>
-              </tr>
 
-              <tr>
-                <!-- <th scope="row"></th> -->
-                <td colspan="2">
-                  <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username3</strong>
-                    To love someone, you have to love yourself first. - Beauty and the Beast
-                  </p>
-                  <hr>
-                </td>
-                <td>02:05</td>
               </tr>
-              <tr>
 
             </tbody>
           </table>
-          <textarea class="form-control" id="commentTextarea" rows="3" placeholder="댓글을 작성해주세요."></textarea>
+          <form name="inputComment">
+            <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
         </div>
 
         <div align="right">
           <div id="noComment"></div>
           <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
         </div>
+        </form>
       </div>
 
     </main>
@@ -226,16 +217,7 @@
         &nbsp; 대표번호: 1644-0000<br />
         &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
       </span> -->
-    <tr>
-      <td colspan="2">
-        <p class="pb-1 mb-0 small lh-sm">
-          <strong class="d-block ">@username3</strong>
-          Today’s special moments are tomorrow’s memories. - Aladdin
-        </p>
-        <hr>
-      </td>
-      <td>02:05</td>
-    </tr>
+
     <!-- ------------script------------ -->
     <script>
       //--------------------썸네일 넣고 빼기 
@@ -244,11 +226,11 @@
       //이미지 안받아왔다면? (임시) ^^
       // let imageId = "";
 
-      if (!imageId) {
-        thumbnailBox.style.display = "none";
-      } else if (imageId) {
-        thumbnailBox.style.display = "block";
-      }
+      // if (!imageId) {
+      //   thumbnailBox.style.display = "none";
+      // } else if (imageId) {
+      //   thumbnailBox.style.display = "block";
+      // }
 
       //--------------------댓글 작성 시간 가져오기
       function getNowTime() {
@@ -291,18 +273,20 @@
 
 
 
-        let strongUsername = document.createElement("strong");
+        let strongUsername = document.createElement("p");
         strongUsername.classList.add("d-bock");
-        strongUsername.innerHTML = "@username"; //어떻게 가져오지^^
+
         commentParagraph.appendChild(strongUsername);
         commentParagraph.appendChild(document.createTextNode(commentText));
 
-        //댓글 내용 추가
         td1.appendChild(commentParagraph);
 
         td1.innerHTML = `${commentText}<hr/>`
+        td1.prepend(strongUsername);
+        strongUsername.innerText = "imUser"; //어떻게 가져오지^^
 
-        td2.textContent = getNowTime();
+        const getTime = getNowTime();
+        td2.innerHTML = `${getTime} <button type="button" onclick="deleteComment()" id="deleteCommentBtn" class="btn addComment justify-content-end">삭제</button>`
 
         newRow.appendChild(td1);
         newRow.appendChild(td2);
@@ -313,6 +297,29 @@
         //작성된 내용 지우기
         document.getElementById("commentTextarea").value = "";
 
+        //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^)
+        //댓글 작성한 데이터는 담겨짐.
+        const commentWrite = `${commentText}`
+        console.log("commentWrite", commentWrite)
+
+        const data = {
+          commentWrite
+        }
+        console.log("data", data)
+
+        axios({
+            method: "post",
+            url: "/notebook/:noteId/comment",
+            data: data
+
+          }).then((result) => {
+            console.log("됐나", result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+
       }
 
       //--------------------댓글 삭제 (본인 댓글만 삭제할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
@@ -322,16 +329,22 @@
       //로그인한 유저(로그인한 값이 null이 아니면서)이면서 + 댓글작성자의 idr가 같아야 한다.
       //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
       //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
-
-
-
+      function deleteComment() {
+        let delBtn = document.getElementById("deleteCommentBtn");
+        delBtn.addEventListener("click", function() {
+          console.log("삭제버튼클릭", this);
+          this.closest('tr').remove();
+        })
+      }
       //--------------------게시글 수정 삭제 버튼 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
       //user가 작성한 노트에 있는 noteId 유무에 따라.
       //*user가 해당 noteId를 가지고 있느냐 없느냐.
       function noteEditBtnShow() {
 
       }
+      //-------------------------------------
 
+      //-------------------------------------
 
       //--------------------게시글 수정 삭제 동작 (작성된 게시글 내용 데이터 가져와서 넣기.)
       //이 동작이 가능하려면 위 함수 내용에 따라 버튼이 보여야 한다. 
