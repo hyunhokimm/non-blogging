@@ -25,6 +25,7 @@ app.use(express.static("static"));
 app.get("/", (req, res) => {
   res.render("main");
 });
+
 app.use("/user", userRoute);
 app.use("/notebook", noteRoute);
 
