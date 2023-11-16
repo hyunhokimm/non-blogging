@@ -156,8 +156,8 @@
 
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right">
-          <button type="button" onclick="" class="btn addComment justify-content-end">수정</button>
-          <button type="button" onclick="" class="btn addComment justify-content-end">삭제</button>
+          <button type="button" onclick="myNoteEdit()" class="btn addComment justify-content-end">수정</button>
+          <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
         </div>
       </div>
 
@@ -184,7 +184,7 @@
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
                     <strong class="d-block ">@username1</strong>
-                    Today’s special moments are tomorrow’s memories. - Aladdin
+                    Today’s special moments are tomorrow’s memories. - Aladdin(임시댓글)
                   </p>
                   <hr>
                 </td>
@@ -196,7 +196,7 @@
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
                     <strong class="d-block ">@username2</strong>
-                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh
+                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh(임시댓글)
                   </p>
                   <hr>
                 </td>
@@ -342,7 +342,19 @@
       //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
       //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
 
+      //function removeCheck() {
+      // if (confirm("정말 삭제하시겠습니까??") == true) {
+      //   deleteComment()
+      // } else {
+      //   return false;
+      // }
+      // }
+
       function deleteComment() {
+        if (window.confirm("정말 삭제하시겠습니까??")) {} else {
+          return false;
+        }
+
         let delButton = document.querySelectorAll("#deleteCommentBtn");
         delButton.forEach(function(delBtn) {
           delBtn.addEventListener("click", function() {
@@ -409,16 +421,25 @@
       };
 
 
-      //--------------------게시글 수정 삭제 버튼 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
+      //--------------------게시글 수정 삭제 버튼 보이게 안보이게 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
       //user가 작성한 노트에 있는 noteId 유무에 따라.
       //*user가 해당 noteId를 가지고 있느냐 없느냐.
       function noteEditBtnShow() {
 
       }
-      //-------------------------------------
-
-      //-------------------------------------
-
+      //-------------------------------------게시글 수정 버튼
+      //유저가 작성한 데이터 값 어떻게 가져오지? ^^
+      function myNoteEdit() {
+        location.href = "/notebook/write";
+      }
+      //-------------------------------------게시글 삭제 버튼
+      function myNoteDelete() {
+        if (window.confirm("정말 삭제하시겠습니까??")) {
+          location.href = "/notebook";
+        } else {
+          return false;
+        }
+      }
       //--------------------게시글 수정 삭제 동작 (작성된 게시글 내용 데이터 가져와서 넣기.)
       //이 동작이 가능하려면 위 함수 내용에 따라 버튼이 보여야 한다. 
       //버튼 유무를 따져야 하니 async await 써야하나?
