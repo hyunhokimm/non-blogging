@@ -11,10 +11,9 @@ exports.signupProcess = (req, res) => {
   const data = {
     email: req.body.email,
     nickname: req.body.nickname,
-    password: req.body.password,
   };
   user
-    .create(data) // 이 부분에서 user 모델을 사용하도록 수정
+    .create(data)
     .then((result) => {
       res.send(result);
     })
