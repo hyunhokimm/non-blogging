@@ -1,4 +1,4 @@
-const { User } = require("../model");
+const { user } = require("../model");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
@@ -10,11 +10,11 @@ exports.isLogin = async (req, res) => {
   console.log(req.body);
 
   try {
-    const user = await User.findOne({ where: { email, password } });
+    const findUser = await user.findOne({ where: { email, password } });
 
-    if (user) {
-      req.session.user = user.email;
-      res.json({ success: true, user });
+    if (findUser) {
+      req.session.user = findUser.email;
+      res.json({ success: true, user: findUser });
     } else {
       res.json({ success: false, msg: "Login Failed" });
     }

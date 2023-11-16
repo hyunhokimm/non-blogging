@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "develop": "nodemon index",
-    "dev": "pm2 start ecosystem.config.js --only projectName-dev --env development",
-    "start": "pm2 start ecosystem.config.js --only projectName-pd --env production",
+    "dev": "pm2 start index.js --only projectName-dev --env development",
+    "start": "pm2 start index.js --only projectName-pd --env production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "bootstrap": "^5.3.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",

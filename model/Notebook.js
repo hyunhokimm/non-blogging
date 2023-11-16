@@ -19,7 +19,7 @@ function Notebook(sequelize, DataTypes) {
         type: DataTypes.TEXT("medium"),
         allowNull: true,
       },
-      // 노트 공개 여부 (default: public)
+      // 노트 공개 여부 (default: public /  1: public, 0: private)
       isPublic: {
         type: DataTypes.ENUM("1", "0"),
         allowNull: false,
