@@ -1,15 +1,15 @@
 const express = require("express");
 const noteRoute = express.Router();
 const blogging = require("../../controller/Cblogging");
-// const { home } = require("../../controller/Chome");
+const { home } = require("../../controller/Chome");
 // const { noteId } = require("../../controller/Cmypost");
 
 // 모든 블로그
-noteRoute.get("/allblog", (req, res) => {
-  res.render("allblog");
-});
+// noteRoute.get("/allblog", (req, res) => {
+//   res.render("allblog");
+// });
 // // 수정될 코드
-// noteRoute.get("/allblog", home);
+noteRoute.get("/allblog", home);
 
 // 나의 게시글들
 noteRoute.get("/", (req, res) => {
