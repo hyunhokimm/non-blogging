@@ -18,6 +18,11 @@ noteRoute.get("/", (req, res) => {
 // 수정될 코드
 // noteRoute.get("/", notebook)
 
+//작성된 노트 보기
+noteRoute.get("/note", (req, res) => {
+  res.render("note");
+});
+
 //나의 블로그 작성
 // noteRoute.get("/write", (req, res) => {
 //   res.render("write");

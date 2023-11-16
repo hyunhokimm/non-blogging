@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   </head>
   <style>
@@ -96,6 +97,18 @@
       color: whitesmoke;
     }
 
+    .editOkComment {
+      border: 1px solid #78715e;
+      background-color: #78715e;
+      color: whitesmoke;
+
+
+      .editOkComment:hover {
+        border: 1px solid #78715e;
+        color: #78715e;
+      }
+    }
+
     .polaroid {
       background: #000;
       /*Change this to a background image or remove*/
@@ -143,8 +156,8 @@
 
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right">
-          <button type="button" onclick="" class="btn addComment justify-content-end">수정</button>
-          <button type="button" onclick="" class="btn addComment justify-content-end">삭제</button>
+          <button type="button" onclick="myNoteEdit()" class="btn addComment justify-content-end">수정</button>
+          <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
         </div>
       </div>
 
@@ -171,7 +184,7 @@
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
                     <strong class="d-block ">@username1</strong>
-                    Today’s special moments are tomorrow’s memories. - Aladdin
+                    Today’s special moments are tomorrow’s memories. - Aladdin(임시댓글)
                   </p>
                   <hr>
                 </td>
@@ -183,35 +196,25 @@
                 <td colspan="2">
                   <p class="pb-1 mb-0 small lh-sm">
                     <strong class="d-block ">@username2</strong>
-                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh
+                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh(임시댓글)
                   </p>
                   <hr>
                 </td>
                 <td>02:05</td>
-              </tr>
 
-              <tr>
-                <!-- <th scope="row"></th> -->
-                <td colspan="2">
-                  <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username3</strong>
-                    To love someone, you have to love yourself first. - Beauty and the Beast
-                  </p>
-                  <hr>
-                </td>
-                <td>02:05</td>
               </tr>
-              <tr>
 
             </tbody>
           </table>
-          <textarea class="form-control" id="commentTextarea" rows="3" placeholder="댓글을 작성해주세요."></textarea>
+          <form name="inputComment">
+            <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
         </div>
 
         <div align="right">
           <div id="noComment"></div>
           <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
         </div>
+        </form>
       </div>
 
     </main>
@@ -226,31 +229,22 @@
         &nbsp; 대표번호: 1644-0000<br />
         &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
       </span> -->
-    <tr>
-      <td colspan="2">
-        <p class="pb-1 mb-0 small lh-sm">
-          <strong class="d-block ">@username3</strong>
-          Today’s special moments are tomorrow’s memories. - Aladdin
-        </p>
-        <hr>
-      </td>
-      <td>02:05</td>
-    </tr>
+
     <!-- ------------script------------ -->
     <script>
-      //썸네일 넣고 빼기 
+      //--------------------썸네일 넣고 빼기 
       const thumbnailBox = document.getElementById("thumbnailBox")
 
       //이미지 안받아왔다면? (임시) ^^
-      // let imageData = "";
+      // let imageId = "";
 
-      if (!imageData) {
-        thumbnailBox.style.display = "none";
-      } else if (imageData) {
-        thumbnailBox.style.display = "block";
-      }
+      // if (!imageId) {
+      //   thumbnailBox.style.display = "none";
+      // } else if (imageId) {
+      //   thumbnailBox.style.display = "block";
+      // }
 
-      //댓글 작성 시간 가져오기
+      //--------------------댓글 작성 시간 가져오기
       function getNowTime() {
         let now = new Date();
         let hours = now.getHours();
@@ -263,7 +257,7 @@
         return hours + ":" + minutes;
       }
 
-      //댓글 등록
+      //--------------------댓글 등록
       function addComment() {
         let commentText = document.getElementById("commentTextarea").value;
 
@@ -291,18 +285,20 @@
 
 
 
-        let strongUsername = document.createElement("strong");
+        let strongUsername = document.createElement("p");
         strongUsername.classList.add("d-bock");
-        strongUsername.innerHTML = "@username"; //어떻게 가져오지^^
+
         commentParagraph.appendChild(strongUsername);
         commentParagraph.appendChild(document.createTextNode(commentText));
 
-        //댓글 내용 추가
         td1.appendChild(commentParagraph);
 
-        td1.innerHTML = `${commentText}<hr/>`
+        td1.innerHTML = `<p class = "commentText">${commentText}</p> <hr/>`
+        td1.prepend(strongUsername);
+        strongUsername.innerText = "imUser"; //어떻게 가져오지^^
 
-        td2.textContent = getNowTime();
+        const getTime = getNowTime();
+        td2.innerHTML = `${getTime} <button type="button" onclick="editComment()" id="editCommentBtn" class="btn addComment justify-content-end">수정</button><button type="button" onclick="deleteComment()" id="deleteCommentBtn" class="btn addComment justify-content-end">삭제</button>`
 
         newRow.appendChild(td1);
         newRow.appendChild(td2);
@@ -313,7 +309,210 @@
         //작성된 내용 지우기
         document.getElementById("commentTextarea").value = "";
 
+        //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^)
+        //댓글 작성한 데이터는 담겨짐.
+        const commentWrite = `${commentText}`
+        console.log("commentWrite", commentWrite)
+
+        const data = {
+          commentWrite
+        }
+        console.log("data", data)
+
+        axios({
+            method: "post",
+            url: "/notebook/:noteId/comment",
+            data: data
+
+          }).then((result) => {
+            console.log("됐나", result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+
       }
+
+      //--------------------댓글 삭제 (본인 댓글만 삭제할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
+      //얘는 노트아이디랑은 별개. 댓글 자체의 아이디.
+      //user가 해당 댓글의 id값을 가지고 있는지에 따라 판단? 
+      //각 댓글의 id값을 login한 user가 가지고 있느다면 삭제 버튼이 보여야한다; 
+      //로그인한 유저(로그인한 값이 null이 아니면서)이면서 + 댓글작성자의 idr가 같아야 한다.
+      //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
+      //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
+
+      //function removeCheck() {
+      // if (confirm("정말 삭제하시겠습니까??") == true) {
+      //   deleteComment()
+      // } else {
+      //   return false;
+      // }
+      // }
+
+
+      //-------
+      // function deleteComment() {
+      //   let delButtons = document.querySelectorAll("#deleteCommentBtn");
+
+      //   for (let i = 0; i < delButtons.length; i++) {
+      //     let delButton = delButtons[i];
+
+      //     // Use event delegation to handle click events
+      //     delButton.addEventListener("click", function() {
+      //       let findRow = this.closest('tr');
+
+      //       if (findRow) {
+      //         // Extract commentId and noteId based on your data attributes
+      //         let commentId = this.getAttribute('data-comment-id');
+      //         let noteId = this.getAttribute('data-note-id');
+
+      //         // Confirm the deletion with the user
+      //         if (window.confirm("정말 삭제하시겠습니까??")) {
+      //           // Remove the row immediately
+      //           findRow.remove();
+
+      //           // Execute the deletion logic asynchronously
+      //           axios.delete(`/notebook/${noteId}/comment/${commentId}`)
+      //             .then((result) => {
+      //               console.log("됐나", result);
+      //             })
+      //             .catch((err) => {
+      //               console.log(err);
+      //             });
+      //         }
+      //       }
+      //     });
+      //   }
+      // }
+
+      // // Ensure the event listener is set up after the DOM has fully loaded
+      // document.addEventListener("DOMContentLoaded", function() {
+      //   deleteComment();
+      // });
+
+      //---------------------------------------원래꺼
+      function deleteComment() {
+        let delButton = document.querySelectorAll("#deleteCommentBtn");
+
+        if (window.confirm("정말 삭제하시겠습니까??")) {
+
+
+          delButton.forEach(function(delBtn) {
+            delBtn.addEventListener("click", function() {
+              let findRow = this.closest('tr');
+
+              findRow.remove();
+              // if (findRow) {
+              //   let commentId = this.getAttribute('dataCommentId');
+              //   let noteId = this.getAttribute('dataNoteId');
+
+              //   findRow.remove();
+
+              //   axios.delete("/notebook/:noteId/comment/:commentId") //^^
+              //     .then((result) => {
+              //       console.log("됐나", result);
+              //     })
+              //     .catch((err) => {
+              //       console.log(err);
+              //     });
+              // }
+            });
+          });
+
+        } else {
+          return false;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+          deleteCommentHandler();
+        });
+      }
+      //---------------------------------------
+
+      // Ensure the event listener is set up after the DOM has fully loaded
+
+      //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
+      function editComment() {
+        let editButton = document.querySelectorAll("#editCommentBtn");
+        editButton.forEach(function(editBtn) {
+          editBtn.addEventListener("click", function() {
+            commentParagraph = this.parentNode.parentNode.querySelector(".commentText");
+            console.log("commentParagraph???", commentParagraph.textContent)
+
+            let editTextarea = document.createElement("textarea");
+            editTextarea.classList.add("form-control");
+            commentParagraph.appendChild(editTextarea);
+            editTextarea.value = commentParagraph.textContent;
+            //작성한 값으로 부모 노드 교체
+            commentParagraph.parentNode.replaceChild(editTextarea, commentParagraph);
+
+            //수정완료 버튼 추가
+            let saveButton = document.createElement("button");
+
+            this.parentNode.appendChild(saveButton);
+            saveButton.textContent = "수정 완료";
+            saveButton.classList.add("btn", "save-comment", "editOkComment");
+
+            //수정완료 버튼 이벤트
+            saveButton.addEventListener("click", function() {
+              saveEditedComment(editTextarea, commentParagraph);
+            });
+
+            //댓글 수정 버튼 클릭 이벤트
+            function saveEditedComment(editTextarea, commentParagraph) {
+              let editedText = editTextarea.value;
+
+              let addNewComment = document.createElement("p");
+              addNewComment.classList.add("pb-1", "mb-0", "small", "lh-sm");
+              addNewComment.appendChild(document.createTextNode(editedText));
+
+              editTextarea.parentNode.replaceChild(addNewComment, editTextarea);
+
+              saveButton.remove();
+
+            }
+            //editComment();
+
+            //근데 왜 수정하고 또 수정하기는 안되냐..
+
+
+          })
+        });
+        //console.log("수정댓글addNewComment", addNewComment.)
+      };
+
+
+      //--------------------게시글 수정 삭제 버튼 보이게 안보이게 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
+      //user가 작성한 노트에 있는 noteId 유무에 따라.
+      //*user가 해당 noteId를 가지고 있느냐 없느냐.
+      function noteEditBtnShow() {
+
+      }
+      //-------------------------------------게시글 수정 버튼
+      //유저가 작성한 데이터 값 어떻게 가져오지? ^^
+      function myNoteEdit() {
+        location.href = "/notebook/write";
+      }
+      //-------------------------------------게시글 삭제 버튼
+      function myNoteDelete() {
+        if (window.confirm("정말 삭제하시겠습니까??")) {
+          location.href = "/notebook";
+        } else {
+          return false;
+        }
+      }
+      //--------------------게시글 수정 삭제 동작 (작성된 게시글 내용 데이터 가져와서 넣기.)
+      //이 동작이 가능하려면 위 함수 내용에 따라 버튼이 보여야 한다. 
+      //버튼 유무를 따져야 하니 async await 써야하나?
+      //위 함수가 실행되었을 때 hidden상태라면 return false;
+
+      //수정 > 게시글 작성 페이지로 이동 write.ejs
+      //이거 어케하지.............
+      //게시글 작성하면서 noteId값 생성된다. 해당 페이지 자체의 내용을 그대로 가져와야 하니 그 주소로 이동..
+
+      //삭제 > 삭제되고 내 블로그로 페이지 이동 notebook.ejs
+      //삭제하시겠습니까 alert창 보여주고 확인하면 내 블로그 페이지로 이동 notebook.ejs
+      //데이터에서도 삭제 이 페이지에는 뭐가이렇게 많지 제일 복잡한페이지걸렸다... 
     </script>
   </body>
 </html>
