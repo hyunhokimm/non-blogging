@@ -1,6 +1,6 @@
-function Notebook(sequelize, DataTypes) {
+function notebook(sequelize, DataTypes) {
   return sequelize.define(
-    "Notebook",
+    "notebook",
     {
       // id 기본키로 설정
       noteId: {
@@ -42,4 +42,4 @@ function Notebook(sequelize, DataTypes) {
   );
 }
 
-module.exports = Notebook;
+module.exports = notebook;
