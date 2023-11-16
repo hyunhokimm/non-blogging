@@ -1,5 +1,5 @@
-.DS_Store
-.vscode
-config
+.DS_Store/
+.vscode/
+config/
 node_modules/
 package-lock.json
