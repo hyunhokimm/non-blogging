@@ -1,36 +1,40 @@
-function userTable(Sequelize, DataTypes) {
+function User(Sequelize, DataTypes) {
   return Sequelize.define(
-    "user",
+    "User",
     {
-      // id 기본키로 설정
+      // id > auto로 설정
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      // 이메일 설정
+      // 이메일
       email: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
-      // 닉네임 설정
+      // 닉네임
       nickname: {
         type: DataTypes.STRING(30),
-        allowNull: false,
+        allowNull: true,
       },
-      // 비밀번호 설정 (솔트 미적용)
+      // 비밀번호 (솔트 미적용)
       password: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: true,
+      },
+      checkPassword: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
       },
     },
     {
-      tableName: "user",
+      tableName: "User",
       freezeTableName: true,
       timestamps: false,
     }
   );
 }
 
-module.exports = userTable;
+module.exports = User;
