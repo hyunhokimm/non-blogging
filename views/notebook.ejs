@@ -34,8 +34,155 @@
       <div style="margin: 30px">
         <% var user = 'user' %>
         <div>
-          <% if(!user) { %> <%- include ('fragment/noNote') %> <% } else { %>
-          <%- include ('fragment/blog') %> <% } %>
+          <% if (!user) { %> <%- include('fragment/noNote') %> <% } else { %>
+            <div
+            style="
+              display: flex;
+              align-items: center;
+              margin-bottom: 50px;
+              justify-content: space-between;
+            "
+            class="border rounded-1 p-3"
+          >
+            <img style="height: auto; width: 60%" src="/images/2.jpg" alt="멋진풍경" />
+            <div class="text-container">
+              나의 대표 블로그
+              <p style="margin-top: 10px">주저리 주저리</p>
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              onclick=onblogging()
+              class="btn mb-4"
+              style="width: 100%; height: 50px; color: white; background-color: #ae7f5f"
+            >
+              Blogging 하기
+            </button>
+          
+            <div class="row" style="margin: 0 0.1%">
+              <div class="col-md-6">
+                <div
+                  class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+                >
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">blog</h3>
+                    <p class="card-text mb-auto">
+                      text text text text text text text text
+                    </p>
+                    <a href="#">Go <b>cookie</b>'s blog</a>
+                  </div>
+                  <div class="col-auto d-none d-lg-block">
+                    <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                    <svg
+                      class="bd-placeholder-img"
+                      width="200"
+                      height="250"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%">image</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+                >
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">blog</h3>
+                    <p class="card-text mb-auto">
+                      text text text text text text text text
+                    </p>
+                    <a href="#">Go <b>cookie</b>'s blog</a>
+                  </div>
+                  <div class="col-auto d-none d-lg-block">
+                    <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                    <svg
+                      class="bd-placeholder-img"
+                      width="200"
+                      height="250"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%">image</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-md-6">
+                <div
+                  class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+                >
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">blog</h3>
+                    <p class="card-text mb-auto">
+                      text text text text text text text text
+                    </p>
+                    <a href="#">Go <b>cookie</b>'s blog</a>
+                  </div>
+                  <div class="col-auto d-none d-lg-block">
+                    <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                    <svg
+                      class="bd-placeholder-img"
+                      width="200"
+                      height="250"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%">image</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+                >
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">blog</h3>
+                    <p class="card-text mb-auto">
+                      text text text text text text text text
+                    </p>
+                    <a href="#">Go <b>cookie</b>'s blog</a>
+                  </div>
+                  <div class="col-auto d-none d-lg-block">
+                    <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
+                    <svg
+                      class="bd-placeholder-img"
+                      width="200"
+                      height="250"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%">image</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+            <% } %>
         </div>
       </div>
       <footer><%- include ('fragment/footer') %></footer>
