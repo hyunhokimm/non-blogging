@@ -10,6 +10,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <style>
     * {
@@ -17,6 +18,7 @@
       
     }
   </style>
+
 
   <body style="background-color: #ece8e4; text-align: center;">
     <div style="width: 40%; text-align: center; margin: 10rem auto;">
@@ -31,7 +33,7 @@
         <input
           type="email"
           class="form-control"
-          id="floatingPassword"
+          id="email"
           placeholder="Password"
         />
         <label for="floatingPassword">Email</label>
@@ -40,7 +42,7 @@
           <input
             type="password"
             class="form-control"
-            id="floatingPassword"
+            id="password"
             placeholder="Password"
           />
           <label for="floatingPassword">Password</label>
@@ -49,7 +51,7 @@
           <input
             type="password"
             class="form-control"
-            id="floatingPassword"
+            id="ckPassword"
             placeholder="Password"
           />
           <label for="floatingPassword">Ck password</label>
@@ -58,11 +60,12 @@
             <input
             type="text"
             class="form-control"
-            id="floatingPassword"
+            id="nickname"
             placeholder="Password"
             />
             <label for="floatingPassword">Nickname</label>
         </div>
+        <div id="err" style="color: red; font-size:15px; margin-bottom: 0.5rem;"></div>
         <div
           class="btn"
           id="modify"
@@ -126,6 +129,8 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      
+
       const modify = () => {
         document.getElementById('pw').style.display=''
         document.getElementById('pwck').style.display = ''
@@ -134,7 +139,43 @@
        
       };
 
-      const complete = ()=>{}
+      const complete = ()=>{
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        const ckPassword = document.getElementById('ckPassword').value
+        const nickname = document.getElementById('nickname').value
+        const err = document.getElementById('err')
+        if(password != ckPassword){
+          err.innerHTML ='패스워드는 같아야 합니다.'
+          setTimeout(()=>{
+            err.innerHTML=''
+          },1500)
+        }
+        if(!email || !password || !ckPassword || !nickname){
+          err.innerHTML = '빈칸을 모두 채워주세요.'
+          setTimeout(()=>{
+            err.innerHTML=''
+          },1500)
+        }
+        if(email.indexOf('@') == -1){
+          err.innerHTML = '이메일 형식을 입력해 주세요.'
+          setTimeout(()=>{
+            err.innerHTML=''
+          },1500)
+        }
+
+        const userInfo = { email, password, nickname}
+
+        axios.post({
+          method:'/user/:userId',
+          userInfo
+        }).then((result)=>{
+          console.log(result)
+        }).catch((err)=>{
+          console.log(err)
+        })
+
+      }
 
       const cancle = () => {
         location.href = "/notebook/allblog";

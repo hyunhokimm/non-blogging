@@ -1,7 +1,7 @@
 const express = require("express");
 const userRoute = express.Router();
-const login = require("../../controller/Clogin");
-const signup = require("../../controller/Csignup");
+const { login, isLogin } = require("../../controller/Clogin");
+const { signup, signupProcess } = require("../../controller/Csignup");
 
 // 로그인
 userRoute.get("/login", login);

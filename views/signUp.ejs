@@ -41,7 +41,7 @@
             <input
               type="email"
               class="form-control"
-              id="floatingPassword"
+              id="email"
               placeholder="Password"
             />
             <label for="floatingPassword">Email</label>
@@ -50,7 +50,7 @@
             <input
               type="password"
               class="form-control"
-              id="floatingPassword"
+              id="password"
               placeholder="Password"
             />
             <label for="floatingPassword">Password</label>
@@ -59,7 +59,7 @@
             <input
               type="password"
               class="form-control"
-              id="floatingPassword"
+              id="chpassword"
               placeholder="Password"
             />
             <label for="floatingPassword">Ck password</label>
@@ -68,7 +68,7 @@
             <input
               type="text"
               class="form-control"
-              id="floatingPassword"
+              id="nickname"
               placeholder="Password"
             />
             <label for="floatingPassword">Nickname</label>
@@ -88,6 +88,7 @@
             Join us
           </button>
         </form>
+        <div style="color: red; font-size: 13px" id="err"></div>
         <div style="display: flex; justify-content: end">
           <div
             style="
@@ -118,19 +119,32 @@
     <script>
       //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
 
+      const err = document.getElementById("err");
+
       const onNext = () => {
         location.href = "/notebook/allblog";
       };
+
       const signUp = () => {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const chpassword = document.getElementById("chpassword").value;
-        const nickname = document.getElementById("name").value;
-        document.getElementById("err").innerHTML = "";
+        const nickname = document.getElementById("nickname").value;
+        if (email.indexOf("@") == -1) {
+          console.log(email.indexOf("@"), "err");
+          return (err.innerHTML = "이메일 형식으로 입력해 주세요.");
+        }
+
+        if (!email || !password || !chpassword || !nickname) {
+          return (err.innerHTML = "빈칸을 모두 채워주세요.");
+        }
+        err.innerHTML = "";
 
         if (password != chpassword) {
-          document.getElementById("err").innerHTML =
-            "비밀번호는 같아야 합니다.";
+          err.innerHTML = "비밀번호는 같아야 합니다.";
+          setTimeout(() => {
+            err.innerHTML = "";
+          }, 1500);
         }
         const user = {
           email,

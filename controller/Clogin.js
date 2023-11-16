@@ -2,11 +2,12 @@ const { User } = require("../model");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
-  res.render("login.ejs");
+  res.render("login");
 };
 
 exports.isLogin = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
 
   try {
     const user = await User.findOne({ where: { email, password } });
