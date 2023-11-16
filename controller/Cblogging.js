@@ -1,7 +1,12 @@
 const { user, notebook } = require("../model");
 
 // 게시물 작성페이지
-exports.write = (req, res) => {
+
+exports.write=(req, res)=>{
+  res.render('write')
+}
+
+exports.writePost = (req, res) => {
   // select * from user where id = 'aaa@email.com'
   // 1
   req.session.email = req.body.email;
