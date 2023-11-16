@@ -350,28 +350,87 @@
       // }
       // }
 
+
+      //-------
+      // function deleteComment() {
+      //   let delButtons = document.querySelectorAll("#deleteCommentBtn");
+
+      //   for (let i = 0; i < delButtons.length; i++) {
+      //     let delButton = delButtons[i];
+
+      //     // Use event delegation to handle click events
+      //     delButton.addEventListener("click", function() {
+      //       let findRow = this.closest('tr');
+
+      //       if (findRow) {
+      //         // Extract commentId and noteId based on your data attributes
+      //         let commentId = this.getAttribute('data-comment-id');
+      //         let noteId = this.getAttribute('data-note-id');
+
+      //         // Confirm the deletion with the user
+      //         if (window.confirm("정말 삭제하시겠습니까??")) {
+      //           // Remove the row immediately
+      //           findRow.remove();
+
+      //           // Execute the deletion logic asynchronously
+      //           axios.delete(`/notebook/${noteId}/comment/${commentId}`)
+      //             .then((result) => {
+      //               console.log("됐나", result);
+      //             })
+      //             .catch((err) => {
+      //               console.log(err);
+      //             });
+      //         }
+      //       }
+      //     });
+      //   }
+      // }
+
+      // // Ensure the event listener is set up after the DOM has fully loaded
+      // document.addEventListener("DOMContentLoaded", function() {
+      //   deleteComment();
+      // });
+
+      //---------------------------------------원래꺼
       function deleteComment() {
-        if (window.confirm("정말 삭제하시겠습니까??")) {} else {
+        let delButton = document.querySelectorAll("#deleteCommentBtn");
+
+        if (window.confirm("정말 삭제하시겠습니까??")) {
+
+
+          delButton.forEach(function(delBtn) {
+            delBtn.addEventListener("click", function() {
+              let findRow = this.closest('tr');
+
+              findRow.remove();
+              // if (findRow) {
+              //   let commentId = this.getAttribute('dataCommentId');
+              //   let noteId = this.getAttribute('dataNoteId');
+
+              //   findRow.remove();
+
+              //   axios.delete("/notebook/:noteId/comment/:commentId") //^^
+              //     .then((result) => {
+              //       console.log("됐나", result);
+              //     })
+              //     .catch((err) => {
+              //       console.log(err);
+              //     });
+              // }
+            });
+          });
+
+        } else {
           return false;
         }
-
-        let delButton = document.querySelectorAll("#deleteCommentBtn");
-        delButton.forEach(function(delBtn) {
-          delBtn.addEventListener("click", function() {
-            let findRow = this.closest('tr');
-            if (findRow) {
-              findRow.remove();
-            }
-          });
+        document.addEventListener("DOMContentLoaded", function() {
+          deleteCommentHandler();
         });
-        axios.delete("/notebook/:noteId/comment/:commentId") //^^
-          .then((result) => {
-            console.log("됐나", result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
       }
+      //---------------------------------------
+
+      // Ensure the event listener is set up after the DOM has fully loaded
+
       //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
       function editComment() {
         let editButton = document.querySelectorAll("#editCommentBtn");
@@ -412,12 +471,14 @@
               saveButton.remove();
 
             }
-            editComment();
+            //editComment();
+
             //근데 왜 수정하고 또 수정하기는 안되냐..
 
 
           })
         });
+        //console.log("수정댓글addNewComment", addNewComment.)
       };
 
 
