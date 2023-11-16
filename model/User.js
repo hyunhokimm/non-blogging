@@ -1,6 +1,6 @@
-function User(Sequelize, DataTypes) {
+function user(Sequelize, DataTypes) {
   return Sequelize.define(
-    "User",
+    "user",
     {
       // id > auto로 설정
       id: {
@@ -36,4 +36,4 @@ function User(Sequelize, DataTypes) {
     }
   );
 }
-module.exports = User;
+module.exports = user;

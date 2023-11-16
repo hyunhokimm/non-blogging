@@ -1,4 +1,4 @@
-const { User } = require("../model/User");
+const { user } = require("../model");
 
 // 회원가입 페이지
 exports.signup = (req, res) => {
@@ -13,7 +13,8 @@ exports.signupProcess = (req, res) => {
     nickname: req.body.nickname,
     password: req.body.password,
   };
-  User.create(data) // 이 부분에서 User 모델을 사용하도록 수정
+  user
+    .create(data) // 이 부분에서 user 모델을 사용하도록 수정
     .then((result) => {
       res.send(result);
     })
