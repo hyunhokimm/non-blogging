@@ -1,9 +1,9 @@
 {
   "development": {
-    "host": "127.0.0.1:3306",
+    "host": "101.101.219.106:3306",
     "database": "non-blogging",
     "username": "non-blogging",
-    "password": "",
+    "password": "sesac231107$",
     "dialect": "mysql"
   },
   "production": {

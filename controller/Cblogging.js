@@ -1,25 +1,27 @@
-const user = require("../model");
-const notebook = require("../model");
+const { user, notebook } = require("../model");
 
 // 게시물 작성페이지
 exports.write = (req, res) => {
-  user
-    .findOne({
-      where: {
-        // 이부분 뭔가 헷갈림.. 리더님께 질문하기
-        id: req.body.email,
-      },
-    })
-    .then((result) => {
-      if (result) {
-        res.render("write", { data: result });
-      } else {
-        res.render("allblog");
-      }
-    })
-    .catch((err) => {
-      res.status(500).send("접근 오류 발생");
-    });
+  // select * from user where id = 'aaa@email.com'
+  // 1
+  req.session.email = req.body.email;
+  // user
+  //   .findOne({
+  //     where: {
+  //       email: req.body.email,
+  //     },
+  //   })
+  //   .then((result) => {
+  //     if (result) {
+  //       res.render("write", { data: result });
+  //     } else {
+  //       res.render("allblog");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log()
+  //     res.status(500).send("접근 오류 발생");
+  //   });
 };
 
 exports.uploadNoteProcess = (req, res) => {

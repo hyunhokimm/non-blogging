@@ -11,12 +11,12 @@ function Notebook(sequelize, DataTypes) {
       },
       // 제목 설정
       title: {
-        type: DataTypes.VARCHAR(30),
+        type: DataTypes.STRING(30),
         allowNull: true,
       },
       // 내용 설정
       content: {
-        type: DataTypes.MEDIUMTEXT,
+        type: DataTypes.TEXT("medium"),
         allowNull: true,
       },
       // 노트 공개 여부 (default: public)

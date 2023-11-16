@@ -1,22 +1,19 @@
-// 회원가입 데이터베이스 연결
-const { signup } = require("../model");
+const { User } = require("../model/User");
 
 // 회원가입 페이지
-exports.signUpPage = (req, res) => {
-  // 회원가입 뷰
+exports.signup = (req, res) => {
   res.render("signup");
 };
 
 // 회원가입 진행
-exports.signUpProcess = (req, res) => {
+exports.signupProcess = (req, res) => {
   console.log(req.body);
   const data = {
     email: req.body.email,
     nickname: req.body.nickname,
     password: req.body.password,
   };
-  signup
-    .create(data)
+  User.create(data) // 이 부분에서 User 모델을 사용하도록 수정
     .then((result) => {
       res.send(result);
     })
