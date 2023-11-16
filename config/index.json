@@ -1,16 +1,14 @@
 {
   "development": {
-    "host": "101.101.219.106:3306",
+    "host": "101.101.219.106",
     "database": "non-blogging",
-    "username": "non-blogging",
-    "password": "sesac231107$",
+    "username": "blogger",
     "dialect": "mysql"
   },
   "production": {
-    "host": "127.0.0.1:3306",
+    "host": "101.101.219.106:3306",
     "database": "non-blogging",
-    "username": "non-blogging",
-    "password": "",
+    "username": "blogger",
     "dialect": "mysql"
   }
 }
