@@ -259,16 +259,11 @@
       //--------------------댓글 작성 시 랜덤 아이디값 주기
 
       function randomCommentId() {
-        const timestamp = new Date().getTime(); // Current timestamp
-        const randomNumber = Math.floor(Math.random() * 1000000); // Random number
+        const timestamp = new Date().getTime();
+        const randomNumber = Math.floor(Math.random() * 1000000);
 
         return `${timestamp}_${randomNumber}`;
       }
-
-      // Example usage
-      // const commentId = randomCommentId();
-      // console.log(commentId);
-
       //--------------------댓글 등록
       function addComment() {
         let commentText = document.getElementById("commentTextarea").value;
@@ -292,10 +287,6 @@
         let td2 = document.createElement("td");
 
         let commentParagraph = document.createElement("p");
-        commentParagraph.classList.add("pb-1", "mb-0", "small", "lh-sm", "commentTextColor");
-        commentParagraph.style.color = "#78715e"; //왜 안되니^^
-
-
 
         let strongUsername = document.createElement("p");
         strongUsername.classList.add("d-bock");
@@ -307,9 +298,9 @@
 
         const randomId = randomCommentId()
 
-        td1.innerHTML = `<p class = "commentText" id= "${randomId}">${commentText}</p> <hr/>`
+        td1.innerHTML = `<p class = "commentText pb-1 mb-0 small lh-sm" id= "${randomId}">${commentText}</p> <hr/>`
         td1.prepend(strongUsername);
-        strongUsername.innerText = "imUser"; //어떻게 가져오지^^
+        strongUsername.innerText = "nickname"; //어떻게 가져오지^^ 로컬에 저장된 유저의 닉네임..
 
         const getTime = getNowTime();
         td2.innerHTML = `${getTime} <button type="button" onclick="editComment()" id="editCommentBtn" class="btn addComment justify-content-end">수정</button><button type="button" onclick="deleteComment()" id="deleteCommentBtn" class="btn addComment justify-content-end">삭제</button>`
@@ -323,12 +314,10 @@
         //작성된 내용 지우기
         document.getElementById("commentTextarea").value = "";
 
-        //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^)
+        //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^ 로컬에 저장된 아이디와 비교?)
         //댓글 작성한 데이터는 담겨짐.
         const commentWrite = `${commentText}`
         const commentId = `${randomId}`
-        console.log("commentWrite", commentWrite)
-        console.log("commentId", commentId)
 
         const data = {
           commentWrite,
@@ -342,10 +331,10 @@
             data: data
 
           }).then((result) => {
-            console.log("됐나", result);
+            console.log("댓글작성 axios result", result);
           })
           .catch((err) => {
-            console.log(err);
+            console.log("댓글작성 axios err", err);
           });
 
 
@@ -358,48 +347,55 @@
       //로그인한 유저(로그인한 값이 null이 아니면서)이면서 + 댓글작성자의 idr가 같아야 한다.
       //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
       //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
-
       function deleteComment() {
-        let confirmationShown = false;
+        let commentTableBox = document.querySelector("tbody");
 
-        function handleDeleteButtonClick(clickedButton) {
-          let findRow = clickedButton.closest('tr');
-          if (findRow) {
-            // Assuming you have the commentId and noteId stored in data attributes
-            let commentId = clickedButton.getAttribute('data-comment-id');
-            let noteId = clickedButton.getAttribute('data-note-id');
+        commentTableBox.addEventListener("click", async function(event) {
+          if (event.target.id === "deleteCommentBtn") {
+            let userConfirmed = window.confirm("정말 삭제하시겠습니까??");
 
-            findRow.remove();
+            if (userConfirmed) {
+              let findRow = event.target.closest('tr');
+              if (findRow) {
+                let commentIdElement = findRow.querySelector('.commentText');
+                let commentId = commentIdElement ? commentIdElement.id : "";
+                let commentText = commentIdElement ? commentIdElement.textContent : "";
 
-            axios.delete(`/notebook/${noteId}/comment/${commentId}`)
-              .then((result) => {
-                console.log("됐나", result);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        }
+                if (!commentId || !commentText) {
+                  console.error("Error: CommentId or CommentText not found.");
+                  return;
+                }
 
-        let delButtons = document.querySelectorAll("#deleteCommentBtn");
+                findRow.remove();
 
-        delButtons.forEach(function(delBtn) {
-          delBtn.addEventListener("click", function() {
-            if (!confirmationShown) {
-              let userConfirmed = window.confirm("정말 삭제하시겠습니까??");
+                console.log("삭제 data:", {
+                  commentText: commentText,
+                  commentId: commentId
+                });
 
-              if (userConfirmed) {
-                handleDeleteButtonClick(this);
-                confirmationShown = true;
-              } else {
-                return false;
+                try {
+                  let result = await axios.delete(`/notebook/${noteId}/comment/${commentId}`, {
+                    data: {
+                      commentId: commentId,
+                      commentText: commentText
+                    }
+                  });
+
+                  console.log("댓글삭제 axios result", result);
+                } catch (err) {
+                  console.log("댓글삭제 axios err", err);
+                }
               }
             }
-          });
+          }
+        }, {
+          once: true
         });
       }
 
+
       //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
+
       function editComment() {
         let editButton = document.querySelectorAll("#editCommentBtn");
         editButton.forEach(function(editBtn) {
@@ -431,7 +427,10 @@
               let editedText = editTextarea.value;
 
               let addNewComment = document.createElement("p");
-              addNewComment.classList.add("pb-1", "mb-0", "small", "lh-sm");
+              addNewComment.classList.add("commentText", "pb-1", "mb-0", "small", "lh-sm");
+              const randomId = randomCommentId()
+              addNewComment.id = `${randomId}`;
+
               addNewComment.appendChild(document.createTextNode(editedText));
 
               editTextarea.parentNode.replaceChild(addNewComment, editTextarea);
@@ -439,16 +438,9 @@
               saveButton.remove();
 
             }
-            //editComment();
-
-            //근데 왜 수정하고 또 수정하기는 안되냐..
-
-
           })
         });
-        //console.log("수정댓글addNewComment", addNewComment.)
       };
-
 
       //--------------------게시글 수정 삭제 버튼 보이게 안보이게 (userId와 noteId 에 따라 버튼 보이고 안보이도록.)
       //user가 작성한 노트에 있는 noteId 유무에 따라.
