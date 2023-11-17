@@ -160,7 +160,9 @@
           data: user,
         })
           .then((result) => {
-            console.log(result);
+            if(result.data){
+              location.href = '/user/login'
+            }
           })
           .catch((err) => {
             console.log(err);
