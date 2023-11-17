@@ -2,10 +2,10 @@ const { user, notebook } = require("../model");
 
 // 사용자 페이지
 exports.userPage = (req, res) => {
-  const email = req.body.email;
+  const email = req.session.user;
 
-  if (!req.session.user) {
-    res.redirect("/");
+  if (!email) {
+    res.render("login");
     return false;
   }
 
