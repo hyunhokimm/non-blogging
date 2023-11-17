@@ -53,63 +53,66 @@
       <header><%- include ('fragment/header') %></header>
       <section>
         <div style="padding: 80px">
-          <div style="justify-content: space-between; display: flex">
-            <div>
-              <label for="file">
-                <div
-                  type="button"
-                  class="btn btn-lg mb-3"
-                  style="
-                    color: #ae7f5f;
-                    border: 2px solid #ae7f5f;
-                    font-weight: bold;
-                  "
-                >
-                  사진 올리기
-                </div>
-              </label>
-              <input
-                type="file"
-                id="file"
-                accept="image/*"
-                style="display: none"
-                required
-              />
-            </div>
+          <form enctype="multipart/form-data">
 
-            <img
-              onclick="deleteImg()"
-              src=""
-              alt=""
-              style="width: 60%; margin: 1rem"
-              id="selectedImg"
-            />
-          </div>
-          <div class="row">
-            <div class="mb-3">
-              <input
-                style="height: 60px"
-                type="text"
-                class="form-control fs-3"
-                id="title"
-                placeholder="제목을 입력하세요."
+            <div style="justify-content: space-between; display: flex">
+              <div>
+                <label for="file">
+                  <div
+                    type="button"
+                    class="btn btn-lg mb-3"
+                    style="
+                      color: #ae7f5f;
+                      border: 2px solid #ae7f5f;
+                      font-weight: bold;
+                    "
+                  >
+                    사진 올리기
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  style="display: none"
+                  required
+                />
+              </div>
+  
+              <img
+                onclick="deleteImg()"
+                src=""
+                alt=""
+                style="width: 60%; margin: 1rem"
+                id="selectedImg"
               />
             </div>
-            <div class="mb-3">
-              <div id="summernote" name="editordata"></div>
+            <div class="row">
+              <div class="mb-3">
+                <input
+                  style="height: 60px"
+                  type="text"
+                  class="form-control fs-3"
+                  id="title"
+                  placeholder="제목을 입력하세요."
+                />
+              </div>
+              <div class="mb-3">
+                <div id="summernote" name="editordata"></div>
+              </div>
+              <div style="display: flex; justify-content: end">
+                <div style="color: rgb(248, 78, 78); margin: 8px" id="err"></div>
+                <button
+                  type="button"
+                  onclick="blogging()"
+                  class="btn btn-lg"
+                  style="color: white; background-color: #ae7f5f"
+                >
+                  Blogging
+                </button>
+              </div>
             </div>
-            <div style="display: flex; justify-content: end">
-              <div style="color: rgb(248, 78, 78); margin: 8px" id="err"></div>
-              <button
-                type="button"
-                onclick="blogging()"
-                class="btn btn-lg"
-                style="color: white; background-color: #ae7f5f"
-              >
-                Blogging
-              </button>
-            </div>
-          </div>
+          </form>
         </div>
       </section>
 
@@ -137,27 +140,18 @@
           document.getElementById("err").innerHTML = "";
           const title = document.getElementById("title").value;
           const content = $("#summernote").summernote("code");
-          let userBlog;
+          const blog ={title, content}
 
-          if (!form.get("file")) {
-            userBlog = {
-              title,
-              content,
-              form: form.get("file"),
-            };
-          }
-
-          userBlog = {
-            title,
-            content,
-            form: form.get("file"),
-          };
-          console.log(userBlog);
-
+         // form.append('blog',JSON.stringify(blog))
+         
+          form.append('blog',JSON.stringify(blog))
+      
+          console.log(form.get('blog'))
+          console.log(form.get('img'))
           axios
-            .post("/notebook/write", userBlog)
+            .post("/notebook/write", form)
             .then((result) => {
-              console.log(result);
+              location.href='/notebook'
             })
             .catch((err) => {
               console.log(err);
@@ -186,8 +180,7 @@
           reader.readAsDataURL(fileDOM.files[0]);
           const file = fileDOM.files[0];
           if (file) {
-            form.append("file", file);
-            console.log(form.get("file"));
+            form.append("img", file);
 
             selectImg.src = URL.createObjectURL(file);
           }
@@ -202,3 +195,5 @@
     </div>
   </body>
 </html>
+
+

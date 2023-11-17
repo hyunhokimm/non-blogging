@@ -19,14 +19,19 @@ function notebook(sequelize, DataTypes) {
         type: DataTypes.TEXT("medium"),
         allowNull: true,
       },
+      // 이미지
+      img:{
+         type: DataTypes.STRING(30),
+        allowNull: true,
+      },
       // 노트 공개 여부 (default: public /  1: public, 0: private)
       isPublic: {
         type: DataTypes.ENUM("1", "0"),
-        allowNull: false,
+        allowNull: true,
       },
       // user 테이블과 연결할 컬럼 설정
       connectUser: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(30),
         allowNull: false,
         references: {
           model: "User",
