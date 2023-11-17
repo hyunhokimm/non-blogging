@@ -256,6 +256,18 @@
 
         return hours + ":" + minutes;
       }
+      //--------------------댓글 작성 시 랜덤 아이디값 주기
+
+      function randomCommentId() {
+        const timestamp = new Date().getTime(); // Current timestamp
+        const randomNumber = Math.floor(Math.random() * 1000000); // Random number
+
+        return `${timestamp}_${randomNumber}`;
+      }
+
+      // Example usage
+      // const commentId = randomCommentId();
+      // console.log(commentId);
 
       //--------------------댓글 등록
       function addComment() {
@@ -293,7 +305,9 @@
 
         td1.appendChild(commentParagraph);
 
-        td1.innerHTML = `<p class = "commentText">${commentText}</p> <hr/>`
+        const randomId = randomCommentId()
+
+        td1.innerHTML = `<p class = "commentText" id= "${randomId}">${commentText}</p> <hr/>`
         td1.prepend(strongUsername);
         strongUsername.innerText = "imUser"; //어떻게 가져오지^^
 
@@ -312,12 +326,15 @@
         //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^)
         //댓글 작성한 데이터는 담겨짐.
         const commentWrite = `${commentText}`
+        const commentId = `${randomId}`
         console.log("commentWrite", commentWrite)
+        console.log("commentId", commentId)
 
         const data = {
-          commentWrite
+          commentWrite,
+          commentId
         }
-        console.log("data", data)
+        console.log("댓글등록 data", data)
 
         axios({
             method: "post",
