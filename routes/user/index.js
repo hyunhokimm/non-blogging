@@ -5,7 +5,9 @@ const { signup, signupProcess } = require("../../controller/Csignup");
 
 // 로그인
 userRoute.get("/login", login);
-userRoute.post("/login", isLogin);
+userRoute.post("/login", (req, res) => {
+  isLogin(req, res);
+});
 
 // 회원가입
 userRoute.get("/signup", signup);

@@ -111,7 +111,7 @@
             <a href="/user/login">Log in</a>
           </div>
         </div>
-        <button type="button" onclick="onNext()">
+        <button type="submit" onclick="onNext()">
           다음페이지(없어질 버튼)
         </button>
       </section>
@@ -120,19 +120,16 @@
       //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
 
       const err = document.getElementById("err");
-      const email = document.getElementById("email");
-      const password = document.getElementById("password");
-      const chpassword = document.getElementById("chpassword");
-      const nickname = document.getElementById("nickname");
+
       const onNext = () => {
         location.href = "/notebook/allblog";
       };
 
       const signUp = () => {
-        const email = email.value;
-        const password = password.value;
-        const chpassword = chpassword.value;
-        const nickname = nickname.value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const chpassword = document.getElementById("chpassword").value;
+        const nickname = document.getElementById("nickname").value;
         if (email.indexOf("@") == -1) {
           console.log(email.indexOf("@"), "err");
           return (err.innerHTML = "이메일 형식으로 입력해 주세요.");
@@ -163,15 +160,23 @@
           data: user,
         })
           .then((result) => {
-            console.log(result);
+            if (result.data == "ok") {
+              document.getElementById("email").innerHTML = "";
+              document.getElementById("password").innerHTML = "";
+              document.getElementById("chpassword").innerHTML = "";
+              document.getElementById("nickname").innerHTML = "";
+              err.innerHTML = "가입이 완료되었습니다.";
+              setTimeout(() => {
+                err.innerHTML = "";
+              });
+            }
           })
           .catch((error) => {
             console.log(error);
             err.innerHTML = error.response.data;
-            email.innerHTML = "";
-            password.innerHTML = "";
-            chpassword.innerHTML = "";
-            nickname.innerHTML = "";
+            setTimeout(() => {
+              err.innerHTML = "";
+            }, 1500);
           });
       };
     </script>
