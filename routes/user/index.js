@@ -9,7 +9,9 @@ userRoute.post("/login", isLogin);
 
 // 회원가입
 userRoute.get("/signup", signup);
-userRoute.post("/signup", signupProcess);
+userRoute.post("/signup", (req, res) => {
+  signupProcess(req, res);
+});
 
 //회원정보
 userRoute.get("/myinfo", (req, res) => {
