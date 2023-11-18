@@ -2,17 +2,11 @@ function user(Sequelize, DataTypes) {
   return Sequelize.define(
     "user",
     {
-      // id > auto로 설정
-      id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       // 이메일
       email: {
         type: DataTypes.STRING(50),
         allowNull: true,
+        primaryKey: true,
       },
       // 닉네임
       nickname: {

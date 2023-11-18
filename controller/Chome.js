@@ -1,6 +1,5 @@
 const { user } = require("../model");
 const { notebook } = require("../model");
-// const Op = Sequelize.Op;
 
 // allblog page
 exports.home = async (req, res) => {
@@ -14,7 +13,7 @@ exports.home = async (req, res) => {
   });
 
   const allNotebook = await notebook.findAll({
-    attributes: ["noteId", "title", "content"], // 게시물없으면 기본이미지
+    attributes: ["noteId", "title", "content"],
   });
   allNotebook.map(async (user) => {
     blogs.push(user.dataValues);
