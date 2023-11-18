@@ -11,29 +11,41 @@ exports.signUpPage = (req, res) => {
 // 회원가입 진행
 exports.signupProcess = async (req, res) => {
   const { email, password, nickname } = req.body;
-  const result = await user.findOne({ email });
-  console.log(result);
-  const hashpassword = hashPassword(password);
-  console.log("hashpass", hashpassword);
-  user
-    .create({
-      email,
-      password: hashpassword,
-      nickname,
-    })
-    .then((result) => {
-      return res.render("signup");
-    })
-    .catch(function (err) {
-      console.log(err);
-      res.status(500).send("등록 오류가 발생하였습니다.");
-    });
+
+  try {
+    const result = await user.findOne({ where: { email } });
+    console.log(result, "result");
+
+    if (result) {
+      return res.status(400).send("이미 가입되어 있는 이메일 입니다.");
+    }
+
+    const hashpassword = hashPassword(password);
+
+    user
+      .create({
+        email,
+        password: hashpassword,
+        nickname,
+      })
+      .then(() => {
+        // return res.render("signup");
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.status(500).send("등록 오류가 발생하였습니다.");
+      });
+  } catch (error) {
+    console.error("Error during signupProcess:", error);
+    res.status(500).send("등록 오류가 발생하였습니다.");
+  }
 };
 
 function hashPassword(password) {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto
     .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+
     .toString("hex");
 
 exports.signUpProcess = (req, res) => {
