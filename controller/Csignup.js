@@ -9,6 +9,7 @@ exports.signup = (req, res) => {
 // 회원가입 진행
 exports.signupProcess = async (req, res) => {
   const { email, password, nickname } = req.body;
+
   try {
     const result = await user.findOne({ where: { email } });
     console.log(result, "result");
