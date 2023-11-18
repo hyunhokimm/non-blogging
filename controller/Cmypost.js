@@ -1,5 +1,16 @@
 const { notebook } = require("../model");
 
+// 게시물 전체 페이지
+exports.notebook = async (req, res) => {
+  res.render("/notebook/note", { notebook });
+};
+
+//게시물 등록 페이지
+exports.createNote = async (content, res) => {
+  console.log(content);
+  // const result = await notebook.create(content)
+};
+
 // 게시물 상세 페이지
 exports.note = async (req, res, next) => {
   try {

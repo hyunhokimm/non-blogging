@@ -6,19 +6,27 @@ exports.signup = (req, res) => {
 };
 
 // 회원가입 진행
-exports.signupProcess = (req, res) => {
-  console.log(req.body);
-  const data = {
-    email: req.body.email,
-    nickname: req.body.nickname,
-  };
-  user
-    .create(data)
-    .then((result) => {
-      res.send(result);
-    })
-    .catch(function (err) {
-      console.log(err);
-      res.status(500).send("등록 오류가 발생하였습니다.");
+exports.signupProcess = async (req, res) => {
+  const { email, nickname } = req.body;
+
+  try {
+    // 이메일 또는 닉네임이 이미 존재하는지 확인
+    const existingUser = await user.findOne({
+      where: {
+        user: [{ email }, { nickname }],
+      },
     });
+
+    if (existingUser) {
+      // 이미 존재하는 경우
+      return res.status(400).send("이미 가입된 이메일 또는 닉네임입니다.");
+    }
+
+    // 존재하지 않는 경우, 회원가입 진행
+    const newuser = await user.create({ email, nickname });
+    return res.status(201).send(newuser);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("등록 오류가 발생하였습니다.");
+  }
 };

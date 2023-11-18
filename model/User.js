@@ -24,10 +24,6 @@ function user(Sequelize, DataTypes) {
         type: DataTypes.STRING(100),
         allowNull: true,
       },
-      checkPassword: {
-        type: DataTypes.STRING(100),
-        allowNull: true,
-      },
     },
     {
       tableName: "User",
