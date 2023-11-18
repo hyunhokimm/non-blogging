@@ -13,7 +13,7 @@ function user(Sequelize, DataTypes) {
         type: DataTypes.STRING(30),
         allowNull: true,
       },
-      // 비밀번호 (솔트 미적용)
+      // 비밀번호
       password: {
         type: DataTypes.STRING(100),
         allowNull: true,

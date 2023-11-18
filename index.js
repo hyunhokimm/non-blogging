@@ -23,6 +23,15 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isAuthenticated;
+  res.locals.user = req.session.user;
+  console.log(res.locals.user);
+  next();
+});
+
+//mypage 작용 바로 x > session 불러오는 코드 작성
+
 // index.js 와 같은 위치에 있는 .env 파일을 불러와서 환경변수로 사용할 수 있게 하는것
 dotenv.config({ path: path.join(__dirname, "./config/envs/.env") });
 // dotenv.config({
