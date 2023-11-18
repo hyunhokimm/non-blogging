@@ -23,3 +23,11 @@ exports.isLogin = async (req, res) => {
     res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
+
+function comparepassword(plainpassword, hashpassword) {
+  const [salt, password] = plainpassword.split(":");
+  const hash = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
+  return hash === password;
+}
