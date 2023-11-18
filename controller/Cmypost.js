@@ -1,11 +1,15 @@
-const {notebook} = require("../model");
+const { notebook } = require("../model");
 
+// 게시물 전체 페이지
+exports.notebook = async (req, res) => {
+  res.render("/notebook/note", { notebook });
+};
 
 //게시물 등록 페이지
-exports.noteCreate = async (content,  res)=>{
-  console.log(content)
+exports.createNote = async (content, res) => {
+  console.log(content);
   // const result = await notebook.create(content)
-}
+};
 
 // 게시물 상세 페이지
 exports.note = async (req, res, next) => {
@@ -13,10 +17,10 @@ exports.note = async (req, res, next) => {
     const { noteId } = req.params;
     const note = await notebook.findOne({ noteId }); // 게시글 검색
     if (!note) {
-      throw new Error("Nonote"); //render("nonote")예정
+      throw new Error("./views/fragment/nonote");
     }
 
-    res.render("/notebook/nonote", { post });
+    res.render("/notebook/note", { post });
   } catch (error) {
     next(error);
   }
@@ -45,7 +49,7 @@ exports.deleteNote = async (req, res, next) => {
   const { noteId } = req.params;
   try {
     await notebook.delete({ noteId });
-    res.send("Success Delete"); // alert 삭제되엇슴당 띄우기!
+    res.send("Success Delete");
   } catch (err) {
     next(err);
   }

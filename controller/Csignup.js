@@ -1,10 +1,9 @@
 const { user } = require("../model");
 const crypto = require("crypto");
 
-// 회원가입 페이지
 exports.signup = (req, res) => {
   res.render("signup");
-};
+}
 
 // 회원가입 진행
 exports.signupProcess = async (req, res) => {
@@ -28,7 +27,10 @@ exports.signupProcess = async (req, res) => {
         nickname,
       })
       .then(() => {
+
         res.send("ok");
+
+
       })
       .catch(function (err) {
         console.log(err);
@@ -42,9 +44,6 @@ exports.signupProcess = async (req, res) => {
 
 function hashPassword(password) {
   const salt = crypto.randomBytes(16).toString("hex");
-  const hash = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
-
-    .toString("hex");
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex");
   return `${salt}:${hash}`;
 }
