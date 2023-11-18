@@ -160,15 +160,12 @@
           data: user,
         })
           .then((result) => {
+            console.log(result.data);
             if (result.data == "ok") {
-              document.getElementById("email").innerHTML = "";
-              document.getElementById("password").innerHTML = "";
-              document.getElementById("chpassword").innerHTML = "";
-              document.getElementById("nickname").innerHTML = "";
               err.innerHTML = "가입이 완료되었습니다.";
               setTimeout(() => {
                 err.innerHTML = "";
-              });
+              }, 2000);
             }
           })
           .catch((error) => {
