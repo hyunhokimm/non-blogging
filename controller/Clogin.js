@@ -10,13 +10,13 @@ exports.isLogin = async (req, res) => {
   console.log(req.body);
 
   try {
-    const findUser = await user.findOne({ where: { email, password } });
+    const findUser = await user.findOne({ email });
+    console.log(findUser);
 
     if (findUser) {
-      req.session.user = findUser.email;
-      res.json({ success: true, user: findUser });
+      return res.render("notebook");
     } else {
-      res.json({ success: false, msg: "Login Failed" });
+      return res.json({ success: false, msg: "Login Failed" });
     }
   } catch (error) {
     console.error("Error during login:", error);
