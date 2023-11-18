@@ -3,7 +3,7 @@
     "host": "101.101.219.106",
     "database": "non-blogging",
     "username": "blogger",
-    
+    "password": "sesac231107$",
     "dialect": "mysql"
   },
   "production": {
