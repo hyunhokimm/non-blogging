@@ -1,41 +1,46 @@
 const { user, notebook } = require("../model");
-// const Op = Sequelize.Op;
 
 // 게시물 작성페이지
-
 exports.write = (req, res) => {
   res.render("write");
 };
 
-exports.createNote = async (content, res) => {
-  console.log(content);
-  // const result = await notebook.create(content)
+exports.writeNote = async (req, res) => {
+  const img = req.files[0].filename;
+  const content = JSON.parse(req.body.blog);
+  console.log(content, req.session.email);
+  const blog = {
+    img,
+    connectUser: req.session.email,
+    title: "",
+    content: "",
+  };
+
+  const result = await notebook.create(blog);
+
+  console.log(result);
+
+  res.send(result);
+
+  // user
+  //   .findOne({
+  //     where: {
+  //       email: req.body.email,
+  //     },
+  //   })
+  //   .then((result) => {
+  //     if (result) {
+  //       res.render("write", { data: result });
+  //     } else {
+  //       res.render("notebook");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send("접근 오류 발생");
+  //   });
 };
 
-// exports.writeNote = (req, res) => {
-// select * from user where id = 'aaa@email.com'
-// 1
-// req.session.email = req.body.email;
-// user
-//   .findOne({
-//     where: {
-//       email: req.body.email,
-//     },
-//   })
-//   .then((result) => {
-//     if (result) {
-//       res.render("write", { data: result });
-//     } else {
-//       res.render("allblog");
-//     }
-//   })
-//   .catch((err) => {
-//     console.log()
-//     res.status(500).send("접근 오류 발생");
-//   });
-// };
-
-exports.uploadNoteProcess = (req, res) => {
+exports.writeNoteProcess = (content, res) => {
   const data = {
     title: req.body.title,
     content: req.body.content,

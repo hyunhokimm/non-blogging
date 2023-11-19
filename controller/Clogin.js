@@ -14,21 +14,25 @@ exports.isLogin = async (req, res) => {
     console.log("-----------------------------");
 
     const findUser = await user.findOne({ where: { email: idBox } });
-    if (!findUser) res.status(400).send("등록된 이메일이 없습니다.");
-
+    if (!findUser) {
+      return res.json({ success: false, msg: "등록된 이메일이 없습니다." });
+    }
     const compare = comparePassword(pwBox, findUser.dataValues.password);
     console.log(compare);
 
     if (compare) {
       console.log("로그인");
-      req.session.user = idBox;
-      res.render("allblog");
+      return res.json({
+        success: true,
+        msg: "로그인 성공",
+        redirectTo: "myInfo",
+      });
     } else {
-      res.json({ success: false, msg: "Login Failed" });
+      return res.json({ success: false, msg: "Login Failed" });
     }
   } catch (error) {
     console.error("로그인 중 오류 발생:", error);
-    res.status(500).json({ success: false, msg: "내부 서버 오류" });
+    return res.status(500).json({ success: false, msg: "내부 서버 오류" });
   }
 };
 
