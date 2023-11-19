@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
 const dotenv = require("dotenv");
 const path = require("path");
@@ -22,6 +23,11 @@ app.use(
       maxAge: 60 * 60 * 24,
     },
     secure: true, // https에서만 동작하도록 함
+    store: new FileStore({
+      path: "./path/to/sessions",
+      retries: 2, // 시도 횟수
+      retriesTimeout: 1000, // 재시도 간격 (밀리초)
+    }), // nodejs 재시작이 되어도 세션 값 유지
   })
 );
 

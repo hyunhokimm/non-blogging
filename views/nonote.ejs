@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 1rem">
+      <div
+        style="
+          border: 3px solid #ae7f5f;
+          border-radius: 25px;
+          height: 10rem;
+          padding: 3rem;
+          margin-bottom: 2rem;
+        "
+      >
+        <div>작성된 블로그가 없습니다.</div>
+        <div>블로그를 작성해 주세요.</div>
+      </div>
+      <div
+        style="
+          border: 3px solid #ae7f5f;
+          border-radius: 25px;
+          height: 20rem;
+          padding: 7rem;
+          margin-bottom: 3rem;
+        "
+      >
+        <div style="margin-bottom: 1rem">포스팅을 작성해 주세요.</div>
+        <button
+          type="button"
+          onclick="posting()"
+          style="
+            background-color: #ae7f5f;
+            border: 0;
+            width: 8rem;
+            height: 2.5rem;
+            color: #ece8e4;
+            border-radius: 15px;
+          "
+        >
+          click
+        </button>
+      </div>
+      <script>
+        const posting = () => {
+          location.href = "/notebook/write";
+        };
+      </script>
+    </div>
+  </body>
+</html>

@@ -1,36 +1,30 @@
-const { user, notebook } = require("../model");
+const { notebook } = require("../model");
+const { user } = require("../model");
 
 // 사용자 페이지
-exports.userPage = (req, res) => {
-  const email = req.session.user;
-
-  if (!email) {
-    res.render("login");
-    return false;
-  }
-
-  user.findOne({
-    where: {
-        email: email,
+exports.userPage = async (req, res) => {
+  try {
+    const email = req.session.user;
+    console.log(email);
+    if (!email) {
+      return res.render("login");
     }
-  }).then((userResult) => {
-    if (userResult) {
-      notebook.findAll({
-        where: {
-          currentUser: email,
-        }
-      }).then((noteResult) => {
-        console.log("조회 ", userResult, noteResult);
-        res.render("notebook", { user: userResult, note: noteResult });
-      }).catch((noteErr) => {
-        console.log(noteErr);
-        res.status(500).send("접근 오류 발생");
+
+    const userInfo = await user.findOne({ where: { email: email } });
+    if (userInfo) {
+      const noteInfo = await notebook.findAll({
+        where: { connectUser: email },
+        attributes: ["noteId", "title", "content", "img", "connectUser"],
       });
-    } else {
-      res.render("signUp");
+      console.log(noteInfo);
+      if (!noteInfo) {
+        res.render("nonote");
+      }
+      console.log("조회 ", userInfo, noteInfo);
+      res.render("notebook", { user: userInfo, note: noteInfo });
     }
-  }).catch((userErr) => {
-    console.log(userErr);
+  } catch (error) {
+    console.log(error);
     res.status(500).send("접근 오류 발생");
-  });
+  }
 };

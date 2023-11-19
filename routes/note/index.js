@@ -2,17 +2,23 @@ const express = require("express");
 const upload = require("../../public/multer");
 const noteRoute = express.Router();
 
-const blogging = require("../../controller/Cblogging");
 const { home } = require("../../controller/Chome");
-const { notebook } = require("../../controller/Cmypost"); // 수정
-const { note, editNote, deleteNote } = require("../../controller/Cmypost"); // 수정
+const {
+  note,
+  editNote,
+  deleteNote,
+  notebook,
+  createNote,
+  write,
+} = require("../../controller/Cmypost"); // 수정
+const { userPage } = require("../../controller/Cmyblog");
 
 // 모든 블로그
 noteRoute.get("/allblog", home);
 
 // 나의 게시글들
 noteRoute.get("/", (req, res) => {
-  res.render("notebook");
+  userPage(req, res);
 });
 
 // 작성된 노트 보기
@@ -21,15 +27,18 @@ noteRoute.get("/note", (req, res) => {
 });
 
 // 나의 블로그 작성
-noteRoute.get("/write", blogging.write);
+noteRoute.get("/write", (req, res) => {
+  write(req, res);
+});
 
 // 노트북 작성
 noteRoute.post("/write", upload.array("img"), (req, res) => {
   const img = req.files[0].filename;
+  const email = req.session.user;
 
   const content = JSON.parse(req.body.blog);
   const blog = { img, title: content.title, content: content.content };
-  noteCreate(blog, res);
+  createNote(blog, req, res);
 });
 
 // 게시물 상세 페이지

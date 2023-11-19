@@ -53,10 +53,9 @@
         <img src="/logo.png" width="170px" class="mx-auto" alt="non-blog"
       /></a>
 
-      <form method="post" action="/user/login" class="py-3" name="login">
+      <form class="py-3">
         <input
           type="text"
-          name="idBox"
           placeholder="ID"
           class="mb-2 form-control err"
           style="border: none"
@@ -64,7 +63,6 @@
         />
         <input
           type="password"
-          name="pwBox"
           placeholder="PW"
           class="mb-2 form-control err"
           style="border: none"
@@ -73,7 +71,7 @@
         <div id="noValue"></div>
         <div class="btnBox text-center mx-auto py-3" style="width: fit-content">
           <button
-            type="submit"
+            type="button"
             class="btn mb-2 custom-margin"
             style="background-color: #ae7f5f; color: whitesmoke"
             onclick="clickLogin()"
@@ -108,7 +106,7 @@
 
         if (email === "" || password === "") {
           alert.textContent = "아이디와 패스워드를 입력해주세요.😅";
-          return false;
+          return;
         } else {
           alert.textContent = "";
         }
@@ -125,10 +123,15 @@
           data: data,
         })
           .then((result) => {
-            console.log(result);
+            if (result.data == "ok") {
+              location.href = "/notebook/allblog";
+            } else {
+              alert.textContent = `${result.data}😅`;
+            }
           })
           .catch((err) => {
             console.log(err);
+            alert.textContent = `${err.response.data}😅`;
           });
       }
     </script>

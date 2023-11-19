@@ -20,8 +20,8 @@ function notebook(sequelize, DataTypes) {
         allowNull: true,
       },
       // 이미지
-      img:{
-         type: DataTypes.STRING(30),
+      img: {
+        type: DataTypes.STRING(30),
         allowNull: true,
       },
       // 노트 공개 여부 (default: public /  1: public, 0: private)
