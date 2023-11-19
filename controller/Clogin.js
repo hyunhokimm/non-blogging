@@ -1,4 +1,5 @@
 const { user } = require("../model");
+const crypto = require("crypto");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
@@ -6,28 +7,36 @@ exports.login = (req, res) => {
 };
 
 exports.isLogin = async (req, res) => {
-  const { email, password } = req.body;
-  console.log(req.body);
-
   try {
-    const findUser = await user.findOne({ email });
-    console.log(findUser);
+    const { email, password } = req.body;
+    console.log("-----------------------------");
+    console.log(email, "email");
+    console.log(password, "password");
+    console.log("-----------------------------");
 
-    if (findUser) {
-      return res.render("notebook");
+    const findUser = await user.findOne({ where: { email: email } });
+    if (!findUser) res.status(400).send("등록된 이메일이 없습니다.");
+
+    const compare = comparePassword(password, findUser.dataValues.password);
+    console.log(compare);
+
+    if (compare) {
+      console.log("로그인");
+      res.render("note");
     } else {
-      return res.json({ success: false, msg: "Login Failed" });
+      res.json({ success: false, msg: "Login Failed" });
     }
   } catch (error) {
-    console.error("Error during login:", error);
-    res.status(500).json({ success: false, msg: "Internal Server Error" });
+    console.error("로그인 중 오류 발생:", error);
+    res.status(500).json({ success: false, msg: "내부 서버 오류" });
   }
 };
 
-function comparepassword(plainpassword, hashpassword) {
-  const [salt, password] = plainpassword.split(":");
-  const hash = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+function comparePassword(inputPassword, hashedPassword) {
+  const [salt, expectedHash] = hashedPassword.split(":");
+  const inputHash = crypto
+    .pbkdf2Sync(inputPassword, salt, 1000, 64, "sha512")
     .toString("hex");
-  return hash === password;
+
+  return inputHash === expectedHash;
 }

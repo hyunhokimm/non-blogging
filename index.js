@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+
 const dotenv = require("dotenv");
 const path = require("path");
 const app = express();
@@ -7,6 +8,7 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/static")));
+app.use(express.static(path.join(__dirname, "/views")));
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -8,6 +8,7 @@ exports.signup = (req, res) => {
 // 회원가입 진행
 exports.signupProcess = async (req, res) => {
   const { email, password, nickname } = req.body;
+  console.log(email, password, nickname);
 
   try {
     const result = await user.findOne({ where: { email } });
@@ -26,7 +27,7 @@ exports.signupProcess = async (req, res) => {
         nickname,
       })
       .then(() => {
-        res.render("signUp");
+        res.send("ok");
       })
       .catch(function (err) {
         console.log(err);
