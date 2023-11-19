@@ -11,7 +11,7 @@ const { note, editNote, deleteNote } = require("../../controller/Cmypost"); // �
 noteRoute.get("/allblog", home);
 
 // 나의 게시글들
-noteRoute.get("/myblog", notebook);
+noteRoute.get("/notebook", notebook);
 
 // 작성된 노트 보기
 noteRoute.get("/note", (req, res) => {
