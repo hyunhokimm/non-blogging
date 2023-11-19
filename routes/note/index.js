@@ -6,14 +6,14 @@ const blogging = require("../../controller/Cblogging");
 const { home } = require("../../controller/Chome");
 const { notebook } = require("../../controller/Cmypost"); // 수정
 const { note, editNote, deleteNote } = require("../../controller/Cmypost"); // 수정
+const { userNotebook } = require("../../controller/Cmyblog"); // 수정
 
 // 모든 블로그
 noteRoute.get("/allblog", home);
 
 // 나의 게시글들
-noteRoute.get("/", (req, res) => {
-  res.render("notebook");
-});
+noteRoute.get("/", userNotebook);
+noteRoute.post("/", userNotebook);
 
 // 작성된 노트 보기
 noteRoute.get("/note", (req, res) => {
