@@ -21,6 +21,7 @@ exports.isLogin = async (req, res) => {
 
     if (compare) {
       console.log("로그인");
+      req.session.user = idBox;
       res.render("allblog");
     } else {
       res.json({ success: false, msg: "Login Failed" });
