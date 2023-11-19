@@ -8,21 +8,20 @@ exports.login = (req, res) => {
 
 exports.isLogin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { idBox, pwBox } = req.body;
     console.log("-----------------------------");
-    console.log(email, "email");
-    console.log(password, "password");
+    console.log(req.body);
     console.log("-----------------------------");
 
-    const findUser = await user.findOne({ where: { email: email } });
+    const findUser = await user.findOne({ where: { email: idBox } });
     if (!findUser) res.status(400).send("등록된 이메일이 없습니다.");
 
-    const compare = comparePassword(password, findUser.dataValues.password);
+    const compare = comparePassword(pwBox, findUser.dataValues.password);
     console.log(compare);
 
     if (compare) {
       console.log("로그인");
-      res.render("note");
+      res.render("allblog");
     } else {
       res.json({ success: false, msg: "Login Failed" });
     }
