@@ -17,15 +17,18 @@ exports.isLogin = async (req, res) => {
     if (!findUser) {
       return res.json({ success: false, msg: "등록된 이메일이 없습니다." });
     }
-    const compare = comparePassword(pwBox, findUser.dataValues.password);
+    // const compare = comparePassword(pwBox, findUser.dataValues.password);
+    const compare = comparePassword(pwBox, findUser.password);
     console.log(compare);
 
     if (compare) {
       console.log("로그인");
+      req.session.user = findUser.email;
       return res.json({
         success: true,
         msg: "로그인 성공",
-        redirectTo: "myInfo",
+        email: findUser.email,
+        // redirectTo: "myInfo",
       });
     } else {
       return res.json({ success: false, msg: "Login Failed" });
@@ -35,6 +38,18 @@ exports.isLogin = async (req, res) => {
     return res.status(500).json({ success: false, msg: "내부 서버 오류" });
   }
 };
+
+// 로그아웃 기능
+// exports.logoutProcess = (req, res) => {
+//   if(req.session.user){
+//     req.session.destroy((err) => {
+//       res.send({ result: true })
+//     })
+//   }
+//   else{
+//     res.send({ result: false })
+//   }
+// }
 
 function comparePassword(inputPassword, hashedPassword) {
   const [salt, expectedHash] = hashedPassword.split(":");

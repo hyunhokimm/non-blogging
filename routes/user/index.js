@@ -1,6 +1,6 @@
 const express = require("express");
 const userRoute = express.Router();
-const { login, isLogin } = require("../../controller/Clogin");
+const { login, isLogin, logout } = require("../../controller/Clogin");
 const { signup, signupProcess } = require("../../controller/Csignup");
 
 // 로그인
@@ -19,5 +19,8 @@ userRoute.post("/signup", (req, res) => {
 userRoute.get("/myinfo", (req, res) => {
   res.render("myInfo");
 });
+
+// 로그아웃
+// userRoute.delete("/logout", logout);
 
 module.exports = userRoute;
