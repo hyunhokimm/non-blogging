@@ -17,8 +17,7 @@ exports.isLogin = async (req, res) => {
     if (!findUser) {
       return res.json({ success: false, msg: "등록된 이메일이 없습니다." });
     }
-    // const compare = comparePassword(pwBox, findUser.dataValues.password);
-    const compare = comparePassword(pwBox, findUser.password);
+    const compare = comparePassword(pwBox, findUser.dataValues.password);
     console.log(compare);
 
     if (compare) {
