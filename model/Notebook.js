@@ -28,6 +28,7 @@ function notebook(sequelize, DataTypes) {
       isPublic: {
         type: DataTypes.ENUM("1", "0"),
         allowNull: true,
+        defaultValue: "1",
       },
       // user 테이블과 연결할 컬럼 설정
       connectUser: {

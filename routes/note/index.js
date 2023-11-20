@@ -11,7 +11,8 @@ const {
   createNote,
   write,
 } = require("../../controller/Cmypost"); // 수정
-const { userPage } = require("../../controller/Cmyblog");
+const { userPage, userOneNote } = require("../../controller/Cmyblog");
+const { userNotebook } = require("../../controller/Cmyblog"); // 수정
 
 // 모든 블로그
 noteRoute.get("/allblog", home);
@@ -21,20 +22,23 @@ noteRoute.get("/", (req, res) => {
   userPage(req, res);
 });
 
-// 작성된 노트 보기
-noteRoute.get("/note", (req, res) => {
-  res.render("note");
+// 작성된 노트 보기(1개의 노트)
+noteRoute.get("/note/:noteId", (req, res) => {
+  userOneNote(req, res);
 });
 
 // 나의 블로그 작성
 noteRoute.get("/write", (req, res) => {
+  if (!req.session.user) return res.render("login");
   write(req, res);
 });
 
 // 노트북 작성
 noteRoute.post("/write", upload.array("img"), (req, res) => {
-  const img = req.files[0].filename;
   const email = req.session.user;
+  if (!email) return res.render("login");
+  const img = req.files[0];
+  console.log(img);
 
   const content = JSON.parse(req.body.blog);
   const blog = { img, title: content.title, content: content.content };
@@ -45,23 +49,23 @@ noteRoute.post("/write", upload.array("img"), (req, res) => {
 noteRoute.get("/notebook/:noteId", note);
 
 // 게시글에 작성자 연동
-noteRoute.get("/write", async (req, res) => {
-  const posts = await notebook // 수정
-    .find({})
-    .sort({ createdAt: -1 })
-    .populate("author");
+// noteRoute.get("/write", async (req, res) => {
+//   const posts = await notebook // 수정
+//     .find({})
+//     .sort({ createdAt: -1 })
+//     .populate("author");
 
-  res.render("posts/list", { posts });
-});
+//   res.render("posts/list", { posts });
+// });
 
 // 수정및삭제 작성자 확인
-noteRoute.get("/write", async (req, res) => {
-  const note = await notebook.findOne({ noteId }).populate("author");
+// noteRoute.get("/write", async (req, res) => {
+//   const note = await notebook.findOne({ noteId }).populate("author");
 
-  if (note.author.noteId !== req.user.noteId) {
-    throw new Error("Not Authorized");
-  }
-});
+//   if (note.author.noteId !== req.user.noteId) {
+//     throw new Error("Not Authorized");
+//   }
+// });
 
 // 게시물 수정 페이지
 noteRoute.post("/notebook/:noteId", editNote);

@@ -120,9 +120,12 @@
     }
   </style>
   <body>
+    <!-- ------------blogs 라는 배열 객체로 데이터 들어옴------------ -->
     <header><%- include ('fragment/header') %></header>
     <!-- <hr class="line"/> -->
-
+    <% blogs.map((blog) => { %>
+      <div><%= blog.title %></div>
+    <% }) %>
     <!-- ------------main------------ -->
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
@@ -135,7 +138,6 @@
         </div>
       </div>
 
-     <div> <%= blogs[1].content  %></div>
       <!-- 아래 긴 박스 영역 -->
       <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>
 
@@ -283,7 +285,7 @@
 </span>
     </footer> -->
      
-
+    <%- include ('fragment/functions') %>
     <script src="/allblog.js"></script>
   </body>
 </html>

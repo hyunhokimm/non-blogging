@@ -53,7 +53,7 @@
             <input
               type="password"
               class="form-control"
-              id="chpassword"
+              id="ckPassword"a
               placeholder="Password"
             />
             <label for="floatingPassword">Ck password</label>
@@ -65,7 +65,7 @@
               id="nickname"
               placeholder="Password"
             />
-            <label for="floatingPassword">Nickname</label>
+            <label for="floatingPassword"><%=userInfo.nickname  %></label>
           </div>
           <div id="err"></div>
           <button
@@ -136,11 +136,16 @@
 
         const userInfo = { password, nickname}
         console.log(userInfo)
-        axios.post({
-          method:'/user/:userId',
-          userInfo
+        axios({
+          method:'post',
+          url:'/user/myinfo',
+          data: userInfo
         }).then((result)=>{
-          console.log(result)
+          err.innerHTML = result.data
+         setTimeout(()=>{
+          err.innerHTML = ''
+          location.href ='/notebook'
+         },500)
         }).catch((err)=>{
           console.log(err)
         })

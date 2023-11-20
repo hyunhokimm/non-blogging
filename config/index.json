@@ -3,13 +3,21 @@
     "host": "101.101.219.106",
     "database": "non-blogging",
     "username": "blogger",
-    "password": "sesac231107$",
+    "password": null,
+    "dialect": "mysql"
+  },
+  "test": {
+    "host": "101.101.219.106:3306",
+    "database": "non-blogging",
+    "username": "blogger",
+    "password": null,
     "dialect": "mysql"
   },
   "production": {
     "host": "101.101.219.106:3306",
     "database": "non-blogging",
     "username": "blogger",
+    "password": null,
     "dialect": "mysql"
   }
 }

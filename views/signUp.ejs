@@ -111,19 +111,12 @@
             <a href="/user/login">Log in</a>
           </div>
         </div>
-        <button type="submit" onclick="onNext()">
-          다음페이지(없어질 버튼)
-        </button>
       </section>
     </div>
     <script>
       //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
 
       const err = document.getElementById("err");
-
-      const onNext = () => {
-        location.href = "/notebook/allblog";
-      };
 
       const signUp = () => {
         const email = document.getElementById("email").value;

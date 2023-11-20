@@ -126,6 +126,7 @@
             if (result.data == "ok") {
               location.href = "/notebook/allblog";
             } else {
+              console.log(result.data);
               alert.textContent = `${result.data}😅`;
             }
           })

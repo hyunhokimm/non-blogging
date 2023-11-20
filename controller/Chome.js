@@ -1,5 +1,4 @@
-const { user } = require("../model");
-const { notebook } = require("../model");
+const { user, notebook } = require("../model");
 
 // allblog page
 exports.home = async (req, res) => {
