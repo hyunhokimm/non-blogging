@@ -39,16 +39,16 @@ exports.isLogin = async (req, res) => {
 };
 
 // 로그아웃 기능
-// exports.logoutProcess = (req, res) => {
-//   if(req.session.user){
-//     req.session.destroy((err) => {
-//       res.send({ result: true })
-//     })
-//   }
-//   else{
-//     res.send({ result: false })
-//   }
-// }
+exports.logout = (req, res) => {
+  if(req.session.user){
+    req.session.destroy((err) => {
+      res.send({ result: true })
+    })
+  }
+  else{
+    res.send({ result: false })
+  }
+}
 
 function comparePassword(inputPassword, hashedPassword) {
   const [salt, expectedHash] = hashedPassword.split(":");

@@ -2,6 +2,7 @@ const express = require("express");
 const userRoute = express.Router();
 const { login, isLogin, logout } = require("../../controller/Clogin");
 const { signup, signupProcess } = require("../../controller/Csignup");
+const { profilePage, updateProfile } = require("../../controller/CmyInfo");
 
 // 로그인
 userRoute.get("/login", login);
@@ -16,11 +17,10 @@ userRoute.post("/signup", (req, res) => {
 });
 
 //회원정보
-userRoute.get("/myinfo", (req, res) => {
-  res.render("myInfo");
-});
+userRoute.get("/myinfo", profilePage);
+userRoute.patch("/update", updateProfile);
 
 // 로그아웃
-// userRoute.delete("/logout", logout);
+userRoute.delete("/logout", logout);
 
 module.exports = userRoute;
