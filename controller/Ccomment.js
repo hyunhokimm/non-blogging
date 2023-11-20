@@ -1,24 +1,28 @@
 // const { comment } = require("../model");
 
-// 댓글 달기
+// // 댓글 달기 // 테이블 칼럼 확정 후 수정 예정
 // exports.writeComment = (req, res) => {
-//     const data = {
-//         commentWrite: req.body.commentWrite,
-//         noteId: req.body.noteId,
-//         email: req.body.email,
-//         nickname: req.body.nickname
-//         테이블 완성 후 변경 가능성 있음
-//     }
-//     comment.create(data).then((result) => {
-//         res.send(result);
+//     const { noteId } = req.params;
+//     const { commentId, commentWrite, email, nickname, recodedTime } = req.body;
+
+//     comment.create({
+//         commentId: commentId,
+//         commentWrite: commentWrite,
+//         noteId: noteId,
+//         email: email,
+//         nickname: nickname,
+//         recodedTime: recodedTime
+//     }).then((result) => {
+//         // 댓글 등록이 성공하면 해당 댓글 정보를 클라이언트로 응답
+//         res.json(result);
 //     }).catch((err) => {
 //         console.log(err);
 //         res.status(500).send("등록 오류 발생");
 //     })
 // }
 
-// 선택한 댓글 읽어오기
-// exports.getCommentById = (req, res) => {
+// // 선택한 댓글 읽어오기
+// exports.getComment = (req, res) => {
 //     comment.findOne({
 //         where: {
 //             commentId: req.params.commentId
@@ -32,7 +36,7 @@
 //     })
 // };
 
-// 댓글 수정 기능
+// // 댓글 수정 기능
 // exports.updateComment = (req, res) => {
 //     comment.update(req.body, {
 //         where: {
@@ -47,7 +51,7 @@
 //     })
 // }
 
-// 댓글 삭제 기능
+// // 댓글 삭제 기능
 // exports.deleteComment = (req, res) => {
 //     comment.destroy({
 //         where: {
