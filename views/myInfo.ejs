@@ -21,6 +21,7 @@
 
 
   <body style="background-color: #ece8e4; text-align: center;">
+    <form name="updateUserInfoForm">
     <div style="width: 40%; text-align: center; margin: 10rem auto;">
         <a href="/notebook/allblog">
             <img
@@ -36,7 +37,7 @@
           id="email"
           placeholder="Password"
         />
-        <label for="floatingPassword">Email</label>
+        <label for="floatingPassword">Email, <%= email %></label>
       </div>
         <div class="form-floating" id="pw" style="margin-bottom:1.5rem; display:none">
           <input
@@ -63,7 +64,7 @@
             id="nickname"
             placeholder="Password"
             />
-            <label for="floatingPassword">Nickname</label>
+            <label for="floatingPassword">Nickname <%= nickname %></label>
         </div>
         <div id="err" style="color: red; font-size:15px; margin-bottom: 0.5rem;"></div>
         <div
@@ -122,6 +123,7 @@
       </div>
 
     </div>
+    </form>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -140,6 +142,8 @@
       };
 
       const complete = ()=>{
+        const form = document.forms["updateUserInfoForm"];
+
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
         const ckPassword = document.getElementById('ckPassword').value
@@ -164,17 +168,21 @@
           },1500)
         }
 
-        const userInfo = { email, password, nickname}
+        const userInfo = { 
+          email: form.email.value, 
+          password: form.password.value, 
+          nickname: form.nickname.value
+        }
 
-        axios.post({
-          method:'/user/:userId',
-          userInfo
-        }).then((result)=>{
-          console.log(result)
-        }).catch((err)=>{
-          console.log(err)
+        axios({
+          method: 'patch',
+          url: `/user/update`,
+          data: userInfo
+        }).then((res) => {
+          console.log(res);
+        }).catch((err) => {
+          console.log(err);
         })
-
       }
 
       const cancle = () => {
