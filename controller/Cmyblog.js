@@ -5,7 +5,6 @@ const { user } = require("../model");
 exports.userPage = async (req, res) => {
   try {
     const email = req.session.user;
-    console.log(email);
     if (!email) {
       return res.render("login");
     }
@@ -17,7 +16,7 @@ exports.userPage = async (req, res) => {
         attributes: ["noteId", "title", "content", "img", "connectUser"],
       });
       if (noteInfo.length === 0) {
-        res.render("nonote");
+        return res.render("nonote");
       }
       let notebooks = [];
       noteInfo.map((note) => {

@@ -42,26 +42,27 @@
           <div style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
           </div>
-
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              margin-bottom: 50px;
-              justify-content: space-between;
-            "
-            class="border rounded-1 p-3"
-          >
-            <img
-              style="height: auto; width: 60%"
-              src="<%=note[0].img%>"
-              alt="Image"
-            />
-            <div class="text-container">
-              <%= note[0].title %>
-              <p style="margin-top: 10px"><%= note[0].content %></p>
+          <a href="/notebook/note/<%=note[0].noteId%>">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 50px;
+                justify-content: space-between;
+              "
+              class="border rounded-1 p-3"
+            >
+              <img
+                style="height: auto; width: 60%"
+                src="<%=note[0].img%>"
+                alt="Image"
+              />
+              <div class="text-container">
+                <%= note[0].title %>
+                <p style="margin-top: 10px"><%= note[0].content %></p>
+              </div>
             </div>
-          </div>
+          </a>
           <div>
             <button
               type="button"

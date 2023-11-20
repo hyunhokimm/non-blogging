@@ -18,7 +18,7 @@ exports.signupProcess = async (req, res) => {
       return res.status(400).send("이미 가입되어 있는 이메일 입니다.");
     }
 
-    const hashpassword = hashPassword(password);
+    const hashpassword = this.hashPassword(password);
 
     user
       .create({
