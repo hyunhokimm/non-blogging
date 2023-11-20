@@ -73,7 +73,7 @@
         <div id="noValue"></div>
         <div class="btnBox text-center mx-auto py-3" style="width: fit-content">
           <button
-            type="submit"
+            type="button"
             class="btn mb-2 custom-margin"
             style="background-color: #ae7f5f; color: whitesmoke"
             onclick="clickLogin()"
@@ -114,8 +114,8 @@
         }
 
         const data = {
-          email,
-          password,
+          idBox: email,
+          pwBox: password,
         };
         console.log(data);
 
@@ -124,12 +124,18 @@
           url: "/user/login", //^^ 컨트롤러에서 찾을수없어서 에러.. 일단 여기까지...
           data: data,
         })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        .then((res) => {
+          if(res.data.success == true){
+            document.location.href = `/notebook/allblog`;
+          }
+          else{
+            alert.textContent = "존재하지 않는 회원입니다.";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert.textContent = "로그인 중 오류가 발생하였습니다.";
+        });
       }
     </script>
   </body>
