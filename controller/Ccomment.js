@@ -3,7 +3,7 @@
 // 댓글 달기
 // exports.writeComment = (req, res) => {
 //     const data = {
-//         mention: req.body.mention,
+//         commentWrite: req.body.commentWrite,
 //         noteId: req.body.noteId,
 //         email: req.body.email,
 //         nickname: req.body.nickname
