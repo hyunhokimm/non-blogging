@@ -112,8 +112,8 @@
         }
 
         const data = {
-          idBox: email,
-          pwBox: password,
+          email,
+          password,
         };
         console.log(data);
 
@@ -122,7 +122,6 @@
           url: "/user/login", //^^ 컨트롤러에서 찾을수없어서 에러.. 일단 여기까지...
           data: data,
         })
-
           .then((result) => {
             if (result.data == "ok") {
               location.href = "/notebook/allblog";
@@ -135,7 +134,6 @@
             console.log(err);
             alert.textContent = `${err.response.data}😅`;
           });
-
       }
     </script>
   </body>

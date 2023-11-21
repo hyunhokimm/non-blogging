@@ -42,10 +42,8 @@
           <div style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
           </div>
-          <a
-            style="text-decoration: none"
-            href="/notebook/note/<%=note[0].noteId%>"
-          >
+          <a style="text-decoration: none" href="/notebook/<%=note[0].noteId%>">
+            <div><%=note[0].noteId%></div>
             <div
               style="display: flex; align-items: center"
               class="border rounded-1 p-3"
@@ -83,7 +81,7 @@
               <div class="col-md-6">
                 <a
                   style="text-decoration: none"
-                  href="/notebook/note/<%=noteInfo.noteId%>"
+                  href="/notebook/<%=noteInfo.noteId%>"
                 >
                   <div
                     style="
