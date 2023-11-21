@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>nonbloging</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,7 +34,9 @@
     }
 
     main {
-      min-height: 1500px;
+      min-height: 1700px;
+      position: relative;
+
     }
 
     footer {
@@ -111,57 +113,75 @@
       position: fixed;
       top: 10px;
     } */
-    /* .myBox{
-      bottom: 200px;
+
+    /* .myBox {
+      position: sticky, fixed;
+      top: 550px;
+      transform: translateY(-50%);
+      overflow-y: scroll;
+
     } */
+    @media (min-height: 781px) {
+      .myBox {
+        position: sticky;
+        top: calc(50% + 180px);
+        /* topBar의 높이를 고려하여 40px 추가 */
+        transform: translateY(-50%);
+      }
+    }
+
+    @media (max-height: 780px) {
+      .myBox {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-height: 860px) and (min-height: 601px) {
+      .myBox {
+        position: fixed;
+        bottom: 140px;
+        /* 푸터의 높이에 따라 조절하세요 */
+        top: auto;
+        transform: translateY(0);
+      }
+    }
+
+    /* 추가된 스타일 */
+    body.footer-visible .myBox {
+      display: block;
+      position: fixed;
+      bottom: 140px;
+      /* 푸터의 높이에 따라 조절하세요 */
+      top: auto;
+      transform: translateY(0);
+    }
+
+
     #clock {
       font-size: 400%;
 
     }
   </style>
+
   <body>
-    <!-- ------------blogs 라는 배열 객체로 데이터 들어옴------------ -->
     <header><%- include ('fragment/header') %></header>
     <!-- <hr class="line"/> -->
-    <% blogs.map((blog) => { %>
-      <div><%= blog.title %></div>
-    <% }) %>
+
     <!-- ------------main------------ -->
-    blogs =[{
-      title:
-      content:
-      img:
-    },
-    {
-      title:
-      content:
-      img:
-    }{
-      title:
-      content:
-      img:
-    }{
-      title:
-      content:
-      img:
-    }]
-    <div>
-      <% blogs.map((blog) => { %>
-        <div><%= blog.title %></div>
-        <div style="margin-bottom: 30px;"><%= blog.content %></div>
-      <% }); %>
-    </div>
-    
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
       <div class="topBox mx-auto ">
         <div class="imageBox"></div>
         <div class="topBoxContent mx-1">
-          <div id="welcome">Welcome to nonbloging.</div>
+          <div id="welcome">Welcome to nonblogging.</div>
           <div class="showDate" id="whatDay">오늘 날짜?</div>
           <div class="showTimeJs" id="clock"></div>
         </div>
       </div>
+
 
       <!-- 아래 긴 박스 영역 -->
       <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>
@@ -169,148 +189,163 @@
       <!-- 블로그 박스 영역 -->
       <div class="blogBox">
         <!--왼쪽 프로필 영역  -->
-        <div class="row g-5 myBox mt-1 ">
-          <div class="row mb-12">
-            <div class="profileBox col-md-2 d-none d-lg-block">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-fixed" style="width: 230px;">
-                <div class="col p-4  d-flex flex-column position-static">
-                  <h3 class="mb-0">profile</h3>
-                  <p class="card-text mb-auto">profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile </p>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                </div>
+        <!-- <div class="row g-5  mt-1 "> -->
+        <div class="row mb-12">
+          <div class="profileBox col-md-2 d-none d-lg-block">
+            <div class="myBox row g-0 flex-md-row mb-4 h-md-250 position-fixed " id="myBox" style="width: 160px; height: 200px;  background-color: #ece8e4;">
+              <div class="col p-4  d-flex flex-column position-static">
+                <h3 class="mb-0">Hi,<br /> loopy!</h3><br />
+                <p class="card-text mb-auto">친구들의<br />블로그를 <br />둘러보세요!</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
               </div>
             </div>
+          </div>
 
 
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="card-text mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                  <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+          <div class="col-md-5">
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">닉네임</h3>
+                <p class="card-text mb-auto">최근 게시물 제목?</p>
+                <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
+              </div>
+
+              <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
+                <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
               </div>
             </div>
+          </div>
 
 
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+          <div class="col-md-5">
+            <% if (blogs.length > 0) { %>
+            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
+                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
+                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
+              </div>
+              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
+                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
               </div>
             </div>
-            <div class="col-md-2 d-none d-lg-block">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0"></h3>
-                  <p class="card-text mb-auto"> </p>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                </div>
+            <% } else { %>
+            <p>No blogs available</p>
+            <% } %>
+          </div>
+
+          <div class="col-md-2 d-none d-lg-block">
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"></h3>
+                <p class="card-text mb-auto"> </p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
               </div>
             </div>
+          </div>
 
-
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="card-text mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <!-- <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%">image</text></svg> -->
-                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+          <div class="col-md-5">
+            <% if (blogs.length > 0) { %>
+            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
+                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
+                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
+              </div>
+              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
+                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
               </div>
             </div>
+            <% } else { %>
+            <p>No blogs available</p>
+            <% } %>
+          </div>
 
-
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+          <div class="col-md-5">
+            <% if (blogs.length > 0) { %>
+            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
+                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
+                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
+              </div>
+              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
+                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
               </div>
             </div>
-            <div class="col-md-2 d-none d-lg-block">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0"></h3>
-                  <p class="card-text mb-auto"> </p>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                </div>
+            <% } else { %>
+            <p>No blogs available</p>
+            <% } %>
+          </div>
+
+          <div class="col-md-2 d-none d-lg-block">
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"></h3>
+                <p class="card-text mb-auto"> </p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
               </div>
             </div>
+          </div>
 
 
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="card-text mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+          <div class="col-md-5">
+            <% if (blogs.length > 0) { %>
+            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
+                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
+                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
+              </div>
+              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
+                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
               </div>
             </div>
+            <% } else { %>
+            <p>No blogs available</p>
+            <% } %>
+          </div>
 
 
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0">blog</h3>
-                  <p class="mb-auto">text text text text text text text text</p>
-                  <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-                </div>
-                <div class="col-auto">
-                  <img src="" class="img-fluid" width="200" height="250" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <rect width="100%" height="100%" /></img>
-                </div>
+
+
+          <div class="col-md-5">
+            <% if (blogs.length > 0) { %>
+            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
+            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
+                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
+                <a href="/notebook/<%randomIndex%>" class="btn btn-outline-secondary">Go</a>
+              </div>
+              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
+                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
               </div>
             </div>
-            <ul>
+            <% } else { %>
+            <p>No blogs available</p>
+            <% } %>
+          </div>
 
-          </ul>
     </main>
     <!-- ------------footer------------ -->
     <footer><%- include ('fragment/footer') %></footer>
-    <!-- <footer>
-<span style="color: whitesmoke;">
-  <br/>
-  &nbsp; non-blogging <br/>
-  &nbsp; 사업자등록번호 : 000-00-00000<br/>
-  &nbsp; 주소 : 서울특별시 용산구 한강로 <br/>
-  &nbsp; 대표번호: 1644-0000<br/>
-  &nbsp; Copyright(c) 2023 non-blogging. All Rights Reserved.
-</span>
-    </footer> -->
-     
-    <%- include ('fragment/functions') %>
+
+
     <script src="/allblog.js"></script>
+    <script>
+      function goToBlog(noteId) {
+        window.location.href = `/notebook/${noteId}`;
+      }
+    </script>
+
+
   </body>
 </html>
