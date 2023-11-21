@@ -53,8 +53,74 @@
       <header><%- include ('fragment/header') %></header>
       <section>
         <div style="padding: 80px">
+          <% if(note) { %>
           <form enctype="multipart/form-data">
+            <div style="justify-content: space-between; display: flex">
+              <div>
+                <label for="file">
+                  <div
+                    type="button"
+                    class="btn btn-lg mb-3"
+                    style="
+                      color: #ae7f5f;
+                      border: 2px solid #ae7f5f;
+                      font-weight: bold;
+                    "
+                  >
+                    사진 바꾸기
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  style="display: none"
+                  required
+                />
+              </div>
 
+              <img
+                onclick="deleteImg()"
+                src=""
+                alt=""
+                style="width: 60%; margin: 1rem"
+                id="selectedImg"
+              />
+            </div>
+            <div class="row">
+              <div class="mb-3">
+                <input
+                  style="height: 60px"
+                  type="text"
+                  class="form-control fs-3"
+                  id="title"
+                  placeholder="제목을 입력하세요."
+                  oninput="updateDisplayedTitle(this.value)"
+                  value="<%= note.title %>"
+                />
+                <span id="displayedTitle"></span>
+              </div>
+              <div class="mb-3">
+                <div id="summernote" name="editordata"><%= note.content %></div>
+              </div>
+              <div style="display: flex; justify-content: end">
+                <div
+                  style="color: rgb(248, 78, 78); margin: 8px"
+                  id="err"
+                ></div>
+                <button
+                  type="button"
+                  onclick="blogging()"
+                  class="btn btn-lg"
+                  style="color: white; background-color: #ae7f5f"
+                >
+                  Blogging
+                </button>
+              </div>
+            </div>
+          </form>
+          <% } else { %>
+          <form enctype="multipart/form-data">
             <div style="justify-content: space-between; display: flex">
               <div>
                 <label for="file">
@@ -78,7 +144,7 @@
                   required
                 />
               </div>
-  
+
               <img
                 onclick="deleteImg()"
                 src=""
@@ -101,7 +167,10 @@
                 <div id="summernote" name="editordata"></div>
               </div>
               <div style="display: flex; justify-content: end">
-                <div style="color: rgb(248, 78, 78); margin: 8px" id="err"></div>
+                <div
+                  style="color: rgb(248, 78, 78); margin: 8px"
+                  id="err"
+                ></div>
                 <button
                   type="button"
                   onclick="blogging()"
@@ -113,6 +182,7 @@
               </div>
             </div>
           </form>
+          <% } %>
         </div>
       </section>
 
@@ -136,22 +206,27 @@
           selectImg.src = "";
         };
 
+        function updateDisplayedTitle(value) {
+          // Assuming you have a span with id "displayedTitle" to show the title
+          document.getElementById("displayedTitle").textContent = value;
+        }
+
         const blogging = () => {
           document.getElementById("err").innerHTML = "";
           const title = document.getElementById("title").value;
           const content = $("#summernote").summernote("code");
-          const blog ={title, content}
+          const blog = { title, content };
 
-         // form.append('blog',JSON.stringify(blog))
-         
-          form.append('blog',JSON.stringify(blog))
-      
-          console.log(form.get('blog'))
-          console.log(form.get('img'))
+          // form.append('blog',JSON.stringify(blog))
+
+          form.append("blog", JSON.stringify(blog));
+
+          console.log(form.get("blog"));
+          console.log(form.get("img"));
           axios
             .post("/notebook/write", form)
             .then((result) => {
-              location.href='/notebook'
+              location.href = "/notebook";
             })
             .catch((err) => {
               console.log(err);
@@ -195,5 +270,3 @@
     </div>
   </body>
 </html>
-
-

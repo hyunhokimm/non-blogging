@@ -11,6 +11,7 @@ const {
   notebook,
   createNote,
   write,
+  editNotePage,
 } = require("../../controller/Cmypost"); // 수정
 const { userPage, userOneNote } = require("../../controller/Cmyblog");
 
@@ -50,6 +51,12 @@ noteRoute.post("/write", upload.array("img"), (req, res) => {
 
 // 게시물 상세 페이지
 noteRoute.get("/notebook/:noteId", note);
+
+// 게시물 수정 페이지 보여주기
+noteRoute.get("/note/:noteId", (req, res) => {
+  const noteid = req.params.noteId;
+  editNotePage(noteid, res);
+});
 
 // 게시물 수정 페이지
 noteRoute.post("/notebook/:noteId", editNote);

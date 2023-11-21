@@ -169,6 +169,8 @@
   <body>
     <header><%- include ('fragment/header') %></header>
     <!-- <hr class="line"/> -->
+    <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
+      ''); } %>
 
     <!-- ------------main------------ -->
     <main>
@@ -202,137 +204,31 @@
             </div>
           </div>
 
-
-          <div class="col-md-5">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0">닉네임</h3>
-                <p class="card-text mb-auto">최근 게시물 제목?</p>
-                <button type="button" href="#" class="btn btn-outline-secondary">Go</button>
-              </div>
-
-              <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
-                <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-5">
-            <% if (blogs.length > 0) { %>
-            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
-                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
-                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
-                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
+          <% blogs.forEach((blog) => { %>
+            <div class="col-md-5">
+              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0"><%= blog.title %></h3>
+                  <p class="card-text mb-auto"><%= removeHtmlTags(blog.content) %></p>
+                  <a href="<%= blog.noteId %>" class="btn btn-outline-secondary">Go</a>
+                </div>
+          
+                <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
+                  <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
+                </div>
               </div>
             </div>
-            <% } else { %>
-            <p>No blogs available</p>
-            <% } %>
-          </div>
-
-          <div class="col-md-2 d-none d-lg-block">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"></h3>
-                <p class="card-text mb-auto"> </p>
-              </div>
-              <div class="col-auto d-none d-lg-block">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-5">
-            <% if (blogs.length > 0) { %>
-            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
-                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
-                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
-                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
-              </div>
-            </div>
-            <% } else { %>
-            <p>No blogs available</p>
-            <% } %>
-          </div>
-
-          <div class="col-md-5">
-            <% if (blogs.length > 0) { %>
-            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
-                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
-                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
-                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
-              </div>
-            </div>
-            <% } else { %>
-            <p>No blogs available</p>
-            <% } %>
-          </div>
-
-          <div class="col-md-2 d-none d-lg-block">
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"></h3>
-                <p class="card-text mb-auto"> </p>
-              </div>
-              <div class="col-auto d-none d-lg-block">
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-5">
-            <% if (blogs.length > 0) { %>
-            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
-                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
-                <button type="button" class="btn btn-outline-secondary" onclick="goToBlog('<%= blogs[randomIndex].noteId %>')">Go</button>
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
-                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
-              </div>
-            </div>
-            <% } else { %>
-            <p>No blogs available</p>
-            <% } %>
-          </div>
+          <% }); %>
+          
+          
 
 
 
 
-          <div class="col-md-5">
-            <% if (blogs.length > 0) { %>
-            <% const randomIndex = Math.floor(Math.random() * blogs.length); %>
-            <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="mb-0"><%= blogs[randomIndex].title %></h3>
-                <p class="card-text mb-auto"><%= blogs[randomIndex].content %></p>
-                <a href="/notebook/<%randomIndex%>" class="btn btn-outline-secondary">Go</a>
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center" style="width: 200px; height: 250px; overflow: hidden; background-color: #e0e0e0;">
-                <img src="<%= blogs[randomIndex].img %>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="<%= blogs[randomIndex].title %>" aria-label="Blog Thumbnail" focusable="false">
-              </div>
-            </div>
-            <% } else { %>
-            <p>No blogs available</p>
-            <% } %>
-          </div>
+
+     
+
+
 
     </main>
     <!-- ------------footer------------ -->

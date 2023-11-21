@@ -8,8 +8,8 @@ const app = express();
 const port = 3000;
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "/static")));
-app.use(express.static(path.join(__dirname, "/views")));
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,9 +31,6 @@ app.use(
   })
 );
 
-
-
-
 app.use((req, res, next) => {
   // 로깅 미들웨어 설정
   console.log(
@@ -43,11 +40,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 // index.js 와 같은 위치에 있는 .env 파일을 불러와서 환경변수로 사용할 수 있게 하는것
 dotenv.config({ path: path.join(__dirname, "./config/envs/.env") });
-
 
 app.get("/", (req, res) => {
   res.render("main");
