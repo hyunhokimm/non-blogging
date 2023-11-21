@@ -35,6 +35,7 @@ noteRoute.get("/:noteId", (req, res) => {
 
 noteRoute.get("/write", (req, res) => {
   if (!req.session.user) return res.render("login");
+  console.log("write");
   write(req, res);
 });
 
