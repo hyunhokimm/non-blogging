@@ -42,10 +42,8 @@
           <div style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
           </div>
-          <a
-            style="text-decoration: none"
-            href="/notebook/note/<%=note[0].noteId%>"
-          >
+          <a style="text-decoration: none" href="/notebook/<%=note[0].noteId%>">
+            <div><%=note[0].noteId%></div>
             <div
               style="display: flex; align-items: center"
               class="border rounded-1 p-3"
@@ -83,7 +81,7 @@
               <div class="col-md-6">
                 <a
                   style="text-decoration: none"
-                  href="/notebook/note/<%=noteInfo.noteId%>"
+                  href="/notebook/<%=noteInfo.noteId%>"
                 >
                   <div
                     style="
@@ -100,7 +98,7 @@
                     />
                     <div class="text-container" style="font-size: 17px">
                       <%= note[0].title %>
-                      <p style="margin-top: 10px; font-size: 13px">
+                      <p style="margin-top: 10px; font-size: 13px" id="tag">
                         <%= noteInfo.content %>
                       </p>
                     </div>
@@ -121,6 +119,18 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      const extractTextPattern = /(<([^>]+)>)/gi;
+
+      let target = document.getElementById("tag");
+
+      let src = target.innerHTML;
+      console.log(src);
+      let extractedText = src.replace(extractTextPattern, "");
+      console.log(extractTex);
+      setTimeout(() => {
+        target.innerHTML = extractTex;
+      }, 500);
+
       const onblogging = () => {
         location.href = "/notebook/write";
       };
