@@ -127,6 +127,31 @@
       <div><%= blog.title %></div>
     <% }) %>
     <!-- ------------main------------ -->
+    blogs =[{
+      title:
+      content:
+      img:
+    },
+    {
+      title:
+      content:
+      img:
+    }{
+      title:
+      content:
+      img:
+    }{
+      title:
+      content:
+      img:
+    }]
+    <div>
+      <% blogs.map((blog) => { %>
+        <div><%= blog.title %></div>
+        <div style="margin-bottom: 30px;"><%= blog.content %></div>
+      <% }); %>
+    </div>
+    
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
       <div class="topBox mx-auto ">

@@ -22,7 +22,6 @@ exports.userPage = async (req, res) => {
       noteInfo.map((note) => {
         notebooks.push(note.dataValues);
       });
-      console.log(notebooks);
 
       res.render("notebook", { user: userInfo, note: notebooks });
     }

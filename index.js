@@ -24,17 +24,25 @@ app.use(
     },
     secure: true, // https에서만 동작하도록 함
     store: new FileStore({
-      path: "./path/to/sessions",
+      path: "/sessions",
       retries: 2, // 시도 횟수
       retriesTimeout: 1000, // 재시도 간격 (밀리초)
     }), // nodejs 재시작이 되어도 세션 값 유지
   })
 );
 
+// app.use((req, res, next) => {
+//   res.locals.isAuthenticated = req.session.isAuthenticated;
+//   res.locals.user = req.session.user;
+//   console.log(res.locals.user);
+//   next();
+// });
+
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isAuthenticated;
-  res.locals.user = req.session.user;
-  console.log(res.locals.user);
+  // 로깅 미들웨어 설정
+  console.log(
+    `${new Date().toISOString()} - ${req.method} ${req.url} ${req.session.user}`
+  );
   next();
 });
 
