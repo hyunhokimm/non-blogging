@@ -1,6 +1,4 @@
-const { notebook } = require("../model");
-const { user } = require("../model");
-const { comment } = require("../model");
+const { notebook, user, comment } = require("../model");
 
 // 게시물 전체 페이지 보여주기
 exports.notebook = async (req, res) => {
@@ -45,7 +43,7 @@ exports.note = async (req, res, next) => {
     const email = req.session.user;
     console.log(email);
 
-    const comments = await Comment.findAll({
+    const comments = await comment.findAll({
       where: { noteId: req.params.noteId },
       include: [{ model: user, attributes: ['nickname'] }], 
       order: [['noteId', 'ASC']],
