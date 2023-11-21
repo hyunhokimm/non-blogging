@@ -1,6 +1,6 @@
 {
   "development": {
-    "host": "101.101.219.106",
+    "host": "101.101.219.106:3306",
     "database": "non-blogging",
     "username": "blogger",
     "password": "sesac231107$",
