@@ -98,7 +98,7 @@
                     />
                     <div class="text-container" style="font-size: 17px">
                       <%= note[0].title %>
-                      <p style="margin-top: 10px; font-size: 13px">
+                      <p style="margin-top: 10px; font-size: 13px" id="tag">
                         <%= noteInfo.content %>
                       </p>
                     </div>
@@ -119,6 +119,18 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      const extractTextPattern = /(<([^>]+)>)/gi;
+
+      let target = document.getElementById("tag");
+
+      let src = target.innerHTML;
+      console.log(src);
+      let extractedText = src.replace(extractTextPattern, "");
+      console.log(extractTex);
+      setTimeout(() => {
+        target.innerHTML = extractTex;
+      }, 500);
+
       const onblogging = () => {
         location.href = "/notebook/write";
       };
