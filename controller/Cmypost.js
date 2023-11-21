@@ -9,7 +9,7 @@ exports.notebook = async (req, res) => {
 //게시물 작성페이지 보여주기
 exports.write = (req, res) => {
   console.log("write 작성중......");
-  return res.render("write");
+  return res.render("write", { note: null });
 };
 
 //게시물 등록 페이지

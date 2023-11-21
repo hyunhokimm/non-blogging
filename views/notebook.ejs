@@ -64,6 +64,8 @@
             </div>
           </a>
           <div>
+            <% const onblogging = () => { %> location.href = "/notebook/write";
+            <% }; %>
             <button
               type="button"
               onclick="onblogging()"
@@ -99,7 +101,7 @@
                       alt="Image"
                     />
                     <div class="text-container" style="font-size: 17px">
-                      <%= note[0].title %>
+                      <%= noteInfo.title %>
                       <p style="margin-top: 10px; font-size: 13px" id="tag">
                         <%= removeHtmlTags(noteInfo.content) %>
                       </p>
@@ -115,11 +117,7 @@
       <footer><%- include ('fragment/footer') %></footer>
     </div>
     <%- include ('fragment/functions') %>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
+
     <script>
       const extractTextPattern = /(<([^>]+)>)/gi;
 
@@ -128,14 +126,19 @@
       let src = target.innerHTML;
       console.log(src);
       let extractedText = src.replace(extractTextPattern, "");
-      console.log(extractTex);
+      console.log(extractedText);
       setTimeout(() => {
-        target.innerHTML = extractTex;
+        target.innerHTML = extractedText;
       }, 500);
 
       const onblogging = () => {
         location.href = "/notebook/write";
       };
     </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
