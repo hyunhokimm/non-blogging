@@ -53,10 +53,9 @@
         <img src="/logo.png" width="170px" class="mx-auto" alt="non-blog"
       /></a>
 
-      <form method="post" action="/user/login" class="py-3" name="login">
+      <form class="py-3">
         <input
           type="text"
-          name="idBox"
           placeholder="ID"
           class="mb-2 form-control err"
           style="border: none"
@@ -64,7 +63,6 @@
         />
         <input
           type="password"
-          name="pwBox"
           placeholder="PW"
           class="mb-2 form-control err"
           style="border: none"
@@ -108,7 +106,7 @@
 
         if (email === "" || password === "") {
           alert.textContent = "아이디와 패스워드를 입력해주세요.😅";
-          return false;
+          return;
         } else {
           alert.textContent = "";
         }
@@ -124,18 +122,20 @@
           url: "/user/login", //^^ 컨트롤러에서 찾을수없어서 에러.. 일단 여기까지...
           data: data,
         })
-        .then((res) => {
-          if(res.data.success == true){
-            document.location.href = `/notebook/allblog`;
-          }
-          else{
-            alert.textContent = "존재하지 않는 회원입니다.";
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          alert.textContent = "로그인 중 오류가 발생하였습니다.";
-        });
+
+          .then((result) => {
+            if (result.data == "ok") {
+              location.href = "/notebook/allblog";
+            } else {
+              console.log(result.data);
+              alert.textContent = `${result.data}😅`;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert.textContent = `${err.response.data}😅`;
+          });
+
       }
     </script>
   </body>

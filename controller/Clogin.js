@@ -3,15 +3,14 @@ const crypto = require("crypto");
 
 // login.ejs > main 페이지
 exports.login = (req, res) => {
+  console.log(req.session.user);
   res.render("login");
 };
 
 exports.isLogin = async (req, res) => {
   try {
-    const { idBox, pwBox } = req.body;
-    console.log("-----------------------------");
-    console.log(req.body);
-    console.log("-----------------------------");
+    const { email, password } = req.body;
+
 
     const findUser = await user.findOne({ where: { email: idBox } });
     if (!findUser) {
@@ -35,8 +34,9 @@ exports.isLogin = async (req, res) => {
   } catch (error) {
     console.error("로그인 중 오류 발생:", error);
     return res.status(500).json({ success: false, msg: "내부 서버 오류" });
+
   }
-};
+
 
 // 로그아웃 기능
 exports.logout = (req, res) => {
@@ -55,6 +55,9 @@ function comparePassword(inputPassword, hashedPassword) {
   const inputHash = crypto
     .pbkdf2Sync(inputPassword, salt, 1000, 64, "sha512")
     .toString("hex");
+
+  console.log(expectedHash, "expectedHash");
+  console.log(inputHash, "inputHash");
 
   return inputHash === expectedHash;
 }

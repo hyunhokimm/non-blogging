@@ -18,7 +18,7 @@ exports.signupProcess = async (req, res) => {
       return res.status(400).send("이미 가입되어 있는 이메일 입니다.");
     }
 
-    const hashpassword = hashPassword(password);
+    const hashpassword = this.hashPassword(password);
 
     user
       .create({
@@ -39,10 +39,10 @@ exports.signupProcess = async (req, res) => {
   }
 };
 
-function hashPassword(password) {
+exports.hashPassword = (password) => {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto
     .pbkdf2Sync(password, salt, 1000, 64, "sha512")
     .toString("hex");
   return `${salt}:${hash}`;
-}
+};

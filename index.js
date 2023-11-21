@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
 const dotenv = require("dotenv");
 const path = require("path");
@@ -22,24 +23,31 @@ app.use(
       maxAge: 60 * 60 * 24,
     },
     secure: true, // https에서만 동작하도록 함
+    store: new FileStore({
+      path: "/sessions",
+      retries: 2, // 시도 횟수
+      retriesTimeout: 1000, // 재시도 간격 (밀리초)
+    }), // nodejs 재시작이 되어도 세션 값 유지
   })
 );
 
+
+
+
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isAuthenticated;
-  res.locals.user = req.session.user;
-  console.log(res.locals.user);
+  // 로깅 미들웨어 설정
+  console.log(
+    `${new Date().toISOString()} - ${req.method} ${req.url} ${req.session.user}`
+  );
+
   next();
 });
 
-//mypage 작용 바로 x > session 불러오는 코드 작성
+
 
 // index.js 와 같은 위치에 있는 .env 파일을 불러와서 환경변수로 사용할 수 있게 하는것
 dotenv.config({ path: path.join(__dirname, "./config/envs/.env") });
-// dotenv.config({
-//   path: path.join(__dirname, `./config/envs/.env`),
-// });
-// dotenv.config({ path: path.join(__dirname, "./config/envs/.env") });
+
 
 app.get("/", (req, res) => {
   res.render("main");

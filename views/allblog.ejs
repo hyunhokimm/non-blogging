@@ -120,10 +120,38 @@
     }
   </style>
   <body>
+    <!-- ------------blogs 라는 배열 객체로 데이터 들어옴------------ -->
     <header><%- include ('fragment/header') %></header>
     <!-- <hr class="line"/> -->
-
+    <% blogs.map((blog) => { %>
+      <div><%= blog.title %></div>
+    <% }) %>
     <!-- ------------main------------ -->
+    blogs =[{
+      title:
+      content:
+      img:
+    },
+    {
+      title:
+      content:
+      img:
+    }{
+      title:
+      content:
+      img:
+    }{
+      title:
+      content:
+      img:
+    }]
+    <div>
+      <% blogs.map((blog) => { %>
+        <div><%= blog.title %></div>
+        <div style="margin-bottom: 30px;"><%= blog.content %></div>
+      <% }); %>
+    </div>
+    
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
       <div class="topBox mx-auto ">
@@ -134,7 +162,6 @@
           <div class="showTimeJs" id="clock"></div>
         </div>
       </div>
-
 
       <!-- 아래 긴 박스 영역 -->
       <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>

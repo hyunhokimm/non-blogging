@@ -10,8 +10,19 @@
     <div class="fw-bold d-flex" id="nav">
       <a class="nav-link me-3" href="/notebook/allblog">Home</a>
       <a class="nav-link me-3" href="/notebook">My blog</a>
-      <a class="nav-link me-3" href="/user/login">Logout</a>
-      <a class="nav-link me-3" href="/user/myinfo">My info</a>
+      <a class="nav-link me-3" onclick="logout()" href="/user/login">Logout</a>
+      <a class="nav-link me-3" onclick="myInfo()" href="/user/myinfo"
+        >My info</a
+      >
     </div>
   </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  const logout = () => {
+    axios.get("/user/logout");
+  };
+
+  const myInfo = () => {};
+</script>
