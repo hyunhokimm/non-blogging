@@ -65,14 +65,21 @@
       position: relative;
       top: 80px;
       height: 60px;
-      border: 1px solid #78715e;
+      /* border: 1px solid #78715e; */
     }
 
     .ContentBox {
       position: relative;
       top: 80px;
-      height: 1000px;
-      border: 1px solid #78715e;
+      /* height: 1000px;
+      border: 1px solid #78715e; */
+    }
+
+    .noneBox {
+      position: relative;
+      top: 80px;
+      height: 50px;
+      /* border: 1px solid #78715e; */
     }
 
     .commentBox {
@@ -134,26 +141,17 @@
     <!-- ------------header------------ -->
     <header><%- include ('fragment/header') %></header>
 
-    <!-- <header class="my-1">
-      <nav class="navbar navbar-light">
-        <div class="mx-3 d-flex justify-content-start">
-          <a class="navbar-brand" href="#"><img src="/static/logo.png" style="height: 40px" alt="" /></a>
-        </div>
-
-        <div class="mx-3 d-flex justify-content-end" id="nav">
-          <a class="nav-link me-2" aria-current="page" href="/">Home</a>
-          <a class="nav-link me-2" href="/myblog">My blog</a>
-          <a class="nav-link me-2" href="/myinfo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
-            </svg></a>
-        </div>
-      </nav>
-    </header> -->
     <!-- ------------main------------ -->
     <main>
+      <%
+      function removeHtmlTags(input) {
+        return input.replace(/<[^>]*>/g, '');
+      }
+      %>
       <!-- 썸네일 영역 -->
       <div class="container thumbnailBox mx-auto m-1" id="thumbnailBox">
-        <img src="https://i.pinimg.com/originals/c2/63/f2/c263f2141b17304b04b9365f17fcddb4.jpg" class="img-responsive center-block d-block mx-auto polaroid" />
+        <img src="http://<%=note.img%>" class="img-responsive center-block d-block mx-auto polaroid" />
+
 
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right" id="noteEditButton">
@@ -163,65 +161,66 @@
           <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
         </div>
       </div>
-      <div><%=note.title%></div>
- <!-- ------------  note 데이터로 들어옵니다.  ------------ -->
+
+      <!-- ------------  note 데이터로 들어옵니다.  ------------ -->
       <!-- ------------제목 영역------------ -->
       <div class="container postTitleBox mx-auto m-1">
-        <h1 class="display-6">제목 빈 값. 틀 고정.글자수 제한</h1>
-      
-          
-       
-      </div>
-      <!-- ------------게시글 영역------------ -->
-      <div class="container ContentBox mx-auto m-1">
-        작성된 글 데이터를 가져와야 한다. 근데 글 길이에 따라 달라지니 높이값을
-        고정시킬수는 없다. 높이값 제외한
-        틀만 잡아놓고 데이터로 넣기
-      </div>
-      <!-- ------------댓글 영역------------ -->
-      <div class="container commentBox mx-auto m-1">
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label comment ">Comment</label>
-          <!-- table-->
-          <table class="table table-hover table-borderless">
-            <tbody>
-              <tr>
-                <!-- <th scope="row"></th> -->
-                <td colspan="2">
-                  <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username1</strong>
-                    Today’s special moments are tomorrow’s memories. - Aladdin(임시댓글)
-                  </p>
-                  <hr>
-                </td>
-                <td>02:05</td>
-              </tr>
+        <h1 class="display-6"><%= removeHtmlTags(note.title) %>
+        </h1>
+        <hr />
+        <!-- ------------게시글 영역------------ -->
+        <div class="container ContentBox mx-auto m-1">
+          <%= removeHtmlTags(note.content) %>
 
-              <tr>
-                <!-- <th scope="row"></th> -->
-                <td colspan="2">
-                  <p class="pb-1 mb-0 small lh-sm">
-                    <strong class="d-block ">@username2</strong>
-                    You cannot be happy every day. But there are happy things every day. - Winnie the Pooh(임시댓글)
-                  </p>
-                  <hr>
-                </td>
-                <td>02:05</td>
-
-              </tr>
-
-            </tbody>
-          </table>
-          <form name="inputComment">
-            <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
         </div>
+        <!-- ------------게시글 밑 공백 빈 박스------------ -->
+        <div class="container noneBox mx-auto m-1">
 
-        <div align="right">
-          <div id="noComment"></div>
-          <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
         </div>
-        </form>
-      </div>
+        <!-- ------------댓글 영역------------ -->
+        <div class="container commentBox mx-auto m-1">
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label comment ">Comment</label>
+            <!-- table-->
+            <table class="table table-hover table-borderless">
+              <tbody>
+                <tr>
+                  <!-- <th scope="row"></th> -->
+                  <td colspan="2">
+                    <p class="pb-1 mb-0 small lh-sm">
+                      <strong class="d-block ">@username1</strong>
+                      Today’s special moments are tomorrow’s memories. - Aladdin(임시댓글)
+                    </p>
+                    <hr>
+                  </td>
+                  <td>02:05</td>
+                </tr>
+
+                <tr>
+                  <!-- <th scope="row"></th> -->
+                  <td colspan="2">
+                    <p class="pb-1 mb-0 small lh-sm">
+                      <strong class="d-block ">@username2</strong>
+                      You cannot be happy every day. But there are happy things every day. - Winnie the Pooh(임시댓글)
+                    </p>
+                    <hr>
+                  </td>
+                  <td>02:05</td>
+
+                </tr>
+
+              </tbody>
+            </table>
+            <form name="inputComment">
+              <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
+          </div>
+
+          <div align="right">
+            <div id="noComment"></div>
+            <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
+          </div>
+          </form>
+        </div>
 
     </main>
     <!-- ------------footer------------ -->
