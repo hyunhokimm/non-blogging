@@ -15,17 +15,17 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.user = require("./User")(sequelize, Sequelize);
+db.comment = require("./Comment")(sequelize, Sequelize);
 db.notebook = require("./Notebook")(sequelize, Sequelize);
+db.user = require("./User")(sequelize, Sequelize);
 
-db.user.hasMany(db.notebook, {
-  foreignKey: "email",
-  sourceKey: "email",
-});
+db.user.hasMany(db.notebook, { foreignKey: "email" });
+db.notebook.belongsTo(db.user, { foreignKey: "email" });
 
-db.notebook.belongsTo(db.user, {
-  foreignKey: "email",
-  targetKey: "email",
-});
+db.notebook.hasMany(db.comment, { foreignKey: "noteId" });
+db.comment.belongsTo(db.notebook, { foreignKey: "noteId" });
+
+db.user.hasMany(db.comment, { foreignKey: "email" });
+db.comment.belongsTo(db.user, { foreignKey: "email" });
 
 module.exports = db;

@@ -21,6 +21,7 @@
 
 
   <body style="background-color: #ece8e4; text-align: center;">
+    <form name="updateUserInfoForm">
     <div style="width: 40%; text-align: center; margin: 10rem auto;">
         <a href="/notebook/allblog">
             <img
@@ -29,8 +30,10 @@
               style="height: 4rem; margin-bottom: 1rem"
             />
         </a>
+
         <form>
           <div class="form-floating" style="margin-bottom: 1rem">
+
             <input
               type="email"
               class="form-control"
@@ -39,6 +42,7 @@
               readonly
               disabled
             />
+
             <label for="floatingPassword"><%=userInfo.email  %></label>
           </div>
           <div class="form-floating" id="pw" style="margin-bottom: 1rem">
@@ -86,6 +90,7 @@
           </button>
         </form>
         
+
         <div
           class="btn"
           style="
@@ -108,6 +113,7 @@
     </div>
 
     </div>
+    </form>
 
 
     <script
@@ -121,6 +127,8 @@
     
       const complete = ()=>{
 
+
+
         const password = document.getElementById('password').value
         const ckPassword = document.getElementById('ckPassword').value
         const nickname = document.getElementById('nickname').value
@@ -133,6 +141,7 @@
           },1500)
           return
         }
+
 
        
 
@@ -150,8 +159,8 @@
          },500)
         }).catch((err)=>{
           console.log(err)
-        })
 
+        })
       }
 
       const cancle = () => {

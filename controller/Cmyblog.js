@@ -2,6 +2,7 @@ const { notebook } = require("../model");
 const { user } = require("../model");
 
 // 사용자 페이지
+
 exports.userPage = async (req, res) => {
   try {
     const email = req.session.user;
@@ -29,6 +30,7 @@ exports.userPage = async (req, res) => {
     console.log(error);
     res.st;
     atus(500).send("접근 오류 발생");
+
   }
 };
 
@@ -48,6 +50,7 @@ exports.userOneNote = async (req, res, next) => {
     });
 
     console.log(noteOne);
+
 
     if (!noteOne) {
       // 노트를 찾을 수 없는 경우 처리
@@ -96,4 +99,5 @@ exports.userNotebook = async (req, res) => {
   //     console.log(userErr);
   //     res.status(500).send("접근 오류 발생");
   //   });
+
 };
