@@ -8,7 +8,8 @@ exports.notebook = async (req, res) => {
 
 //게시물 작성페이지 보여주기
 exports.write = (req, res) => {
-  res.render("write");
+  console.log("write 작성중......");
+  return res.render("write");
 };
 
 //게시물 등록 페이지
@@ -29,7 +30,7 @@ exports.createNote = async (content, req, res) => {
       connectUser: email,
     });
 
-    res.send("저장 성공");
+    return res.send("저장 성공");
   } catch (error) {
     console.error("로스트 저장 중 오류 발생:", error);
     res.status(500).json({ success: false, msg: "내부 서버 오류" });
@@ -58,10 +59,29 @@ exports.note = async (req, res, next) => {
       },
     });
     console.log(note);
-    res.render("/notebook/note", { note: note });
+    res.render("note", { note: note });
   } catch (error) {
     next(error);
   }
+};
+
+//게시물 수정페이지 보여주기
+exports.editNotePage = async (noteId, res) => {
+  const result = await notebook.findOne({
+    where: { noteId: noteId },
+    attributes: [
+      "noteId",
+      "title",
+      "content",
+      "img",
+      "isPublic",
+      "connectUser",
+    ],
+  });
+
+  console.log(result);
+
+  return res.render("write", { note: result });
 };
 
 // 게시물 수정 페이지

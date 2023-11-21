@@ -42,6 +42,8 @@
           <div style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
           </div>
+          <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
+          ''); } %>
           <a style="text-decoration: none" href="/notebook/<%=note[0].noteId%>">
             <div><%=note[0].noteId%></div>
             <div
@@ -56,7 +58,7 @@
               <div class="text-container" style="font-size: 17px">
                 <%= note[0].title %>
                 <p style="margin-top: 10px; font-size: 13px">
-                  <%= note[0].content %>
+                  <%= removeHtmlTags(note[0].content) %>
                 </p>
               </div>
             </div>
@@ -99,7 +101,7 @@
                     <div class="text-container" style="font-size: 17px">
                       <%= note[0].title %>
                       <p style="margin-top: 10px; font-size: 13px" id="tag">
-                        <%= noteInfo.content %>
+                        <%= removeHtmlTags(noteInfo.content) %>
                       </p>
                     </div>
                   </div>

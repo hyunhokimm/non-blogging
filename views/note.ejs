@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   </head>
+
   <style>
     /* 상단 고정 */
     * {
@@ -156,7 +157,9 @@
 
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right" id="noteEditButton">
-          <button type="button" onclick="myNoteEdit()" class="btn addComment justify-content-end">수정</button>
+          <a href="/notebook/note/<%=note.noteId  %>">
+            <button type="button" class="btn addComment justify-content-end">수정</button>
+          </a>
           <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
         </div>
       </div>
@@ -504,7 +507,7 @@
       //유저가 작성한 데이터 값 어떻게 가져오지? ^^
       //페이지에 저장된 내용 그대로 가져와야한다.
       function myNoteEdit() {
-        location.href = "/notebook/write";
+        location.href = "/notebook/note";
       }
 
       //-------------------------------------게시글 삭제 버튼

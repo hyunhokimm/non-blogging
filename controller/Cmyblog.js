@@ -30,11 +30,11 @@ exports.userPage = async (req, res) => {
     console.log(error);
     res.st;
     atus(500).send("접근 오류 발생");
-
   }
 };
 
 exports.userOneNote = async (req, res, next) => {
+  if (!req.session.user) return res.render("login");
   console.log(req.params.noteId);
   try {
     const noteId = req.params.noteId;
@@ -51,10 +51,9 @@ exports.userOneNote = async (req, res, next) => {
 
     console.log(noteOne);
 
-
     if (!noteOne) {
       // 노트를 찾을 수 없는 경우 처리
-      return res.status(404).render("not-found");
+      return res.status(404).render("write");
     }
 
     res.render("note", { note: noteOne });
@@ -99,5 +98,4 @@ exports.userNotebook = async (req, res) => {
   //     console.log(userErr);
   //     res.status(500).send("접근 오류 발생");
   //   });
-
 };
