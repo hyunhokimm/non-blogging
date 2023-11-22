@@ -83,19 +83,4 @@ exports.userNotebook = async (req, res) => {
     console.log(userErr);
     res.status(500).send("접근 오류 발생");
   }
-
-  // user
-  //   .findOne({
-  //     where: {
-  //       email: currentUser,
-  //     },
-  //   })
-  //   .then((result) => {
-  //     console.log("결과 ", result);
-  //     res.render("notebook", { result, currentUser });
-  //   })
-  //   .catch((userErr) => {
-  //     console.log(userErr);
-  //     res.status(500).send("접근 오류 발생");
-  //   });
 };

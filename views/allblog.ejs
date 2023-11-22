@@ -4,11 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nonbloging</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <style>
     * {
@@ -36,7 +43,6 @@
     main {
       min-height: 1700px;
       position: relative;
-
     }
 
     footer {
@@ -45,7 +51,6 @@
       background-color: #78715e;
       text-align: center;
       color: whitesmoke;
-
     }
 
     .line {
@@ -74,7 +79,6 @@
       height: 299px;
       top: 75px;
       padding-top: 20px;
-
     }
 
     .imageBox {
@@ -106,10 +110,7 @@
     .blogTopic {
       position: relative;
       padding: 5px;
-
     }
-
-
 
     /* .profileBox{
       position: fixed;
@@ -161,25 +162,21 @@
       transform: translateY(0);
     }
 
-
     #clock {
       font-size: 400%;
-
     }
   </style>
 
   <body>
     <header><%- include ('fragment/header') %></header>
     <!-- <hr class="line"/> -->
-    <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
-      ''); } %>
-
-    <% const alternativeImagePath = '/noImage.png'; %>
+    <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g, ''); }
+    %> <% const alternativeImagePath = '/noImage.png'; %>
 
     <!-- ------------main------------ -->
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
-      <div class="topBox mx-auto ">
+      <div class="topBox mx-auto">
         <div class="imageBox"></div>
         <div class="topBoxContent mx-1">
           <div id="welcome">Welcome to nonblogging.</div>
@@ -188,9 +185,10 @@
         </div>
       </div>
 
-
       <!-- 아래 긴 박스 영역 -->
-      <div class="topBar mx-auto blogTopic" id="whatTopic">What's today's blog topic?</div>
+      <div class="topBar mx-auto blogTopic" id="whatTopic">
+        What's today's blog topic?
+      </div>
 
       <!-- 블로그 박스 영역 -->
       <div class="blogBox">
@@ -198,30 +196,63 @@
         <!-- <div class="row g-5  mt-1 "> -->
         <div class="row mb-12">
           <div class="profileBox col-md-2 d-none d-lg-block">
-            <div class="myBox row g-0 flex-md-row mb-4 h-md-250 position-fixed " id="myBox" style="width: 160px; height: 200px;  background-color: #ece8e4;">
-              <div class="col p-4  d-flex flex-column position-static">
-                <h3 class="mb-0">Hi,<br /> there!</h3><br />
-                <p class="card-text mb-auto">친구들의<br />블로그를 <br />둘러보세요!</p>
+            <div
+              class="myBox row g-0 flex-md-row mb-4 h-md-250 position-fixed"
+              id="myBox"
+              style="width: 160px; height: 200px; background-color: #ece8e4"
+            >
+              <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">
+                  Hi,<br />
+                  there!
+                </h3>
+                <br />
+                <p class="card-text mb-auto">
+                  친구들의<br />블로그를 <br />둘러보세요!
+                </p>
               </div>
-              <div class="col-auto d-none d-lg-block">
-              </div>
+              <div class="col-auto d-none d-lg-block"></div>
             </div>
           </div>
 
           <div class="col-md-10">
             <!-- 부모 요소 추가 -->
-            <div class="row " style="justify-content: space-around;">
+            <div class="row" style="justify-content: space-around">
               <% blogs.forEach((blog) => { %>
               <div class="col-md-5 mb-4 px-0">
-                <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                <div
+                  class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+                >
                   <div class="col p-4 d-flex flex-column position-static">
-                    <h3 class="mb-0"><%= blog.title %></h3>
-                    <p class="card-text mb-auto"><%= removeHtmlTags(blog.content) %></p>
-                    <a href="<%= blog.noteId %>" class="btn btn-outline-secondary">Go</a>
+                    <h5 class="mb-2"><%= blog.title %></h5>
+                    <p class="card-text mb-auto">
+                      <%= removeHtmlTags(blog.content) %>
+                    </p>
+                    <a
+                      href="<%= blog.noteId %>"
+                      class="btn btn-outline-secondary"
+                      >Go</a
+                    >
                   </div>
 
-                  <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
-                    <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImageError(this, '<%= alternativeImagePath %>')" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
+                  <div
+                    class="col-auto d-flex align-items-center justify-content-center"
+                    style="
+                      background-color: #e0e0e0;
+                      width: 200px;
+                      height: 250px;
+                      overflow: hidden;
+                    "
+                  >
+                    <img
+                      src="http://<%=blog.img%>"
+                      class="img-fluid"
+                      style="width: 100%; height: 100%; object-fit: cover"
+                      onerror="handleImageError(this, '<%= alternativeImagePath %>')"
+                      alt="썸네일"
+                      aria-label="Placeholder: Thumbnail"
+                      focusable="false"
+                    />
                   </div>
                 </div>
               </div>
@@ -230,15 +261,9 @@
           </div>
         </div>
       </div>
-
-
-
-
-
     </main>
     <!-- ------------footer------------ -->
     <footer><%- include ('fragment/footer') %></footer>
-
 
     <script src="/allblog.js"></script>
     <script>
@@ -246,14 +271,10 @@
         window.location.href = `/notebook/${noteId}`;
       }
 
-
-
       function handleImageError(img, alternativeImagePath) {
         img.src = alternativeImagePath;
-        img.alt = '대체 이미지';
+        img.alt = "대체 이미지";
       }
     </script>
-
-
   </body>
 </html>

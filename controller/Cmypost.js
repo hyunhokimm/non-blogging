@@ -1,4 +1,5 @@
 const { notebook, user, comment } = require("../model");
+const { home } = require("./Chome");
 
 // 게시물 전체 페이지 보여주기
 exports.notebook = async (req, res) => {
@@ -45,9 +46,9 @@ exports.note = async (req, res, next) => {
 
     const comments = await comment.findAll({
       where: { noteId: req.params.noteId },
-      include: [{ model: user, attributes: ['nickname'] }], 
-      order: [['noteId', 'ASC']],
-    });     
+      include: [{ model: user, attributes: ["nickname"] }],
+      order: [["noteId", "ASC"]],
+    });
 
     const note = await notebook.findOne({
       attributes: [
@@ -91,20 +92,32 @@ exports.editNotePage = async (noteId, res) => {
 
 // 게시물 수정 페이지
 exports.editNote = async (req, res, next) => {
-  const { noteId } = req.params;
-  const { title, content } = req.body;
-  const note = await notebook.findOneAndUpdate(
-    { noteId },
-    {
-      title,
-      content,
+  console.log(req.body);
+  const { title, editContent: content, blogId: noteId, imgUlr: img } = req.body;
+  const user = req.session.user;
+  if (!user) return res.render("login");
+  try {
+    const [update, updatedRows] = await notebook.update(
+      { title, content, img },
+      { where: { noteId } }
+    );
+    const note = { noteId, title, content, img };
+    if (update > 0) {
+      // 업데이트 성공
+      console.log(`${update} update`);
+      // 업데이트 성공 시 note 페이지를 렌더링해서 클라이언트에게 보냄
+      return res.render("note", { note: note });
+    } else {
+      // 해당하는 노트가 없는 경우
+      console.log("No rows updated.");
+      res.status(404).send("Note not found.");
+      return home(req, res);
     }
-  ); // noteId 검색해서 내용을 title, content로 변경
-  if (!note) {
-    throw new Error("nonote");
+  } catch (error) {
+    // 업데이트 실패
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
-
-  res.rendirect(`/notebook/:${noteId}`, { note });
 };
 
 // 게시물 삭제 기능

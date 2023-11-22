@@ -21,7 +21,6 @@ const { userNotebook } = require("../../controller/Cmyblog"); // 수정
 noteRoute.get("/allblog", home);
 
 // 나의 게시글들
-
 noteRoute.get("/", (req, res) => {
   userPage(req, res);
 });
@@ -51,16 +50,18 @@ noteRoute.post("/write", upload.array("img"), (req, res) => {
 });
 
 // 게시물 상세 페이지
-noteRoute.get("/notebook/:noteId", note);
+noteRoute.get("/:noteId", note);
 
 // 게시물 수정 페이지 보여주기
-noteRoute.get("/note/:noteId", (req, res) => {
+noteRoute.get("/notemodify/:noteId", (req, res) => {
   const noteid = req.params.noteId;
   editNotePage(noteid, res);
 });
 
 // 게시물 수정 페이지
-noteRoute.post("/notebook/:noteId", editNote);
+noteRoute.post("/modify", (req, res) => {
+  editNote(req, res);
+});
 
 // 게시물 삭제 기능
 noteRoute.delete("/notebook/:noteId", deleteNote);

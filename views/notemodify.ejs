@@ -57,47 +57,48 @@
             <div style="justify-content: space-between; display: flex">
               <div>
                 <label for="file">
-                  <div
-                    type="button"
-                    class="btn btn-lg mb-3"
-                    style="
-                      color: #ae7f5f;
-                      border: 2px solid #ae7f5f;
-                      font-weight: bold;
-                    "
-                  >
-                    사진 바꾸기
-                  </div>
+
+                  <h3 id="blogid"><%= note.noteId  %></h3>
+                  <div>번의 블로그</div>
                 </label>
                 <input
-                  type="file"
-                  id="file"
-                  accept="image/*"
-                  style="display: none"
-                  required
-                />
+                type="file"
+                id="file"
+                accept="image/*"
+                style="display: none"
+                required
+              />
               </div>
 
               <img
-                onclick="deleteImg()"
-                src=""
+                src="http://<%=note.img  %>"
                 alt=""
                 style="width: 60%; margin: 1rem"
                 id="selectedImg"
               />
             </div>
             <div class="row">
+                <div class="mb-3">
+                    <input
+                      style="height: 60px"
+                      type="text"
+                      class="form-control fs-3"
+                      id="title"
+                      placeholder=""
+                      value="<%= note.title %>"
+                    />
+                   
+                  </div>
               <div class="mb-3">
-                <input
-                  style="height: 60px"
-                  type="text"
-                  class="form-control fs-3"
-                  id="title"
-                  placeholder="제목을 입력하세요."
-                />
+              
+                <% function removeHtmlTags(input) { %>
+                   <%   return input.replace(/<[^>]*>/g, '');
+                   } %>
+                  
+                  <div id="summernote" name="editordata">
+                    <%= removeHtmlTags(note.content) %>
+                  </div>
               </div>
-              <div class="mb-3">
-                <div id="summernote" name="editordata"></div>
               </div>
               <div style="display: flex; justify-content: end">
                 <div
@@ -106,7 +107,7 @@
                 ></div>
                 <button
                   type="button"
-                  onclick="blogging()"
+                  onclick="modifyblogging()"
                   class="btn btn-lg"
                   style="color: white; background-color: #ae7f5f"
                 >
@@ -120,72 +121,59 @@
 
       <footer><%- include ('fragment/footer') %></footer>
 
-      <script>
+     <script>
         const fileDOM = document.getElementById("file");
-        const preview = document.getElementById("imgbox");
-        const selectImg = document.getElementById("selectedImg");
+const selectImg = document.getElementById("selectedImg");
+const form = new FormData();
 
-        const form = new FormData();
 
-        const deleteImg = () => {
-          selectImg.src = "";
-        };
+const modifyblogging = () => {
+  document.getElementById("err").innerHTML = "";
+  const title = document.getElementById("title").value;
+  const blogId = document.getElementById('blogid').innerText;
+  if(fileDOM.files.length ==0){
+    const content = $("#summernote").summernote("code");
+    const selectedImg = document.getElementById("selectedImg");
+const imgUrl = selectedImg.src;
 
-        function updateDisplayedTitle(value) {
-          // Assuming you have a span with id "displayedTitle" to show the title
-          document.getElementById("displayedTitle").textContent = value;
-        }
+    // HTML 태그 제거 후 개행 문자를 공백으로 대체
+    const editContent = content.trim();
 
-        const blogging = () => {
-          document.getElementById("err").innerHTML = "";
-          const title = document.getElementById("title").value;
-          const content = $("#summernote").summernote("code");
-          const blog = { title, content };
+    const blogInfo = { title, editContent, blogId,imgUrl };
 
-          // form.append('blog',JSON.stringify(blog))
+    axios
+    .post("/notebook/modify/", blogInfo)
+    .then((result) => {
+      if(result=='ok'){
+        location.href=`/notebook/${blogId}`
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
-          form.append("blog", JSON.stringify(blog));
+ 
+  
+};
 
-          console.log(form.get("blog"));
-          console.log(form.get("img"));
-          axios
-            .post("/notebook/write", form)
-            .then((result) => {
-              location.href = "/notebook";
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        };
+$(document).ready(function () {
+  $("#summernote").summernote({
+    placeholder: "당신의 이야기를 들려주세요.😊",
+    tabsize: 2,
+    height: 300,
+    lang: "ko-KR",
+    toolbar: [
+      ["style", ["bold", "italic", "underline"]],
+      ["font", ["strikethrough"]],
+      ["para", ["ul", "ol"]],
+    ],
+  });
+});
 
-        $(document).ready(function () {
-          $("#summernote").summernote({
-            placeholder: "당신의 이야기를 들려주세요.😊",
-            tabsize: 2,
-            height: 300,
-            lang: "ko-KR",
-            toolbar: [
-              // [groupName, [list of button]]
-              ["style", ["bold", "italic", "underline"]],
-              ["font", ["strikethrough"]],
 
-              ["para", ["ul", "ol"]],
-            ],
-          });
-        });
 
-        fileDOM.addEventListener("change", () => {
-          const reader = new FileReader();
-
-          reader.readAsDataURL(fileDOM.files[0]);
-          const file = fileDOM.files[0];
-          if (file) {
-            form.append("img", file);
-
-            selectImg.src = URL.createObjectURL(file);
-          }
-        });
-      </script>
+     </script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
