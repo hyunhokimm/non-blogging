@@ -156,7 +156,7 @@
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right" id="noteEditButton">
           <a href="/notebook/note/<%=note.noteId  %>">
-            <button type="button" class="btn addComment justify-content-end">수정</button>
+            <button type="button"  class="btn addComment justify-content-end">수정</button>
           </a>
           <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
         </div>
@@ -239,6 +239,7 @@
     <script>
       //--------------------썸네일 넣고 빼기 
       const thumbnailBox = document.getElementById("thumbnailBox")
+
 
       //이미지 안받아왔다면? (임시) ^^
       // let imageId = "";

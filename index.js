@@ -22,7 +22,7 @@ app.use(
       httpOnly: true, // document.cookie로는 접속x
       maxAge: 60 * 60 * 24,
     },
-    secure: true, // https에서만 동작하도록 함
+    secure: false, // https에서만 동작하도록 함
     store: new FileStore({
       path: "/sessions",
       retries: 2, // 시도 횟수

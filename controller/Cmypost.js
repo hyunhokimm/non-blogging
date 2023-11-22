@@ -81,7 +81,7 @@ exports.editNotePage = async (noteId, res) => {
 
   console.log(result);
 
-  return res.render("write", { note: result });
+  return res.render("notemodify", { note: result });
 };
 
 // 게시물 수정 페이지
