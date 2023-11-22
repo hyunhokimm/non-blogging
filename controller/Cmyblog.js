@@ -11,25 +11,25 @@ exports.userPage = async (req, res) => {
     }
 
     const userInfo = await user.findOne({ where: { email: email } });
-    if (userInfo) {
-      const noteInfo = await notebook.findAll({
-        where: { connectUser: email },
-        attributes: ["noteId", "title", "content", "img", "connectUser"],
-      });
-      if (noteInfo.length === 0) {
-        return res.render("nonote");
-      }
-      let notebooks = [];
-      noteInfo.map((note) => {
-        notebooks.push(note.dataValues);
-      });
-
-      res.render("notebook", { user: userInfo, note: notebooks });
+    if (!userInfo) {
+      return res.render("login");
     }
+
+    const noteInfo = await notebook.findAll({
+      where: { connectUser: email },
+      attributes: ["noteId", "title", "content", "img", "connectUser"],
+    });
+
+    if (noteInfo.length === 0) {
+      return res.render("nonote");
+    }
+
+    const notebooks = noteInfo.map((note) => note.dataValues);
+
+    return res.render("notebook", { user: userInfo, note: notebooks });
   } catch (error) {
-    console.log(error);
-    res.st;
-    atus(500).send("접근 오류 발생");
+    console.error(error);
+    return res.status(500).send("접근 오류 발생");
   }
 };
 
@@ -37,6 +37,8 @@ exports.userPage = async (req, res) => {
 exports.userOneNote = async (req, res, next) => {
   try {
     const noteId = req.params.noteId;
+
+    const userEmail = req.session.user;
 
     let noteOne = await notebook.findOne({
       attributes: ["noteId", "title", "content", "img", "connectUser"], // 선택할 열을 지정합니다
@@ -50,7 +52,10 @@ exports.userOneNote = async (req, res, next) => {
       return res.status(404).render("write");
     }
 
-    res.render("note", { note: noteOne });
+    res.render("note", {
+      note: noteOne,
+      user: userEmail,
+    });
   } catch (error) {
     console.error(error);
     // 에러를 적절히 처리합니다. 예를 들어 에러 페이지를 렌더링할 수 있습니다.

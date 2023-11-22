@@ -64,6 +64,9 @@ noteRoute.post("/modify", (req, res) => {
 });
 
 // 게시물 삭제 기능
-noteRoute.delete("/notebook/:noteId", deleteNote);
+noteRoute.get("/notedelete/:noteId", (req, res, next) => {
+  console.log(req);
+  deleteNote(req, res, next);
+});
 
 module.exports = noteRoute;

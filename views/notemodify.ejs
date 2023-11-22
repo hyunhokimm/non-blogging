@@ -144,9 +144,8 @@ const imgUrl = selectedImg.src;
     axios
     .post("/notebook/modify/", blogInfo)
     .then((result) => {
-      if(result=='ok'){
-        location.href=`/notebook/${blogId}`
-      }
+        location.href=`/notebook/`
+  
     })
     .catch((err) => {
       console.log(err);

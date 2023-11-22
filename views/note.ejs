@@ -151,20 +151,23 @@
       <!-- 썸네일 영역 -->
       <div class="container thumbnailBox mx-auto m-1" id="thumbnailBox">
         <img src="http://<%=note.img%>" class="img-responsive center-block d-block mx-auto polaroid" />
-
-
+        
+        
         <!-- ------------게시글 수정 삭제 버튼------------ -->
         <div align="right" id="noteEditButton">
-        
-        <span style="display:none" id="user"> <%=note.connectUser %></span>
+          <div><%=note.connectUser  %> </div>
+       
         <div id="forUser">
-
-          <a href="/notebook/notemodify/<%=note.noteId%>">
-            <button type="button" class="btn addComment justify-content-end">수정</button>
-          </a>
-          <a href="/notebook/notedelete/<%=note.noteId%>">
-            <button type="button" onclick="myNoteDelete()" class="btn addComment justify-content-end">삭제</button>
-          </a>
+          <% if (note.connectUser == user) { %>
+            <a href="/notebook/notemodify/<%=note.noteId%>">
+              <button type="button" onclick="editNote()" class="btn addComment justify-content-end">수정</button>
+            </a>
+            <a href="/notebook/notedelete/<%=note.noteId%>">
+              <button type="button"  class="btn addComment justify-content-end">삭제</button>
+            </a>
+          <% } else { %>
+            <!-- 다른 내용 추가할 수 있음 -->
+          <% } %>
         </div>
         
         </div>
@@ -183,7 +186,6 @@
         </div>
         <!-- ------------게시글 밑 공백 빈 박스------------ -->
         <div class="container noneBox mx-auto m-1">
-
         </div>
         <!-- ------------댓글 영역------------ -->
         <div class="container commentBox mx-auto m-1">
@@ -217,14 +219,13 @@
 
     <!-- ------------script------------ -->
     <script>
-     const user = document.getElementById('user').innerText
-     const userstorage =JSON.parse( localStorage.getItem('user'))
-     console.log(user, userstorage)
-      if(user!=userstorage){
-        document.getElementById('forUser').style.display = 'none';
-      }
+ 
       //--------------------썸네일 넣고 빼기 
       const thumbnailBox = document.getElementById("thumbnailBox")
+
+      const editNote =()=>{
+        location.href=''
+      }
 
 
       //이미지 안받아왔다면? (임시) ^^
