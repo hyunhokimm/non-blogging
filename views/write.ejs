@@ -158,6 +158,7 @@
           axios
             .post("/notebook/write", form)
             .then((result) => {
+              console.log(result);
               location.href = "/notebook";
             })
             .catch((err) => {
