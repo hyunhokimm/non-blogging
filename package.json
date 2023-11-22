@@ -4,6 +4,7 @@
   "description": "1st team project",
   "main": "index.js",
   "scripts": {
+    "develop": "nodemon index",
     "dev": "pm2 start index.js --env development",
     "test": "pm2 start index.js --env test",
     "start": "pm2 start index.js --env production"
