@@ -122,13 +122,13 @@ exports.editNote = async (req, res, next) => {
 
 // 게시물 삭제 기능
 exports.deleteNote = async (req, res, next) => {
-  const { noteId } = req.params;
-  try {
-    await notebook.delete({ noteId });
-    res.send("Success Delete");
-  } catch (err) {
-    next(err);
-  }
+  console.log(req.params);
+  // try {
+  //   await notebook.delete({ noteId });
+  //   res.render("allblog");
+  // } catch (err) {
+  //   next(err);
+  // }
 };
 
 // exports.uploadNoteProcess = (req, res) => {
