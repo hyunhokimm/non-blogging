@@ -39,13 +39,12 @@
       <header><%- include ('fragment/header') %></header>
       <div style="margin: 30px">
         <div>
-          <div style="text-align: center">
+          <h3 style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
-          </div>
+          </h3>
           <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
           ''); } %>
           <a style="text-decoration: none" href="/notebook/<%=note[0].noteId%>">
-            <div><%=note[0].noteId%></div>
             <div
               style="display: flex; align-items: center"
               class="border rounded-1 p-3"
@@ -124,9 +123,7 @@
       let target = document.getElementById("tag");
 
       let src = target.innerHTML;
-      console.log(src);
       let extractedText = src.replace(extractTextPattern, "");
-      console.log(extractedText);
       setTimeout(() => {
         target.innerHTML = extractedText;
       }, 500);

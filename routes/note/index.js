@@ -31,7 +31,6 @@ noteRoute.get("/:noteId", (req, res) => {
 });
 
 // 나의 블로그 작성
-
 noteRoute.get("/write", (req, res) => {
   if (!req.session.user) return res.render("login");
   console.log("write");
