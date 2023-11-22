@@ -25,7 +25,7 @@ app.use(
     secure: false, // https에서만 동작하도록 함
     store: new FileStore({
       path: "/sessions",
-      retries: 2, // 시도 횟수
+      retries: 3, // 시도 횟수
       retriesTimeout: 1000, // 재시도 간격 (밀리초)
     }), // nodejs 재시작이 되어도 세션 값 유지
   })

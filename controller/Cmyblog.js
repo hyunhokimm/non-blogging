@@ -34,9 +34,14 @@ exports.userPage = async (req, res) => {
 };
 
 // 하나의 노트 상세페이지
-exports.userOneNote = async (req, res, next) => {
+exports.userOneNote = async (req, res, next, noteid) => {
   try {
-    const noteId = req.params.noteId;
+    let noteId;
+    if (req.params) {
+      noteId = req.params.noteId;
+    } else {
+      noteId = noteid;
+    }
 
     const userEmail = req.session.user;
 

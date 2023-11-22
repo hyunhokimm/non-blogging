@@ -26,16 +26,23 @@
       <header><%- include ('fragment/header') %></header>
       <div style="margin: 30px">
         <div>
-          <div style="text-align: center">
+          <h3 style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
-            <hr />
-          </div>
+
+          </h3>
           <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
           ''); } %>
           <a style="text-decoration: none" href="/notebook/<%=note[0].noteId%>">
+            <div
+              style="display: flex; align-items: center"
+              class="border rounded-1 p-3"
+            >
+              <img
+                style="height: auto; width: 60%; padding: 1rem"
+                src="http://<%=note[0].img%>"
+                alt="Image"
+              />
 
-            <div style="display: flex; align-items:center; justify-content: space-around;" class="border rounded-1 p-3">
-              <img style="padding: 1rem; width: 300px; height: 100%; object-fit: cover;" src="http://<%=note[0].img%>" alt="Image" />
               <div class="text-container" style="font-size: 17px">
                 <%= removeHtmlTags(note[0].title) %>
                 <p style="margin-top: 10px; font-size: 13px">
@@ -87,6 +94,7 @@
 
       <%- include ('fragment/functions') %>
 
+
       <script>
         const extractTextPattern = /(<([^>]+)>)/gi;
 
@@ -110,6 +118,7 @@
         }
       </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 
   </body>
 </html>
