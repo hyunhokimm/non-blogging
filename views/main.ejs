@@ -51,8 +51,11 @@
         <hr />
 
         <div class="mt-5 mb-5">
-          <h3 class="fw-semibold">blogging is happy. enjoy 🙂</h3><br />
-          '블로깅은 즐거워~'를 모티브로 하고 있습니다.<br />
+          <div class="text_box">
+            <h3 class="text"></h3><br />
+          </div>
+          <!-- <h3 class="fw-semibold">blogging is happy. enjoy 🙂</h3><br /> -->
+          '블로깅은 즐거워~'를 모티브로 하고 있습니다. 🙂<br />
           <p class="fw-bolder">블로깅에 대한 부담을 줄여줍니다.</p> <br />
           여러분은 자신의 이야기를 나누며<br /> 다른 사람들 과의 communication을 통해 행복할 것이고,<br />
           nonblogging은 당신을 도울 것입니다.<br />
@@ -70,5 +73,25 @@
     const onClick = () => {
       location.href = "/user/login";
     };
+
+    const content = "blogging is happy. enjoy :)";
+    const text = document.querySelector(".text");
+    let i = 0;
+
+    function typing() {
+      if (i < content.length) {
+        let txt = content[i++];
+        text.innerHTML += txt === "\n" ? "<br/>" : txt;
+        setTimeout(typing, 200);
+      } else {
+        setTimeout(() => {
+          text.textContent = "";
+          i = 0;
+          typing(); // 다시 시작하도록 호출
+        }, 1000);
+      }
+    }
+
+    typing(); // 초기 호출
   </script>
 </html>
