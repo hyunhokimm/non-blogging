@@ -11,26 +11,25 @@ exports.userPage = async (req, res) => {
     }
 
     const userInfo = await user.findOne({ where: { email: email } });
-    if (userInfo) res.render("login");
-    if (userInfo) {
-      const noteInfo = await notebook.findAll({
-        where: { connectUser: email },
-        attributes: ["noteId", "title", "content", "img", "connectUser"],
-      });
-      if (noteInfo.length === 0) {
-        return res.render("nonote");
-      }
-      let notebooks = [];
-      noteInfo.map((note) => {
-        notebooks.push(note.dataValues);
-      });
-
-      res.render("notebook", { user: userInfo, note: notebooks });
+    if (!userInfo) {
+      return res.render("login");
     }
+
+    const noteInfo = await notebook.findAll({
+      where: { connectUser: email },
+      attributes: ["noteId", "title", "content", "img", "connectUser"],
+    });
+
+    if (noteInfo.length === 0) {
+      return res.render("nonote");
+    }
+
+    const notebooks = noteInfo.map((note) => note.dataValues);
+
+    return res.render("notebook", { user: userInfo, note: notebooks });
   } catch (error) {
-    console.log(error);
-    res.st;
-    atus(500).send("접근 오류 발생");
+    console.error(error);
+    return res.status(500).send("접근 오류 발생");
   }
 };
 
