@@ -20,7 +20,7 @@ app.use(
     saveUninitialized: true, // client가 처음 접속할 때, 세션을 한 번 초기화 할건지?말건지?
     cookie: {
       httpOnly: true, // document.cookie로는 접속x
-      maxAge: 60 * 60 * 24,
+      maxAge: 60000,
     },
     secure: false, // https에서만 동작하도록 함
     store: new FileStore({
