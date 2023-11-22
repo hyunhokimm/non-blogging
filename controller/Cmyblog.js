@@ -33,23 +33,17 @@ exports.userPage = async (req, res) => {
   }
 };
 
+// 하나의 노트 상세페이지
 exports.userOneNote = async (req, res, next) => {
-  if (!req.session.user) return res.render("login");
-  console.log(req.params.noteId);
   try {
     const noteId = req.params.noteId;
 
-    const userEmail = req.session.user;
-
-    const noteOne = await notebook.findOne({
+    let noteOne = await notebook.findOne({
       attributes: ["noteId", "title", "content", "img", "connectUser"], // 선택할 열을 지정합니다
       where: {
-        noteId: noteId,
-        connectUser: userEmail, // 쿼리에 사용자 이메일을 포함합니다.
+        noteId: noteId, // 쿼리에 사용자 이메일을 포함합니다.
       },
     });
-
-    console.log(noteOne);
 
     if (!noteOne) {
       // 노트를 찾을 수 없는 경우 처리

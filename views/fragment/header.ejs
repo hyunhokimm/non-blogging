@@ -21,6 +21,7 @@
 
 <script>
   const logout = () => {
+    localStorage.removeItem("user");
     axios.get("/user/logout");
   };
 
