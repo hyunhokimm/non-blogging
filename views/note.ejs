@@ -184,44 +184,42 @@
             <!-- table-->
             <table class="table table-hover table-borderless">
               <tbody>
-                <tr>
-                  <!-- <th scope="row"></th> -->
-                  <td colspan="2">
-                    <p class="pb-1 mb-0 small lh-sm">
-                      <strong class="d-block ">@username1</strong>
-                      Today’s special moments are tomorrow’s memories. - Aladdin(임시댓글)
-                    </p>
-                    <hr>
-                  </td>
-                  <td>02:05</td>
-                </tr>
-
-                <tr>
-                  <!-- <th scope="row"></th> -->
-                  <td colspan="2">
-                    <p class="pb-1 mb-0 small lh-sm">
-                      <strong class="d-block ">@username2</strong>
-                      You cannot be happy every day. But there are happy things every day. - Winnie the Pooh(임시댓글)
-                    </p>
-                    <hr>
-                  </td>
-                  <td>02:05</td>
-
-                </tr>
-
+                <!-- 댓글 관련된 코드는 유지 -->
+                <% for(let i = 0; i < comment.length; i++) { %>
+                  <tr id="tr_<%=comment[i].commentId%>">
+                    <td colspan="2">
+                        <p class="pb-1 mb-0 small lh-sm">
+                          <strong class="d-block "><%= comment[i].user ? comment[i].user.dataValues.nickname : 'Unknown User' %></strong>
+                          <%= comment[i].commentWrite %>
+                        </p>
+                        <hr>
+                      </td>
+                      <td>
+                        <% if (comment[i].createdAt.getTime() !== comment[i].updatedAt.getTime()) { %>
+                          수정된 시간: <%= comment[i].updatedAt.toLocaleString() %>
+                        <% } else { %>
+                          등록한 시간: <%= comment[i].createdAt.toLocaleString() %>
+                        <% } %>
+                        <% if(comment[i].email == user.email) { %>
+                          <button type="button" onclick="updateComment('<%= comment[i].commentId %>')" class="btn addComment justify-content-end showCommentEditBtn">수정</button>
+                          <button type="button" onclick="deleteComment('<%= comment[i].commentId %>')" class="btn addComment justify-content-end showCommentEditBtn">삭제</button>
+                        <% } else { %>
+                        <% }  %>
+                      </td>
+                  </tr>
+                  <% } %>
               </tbody>
             </table>
             <form name="inputComment">
               <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
-          </div>
-
-          <div align="right">
-            <div id="noComment"></div>
-            <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
-          </div>
+              <input type="hidden" name="noteId" value="<%= note.noteId %>" disabled/>
+              <input type="hidden" name="email" value="<%= user.email %>" disabled/>              
+              <div align="right" class="commentBtnGroup">
+                <div id="noComment"></div>
+                <button type="button" onclick="addComment()" class="btn addComment justify-content-end" id="commentTextareaBtn">작성</button>
+              </div>
           </form>
         </div>
-
     </main>
     <!-- ------------footer------------ -->
 
@@ -249,100 +247,36 @@
       //   thumbnailBox.style.display = "block";
       // }
 
-      //--------------------댓글 작성 시간 가져오기
-      function getNowTime() {
-        let now = new Date();
-        let hours = now.getHours();
-        let minutes = now.getMinutes();
-
-        // Add leading zeros if necessary
-        hours = (hours < 10 ? "0" : "") + hours;
-        minutes = (minutes < 10 ? "0" : "") + minutes;
-
-        return hours + ":" + minutes;
+      function cancelUpdateComment(){
+        location.reload();
       }
-      //--------------------댓글 작성 시 랜덤 아이디값 주기
 
-      function randomCommentId() {
-        const timestamp = new Date().getTime();
-        const randomNumber = Math.floor(Math.random() * 1000000);
-
-        return `${timestamp}_${randomNumber}`;
-      }
       //--------------------댓글 등록
-      function addComment() {
+      function addComment(){
         let commentText = document.getElementById("commentTextarea").value;
-
-        //작성된 내용 없으면 false값 내보내서 작성 안되게 하기
         let textElement = document.getElementById("noComment");
         if (commentText.trim() === "") {
-          // Display a message prompting the user to enter a comment
           textElement.textContent = "작성된 내용이 없습니다.😅";
           return false;
         } else {
-          // Clear the message
           textElement.textContent = "";
         }
-
-        //테이블 행 추가
-        let newRow = document.createElement("tr");
-
-        let td1 = document.createElement("td");
-        td1.setAttribute("colSpan", "2");
-        let td2 = document.createElement("td");
-
-        let commentParagraph = document.createElement("p");
-
-        let strongUsername = document.createElement("p");
-        strongUsername.classList.add("d-bock");
-
-        commentParagraph.appendChild(strongUsername);
-        commentParagraph.appendChild(document.createTextNode(commentText));
-
-        td1.appendChild(commentParagraph);
-
-        const randomId = randomCommentId()
-
-        td1.innerHTML = `<p class = "commentText pb-1 mb-0 small lh-sm" id= "${randomId}">${commentText}</p> <hr/>`
-        td1.prepend(strongUsername);
-        strongUsername.innerText = "nickname"; //어떻게 가져오지^^ 로컬에 저장된 유저의 닉네임..
-
-        const getTime = getNowTime();
-        td2.innerHTML = `${getTime} <button type="button" onclick="editComment()" id="editCommentBtn" class="btn addComment justify-content-end showCommentEditBtn">수정</button><button type="button" onclick="deleteComment()" id="deleteCommentBtn" class="btn addComment justify-content-end showCommentEditBtn">삭제</button>`
-
-        newRow.appendChild(td1);
-        newRow.appendChild(td2);
-
-        let commentTableBox = document.querySelector("tbody");
-        commentTableBox.appendChild(newRow);
-
-        //작성된 내용 지우기
-        document.getElementById("commentTextarea").value = "";
-
-        //axios 작성한 댓글 데이터 보내기 (userId 아직 ^^ 로컬에 저장된 아이디와 비교?)
-        //댓글 작성한 데이터는 담겨짐.
-        const commentWrite = `${commentText}`
-        const commentId = `${randomId}`
+        const form = document.forms["inputComment"];
 
         const data = {
-          commentWrite,
-          commentId
-        }
-        console.log("댓글등록 data", data)
+          commentWrite: form.comment.value,
+          noteId: form.noteId.value,
+          email: form.email.value,
+        };
 
         axios({
-            method: "post",
-            url: "/notebook/:noteId/comment",
-            data: data
-
-          }).then((result) => {
-            console.log("댓글작성 axios result", result);
-          })
-          .catch((err) => {
-            console.log("댓글작성 axios err", err);
-          });
-
-
+          method: "post",
+          url: `/notebook/${'<%= note.noteId %>'}/comment`,
+          data: data
+        }).then((res)=>{
+          // alert("댓글 달기 성공!");
+          location.reload();
+        })
       }
 
       //--------------------댓글 삭제 (본인 댓글만 삭제할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
@@ -352,114 +286,22 @@
       //로그인한 유저(로그인한 값이 null이 아니면서)이면서 + 댓글작성자의 idr가 같아야 한다.
       //그럼 댓글 작성하면서 로그인한 userId값을 보내야한다?
       //댓글 작성하면서 로그인한 본이 id를 같이 보내야하네
-      function deleteComment() {
-        let commentTableBox = document.querySelector("tbody");
-
-        commentTableBox.addEventListener("click", async function(event) {
-          if (event.target.id === "deleteCommentBtn") {
-            let userConfirmed = window.confirm("정말 삭제하시겠습니까??");
-
-            if (userConfirmed) {
-              let findRow = event.target.closest('tr');
-              if (findRow) {
-                let commentIdElement = findRow.querySelector('.commentText');
-                let commentId = commentIdElement ? commentIdElement.id : "";
-                let commentText = commentIdElement ? commentIdElement.textContent : "";
-
-                if (!commentId || !commentText) {
-                  console.error("Error: CommentId or CommentText not found.");
-                  return;
-                }
-
-                findRow.remove();
-
-                console.log("삭제 data:", {
-                  commentText: commentText,
-                  commentId: commentId
-                });
-
-                try {
-                  let result = await axios.delete(`/notebook/${noteId}/comment/${commentId}`, {
-                    data: {
-                      commentText: commentText,
-                      commentId: commentId
-                    }
-                  });
-
-                  console.log("댓글삭제 axios result", result);
-                } catch (err) {
-                  console.log("댓글삭제 axios err", err);
-                }
-              }
-            }
-          }
-        }, {
-          once: true
-        });
+      function deleteComment(commentId) {
+        let userConfirmed = window.confirm("정말 삭제하시겠습니까??");
+        if(userConfirmed){
+          axios({
+            method: 'delete',
+            url: `/notebook/${'<%= note.noteId %>'}/comment/${commentId}`
+          }).then((res) => {
+            alert("댓글을 삭제했습니다.");
+            location.reload();
+          }).catch((err) => {
+            alert("댓글을 삭제할 수 없습니다.");
+          })
+        }
       }
 
-      //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.)
-
-      function editComment() {
-        let editButton = document.querySelectorAll("#editCommentBtn");
-        editButton.forEach(function(editBtn) {
-          editBtn.addEventListener("click", function() {
-            commentParagraph = this.parentNode.parentNode.querySelector(".commentText");
-            // console.log("commentParagraph???", commentParagraph.textContent)
-
-            let editTextarea = document.createElement("textarea");
-            editTextarea.classList.add("form-control");
-            commentParagraph.appendChild(editTextarea);
-            editTextarea.value = commentParagraph.textContent;
-            //작성한 값으로 변경
-            commentParagraph.parentNode.replaceChild(editTextarea, commentParagraph);
-
-            //수정완료 버튼 추가
-            let saveButton = document.createElement("button");
-            this.parentNode.appendChild(saveButton);
-            saveButton.textContent = "수정 완료";
-            saveButton.classList.add("btn", "save-comment", "editOkComment");
-
-            //수정완료 버튼 이벤트
-            saveButton.addEventListener("click", function() {
-              saveEditedComment(editTextarea, commentParagraph);
-            });
-
-            //댓글 수정 버튼 클릭 이벤트
-            function saveEditedComment(editTextarea, commentParagraph) {
-              let editedText = editTextarea.value;
-
-              let addNewComment = document.createElement("p");
-              addNewComment.classList.add("commentText", "pb-1", "mb-0", "small", "lh-sm");
-              const randomId = randomCommentId()
-              addNewComment.id = `${randomId}`;
-              newRandomId = addNewComment.id;
-
-              addNewComment.appendChild(document.createTextNode(editedText));
-
-              console.log("수정된 댓글:", editedText);
-              console.log("수정된 랜덤아이디값:", newRandomId);
-
-              editTextarea.parentNode.replaceChild(addNewComment, editTextarea);
-              saveButton.remove();
-
-              axios.patch("/notebook/:noteId/comment/:commentId", {
-                  editedText: editedText,
-                  newRandomId: newRandomId
-                })
-                .then((result) => {
-                  console.log("댓글수정 patch result", result);
-                })
-                .catch((err) => {
-                  console.log("댓글수정 patch err", err);
-                });
-
-
-
-            }
-          })
-        })
-      };
+      //--------------------댓글 수정 (본인 댓글만 수정할 수 있어야 하니 user id 값에 따라 삭제 버튼 안보이도록.
       //--------------------댓글 수정 삭제 버튼 visibility
       //user가 작성한 댓글에 있는 commentId 유무에 따라.
       //*user가 해당 commentId를 가지고 있느냐 없느냐.
@@ -468,18 +310,43 @@
       // let commentId = "writer1"
       // let userId = "writer1"
 
-      function commentEditBtnShow(commentId, userId) {
-        const showCommentEditBtn = document.getElementsByClassName("showCommentEditBtn")
+      function updateComment(commentId) {
+        axios({
+          method: 'get',
+          url: `/notebook/${'<%= note.noteId %>'}/comment/${commentId}`,
+        }).then((res) => {
+          const { commentWrite, nickname } = res.data;
+          const form = document.forms['inputComment'];
+          form.comment.value = commentWrite;
+        });
 
-        if (userId) {
-          if (commentId === userId) {
-            showCommentEditBtn.style.visibility = "visible";
-          } else {
-            showCommentEditBtn.style.visibility = "hidden";
-          }
-        }
+        var btnGroup = document.querySelector(".commentBtnGroup");
+          btnGroup.innerHTML = `
+            <button type="button" onclick="updateCommentConfirm('${commentId}')" class="btn addComment justify-content-end" id="commentTextareaBtn">수정하기</button>
+            <button type="button" onclick="cancelUpdateComment()" class="btn addComment justify-content-end">수정 취소</button>
+        `;
       }
-      commentEditBtnShow("writer1", "writer3")
+
+      function updateCommentConfirm(commentId) {
+        const form = document.forms["inputComment"];
+
+        const data = {
+          commentWrite: form.comment.value,
+        };
+
+        axios({
+          method: "patch",
+          url: `/notebook/${'<%= note.noteId %>'}/comment/${commentId}`,
+          data: data
+        }).then((res) => {
+          console.log(res.data.result);
+          // alert("댓글 수정 성공!");
+          location.reload();
+        }).catch((err) => {
+          console.log(err);
+          alert("댓글 수정 실패");
+        })
+      }
 
       //--------------------게시글 수정 삭제 버튼 visibility
       //user가 작성한 노트에 있는 noteId 유무에 따라.
