@@ -37,7 +37,7 @@
             <div style="display: flex; align-items:center; justify-content: space-around;" class="border rounded-1 p-3">
               <img style="padding: 1rem; width: 300px; height: 100%; object-fit: cover;" src="http://<%=note[0].img%>" alt="Image" />
               <div class="text-container" style="font-size: 17px">
-                <%= note[0].title %>
+                <%= removeHtmlTags(note[0].title) %>
                 <p style="margin-top: 10px; font-size: 13px">
                   <%= removeHtmlTags(note[0].content) %>
                 </p>
@@ -67,9 +67,9 @@
                     " class="border rounded-1 p-3">
                     <img style="height: auto; width: 60%; padding: 1rem" src="http://<%=noteInfo.img%>" alt="Image" onerror="handleImageError(this, '<%= alternativeImagePath %>')" />
                     <div class="text-container" style="font-size: 17px">
-                      <%= note[0].title %>
+                      <%= removeHtmlTags(note[0].title) %>
                       <p style="margin-top: 10px; font-size: 13px" id="tag">
-                        <%= noteInfo.content %>
+                        <%= removeHtmlTags(note[0].content) %>
                       </p>
                     </div>
                   </div>
