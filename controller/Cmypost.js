@@ -1,5 +1,6 @@
 const { notebook, user, comment } = require("../model");
 const { home } = require("./Chome");
+const { userPage, userOneNote } = require("./Cmyblog");
 
 // 게시물 전체 페이지 보여주기
 exports.notebook = async (req, res) => {
@@ -106,7 +107,7 @@ exports.editNote = async (req, res, next) => {
       // 업데이트 성공
       console.log(`${update} update`);
       // 업데이트 성공 시 note 페이지를 렌더링해서 클라이언트에게 보냄
-      return res.render("note", { note: note });
+      userOneNote(req, res);
     } else {
       // 해당하는 노트가 없는 경우
       console.log("No rows updated.");
@@ -126,7 +127,8 @@ exports.deleteNote = async (req, res, next) => {
   const { noteId } = req.params;
   try {
     await notebook.destroy({ where: { noteId: noteId } });
-    return res.send("ok");
+
+    userPage(req, res);
   } catch (err) {
     next(err);
   }
