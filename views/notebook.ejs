@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My blog</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       * {
         font-family: "Noto Serif KR", serif;
         color: #78715e;
-      }
-
-      #footer {
-        font-weight: 100;
-        background-color: #ece8e4;
-        padding: 20px;
       }
     </style>
     <script>
@@ -35,12 +21,14 @@
     </script>
   </head>
   <body style="background-color: #ece8e4">
+    <% const alternativeImagePath = '/noImage.png'; %>
     <div>
       <header><%- include ('fragment/header') %></header>
       <div style="margin: 30px">
         <div>
           <h3 style="text-align: center">
             <%= user.email%> 님 안녕하세요. 오늘도 좋은 글 남겨주세요.
+
           </h3>
           <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
           ''); } %>
@@ -54,8 +42,9 @@
                 src="http://<%=note[0].img%>"
                 alt="Image"
               />
+
               <div class="text-container" style="font-size: 17px">
-                <%= note[0].title %>
+                <%= removeHtmlTags(note[0].title) %>
                 <p style="margin-top: 10px; font-size: 13px">
                   <%= removeHtmlTags(note[0].content) %>
                 </p>
@@ -65,44 +54,29 @@
           <div>
             <% const onblogging = () => { %> location.href = "/notebook/write";
             <% }; %>
-            <button
-              type="button"
-              onclick="onblogging()"
-              class="btn mb-4"
-              style="
+            <button type="button" onclick="onblogging()" class="btn mb-4" style="
                 width: 100%;
                 height: 50px;
                 color: white;
                 background-color: #ae7f5f;
-              "
-            >
+              ">
               Blogging 하기
             </button>
 
             <div class="row" style="margin: 0 0.1%">
               <% note.map(noteInfo => { %>
               <div class="col-md-6">
-                <a
-                  style="text-decoration: none"
-                  href="/notebook/<%=noteInfo.noteId%>"
-                >
-                  <div
-                    style="
+                <a style="text-decoration: none" href="/notebook/<%=noteInfo.noteId%>">
+                  <div style="
                       display: flex;
                       align-items: center;
                       margin-bottom: 50px;
-                    "
-                    class="border rounded-1 p-3"
-                  >
-                    <img
-                      style="height: auto; width: 60%; padding: 1rem"
-                      src="http://<%=noteInfo.img%>"
-                      alt="Image"
-                    />
+                    " class="border rounded-1 p-3">
+                    <img style="height: auto; width: 60%; padding: 1rem" src="http://<%=noteInfo.img%>" alt="Image" onerror="handleImageError(this, '<%= alternativeImagePath %>')" />
                     <div class="text-container" style="font-size: 17px">
-                      <%= noteInfo.title %>
+                      <%= removeHtmlTags(note[0].title) %>
                       <p style="margin-top: 10px; font-size: 13px" id="tag">
-                        <%= removeHtmlTags(noteInfo.content) %>
+                        <%= removeHtmlTags(note[0].content) %>
                       </p>
                     </div>
                   </div>
@@ -113,29 +87,38 @@
           </div>
         </div>
       </div>
-      <footer><%- include ('fragment/footer') %></footer>
-    </div>
-    <%- include ('fragment/functions') %>
+      <footer>
+        <%- include ('fragment/footer') %>
+      </footer>
 
-    <script>
-      const extractTextPattern = /(<([^>]+)>)/gi;
 
-      let target = document.getElementById("tag");
+      <%- include ('fragment/functions') %>
 
-      let src = target.innerHTML;
-      let extractedText = src.replace(extractTextPattern, "");
-      setTimeout(() => {
-        target.innerHTML = extractedText;
-      }, 500);
 
-      const onblogging = () => {
-        location.href = "/notebook/write";
-      };
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
+      <script>
+        const extractTextPattern = /(<([^>]+)>)/gi;
+
+        let target = document.getElementById("tag");
+
+        let src = target.innerHTML;
+        console.log(src);
+        let extractedText = src.replace(extractTextPattern, "");
+        console.log(extractedText);
+        setTimeout(() => {
+          target.innerHTML = extractedText;
+        }, 500);
+
+        const onblogging = () => {
+          location.href = "/notebook/write";
+        };
+
+        function handleImageError(img, alternativeImagePath) {
+          img.src = alternativeImagePath;
+          img.alt = "대체 이미지";
+        }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
   </body>
 </html>

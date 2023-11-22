@@ -21,8 +21,8 @@ function notebook(sequelize, DataTypes) {
       },
       // 이미지
       img: {
-        type: DataTypes.STRING(30),
-        allowNull: true,
+        type: DataTypes.STRING(100),
+        allowNull: false,
       },
       // 노트 공개 여부 (default: public /  1: public, 0: private)
       isPublic: {

@@ -3,12 +3,11 @@ const { Comment } = require("../model");
 // 댓글 달기
 exports.uploadComment = (req, res) => {
     const { noteId } = req.params;
-    const { commentWrite, email } = req.body;
+    const { commentWrite } = req.body;
 
     Comment.create({
         commentWrite: commentWrite,
         noteId: noteId,
-        email: email,
     }).then((result) => {
         res.json(result);
     }).catch((err) => {
