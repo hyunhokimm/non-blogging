@@ -1,4 +1,4 @@
-![logo](https://github.com/hyunhokimm/non-blogging/assets/129264045/b7110646-a76c-4bd0-ba7c-554016898595)
+![logo](https://github.com/hyunhokimm/non-blogging/assets/129264045/e5d8f321-5495-4061-978c-179b77e7ce6f)
 
 <br />
 <h3 id="infoProject">📜(n)on-blogging?</h3>
