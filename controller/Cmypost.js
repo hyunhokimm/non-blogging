@@ -27,7 +27,7 @@ exports.createNote = async (content, req, res) => {
       id: content.noteId,
       title: content.title,
       content: content.content,
-      img: `localhost:3000/uploads/${content.img.filename}`,
+      img: `http://101.101.219.106:3000/uploads/${content.img.filename}`,
       connectUser: email,
     });
 

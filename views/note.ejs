@@ -150,7 +150,7 @@
       %>
       <!-- 썸네일 영역 -->
       <div class="container thumbnailBox mx-auto m-1" id="thumbnailBox">
-        <img src="http://<%=note.img%>" class="img-responsive center-block d-block mx-auto polaroid" />
+        <img src="<%=note.img%>" class="img-responsive center-block d-block mx-auto polaroid" />
 
 
         <!-- ------------게시글 수정 삭제 버튼------------ -->
@@ -200,7 +200,7 @@
               </tbody>
             </table>
             <form name="inputComment">
-              <textarea class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
+              <textarea style="justify-content: space-between;" class="form-control" id="commentTextarea" rows="3" name="comment" placeholder="댓글을 작성해주세요."></textarea>
           </div>
 
           <div align="right">
@@ -259,6 +259,7 @@
       }
       //--------------------댓글 등록
       function addComment() {
+        
         let commentText = document.getElementById("commentTextarea").value;
 
         //작성된 내용 없으면 false값 내보내서 작성 안되게 하기
