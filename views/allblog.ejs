@@ -174,6 +174,8 @@
     <% function removeHtmlTags(input) { return input.replace(/<[^>]*>/g,
       ''); } %>
 
+    <% const alternativeImagePath = '/noImage.png'; %>
+
     <!-- ------------main------------ -->
     <main>
       <!-- 상단 박스 (이미지, 콘텐츠) 영역 -->
@@ -219,7 +221,7 @@
                   </div>
 
                   <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
-                    <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
+                    <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImageError(this, '<%= alternativeImagePath %>')" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
                   </div>
                 </div>
               </div>
@@ -242,6 +244,13 @@
     <script>
       function goToBlog(noteId) {
         window.location.href = `/notebook/${noteId}`;
+      }
+
+
+
+      function handleImageError(img, alternativeImagePath) {
+        img.src = alternativeImagePath;
+        img.alt = '대체 이미지';
       }
     </script>
 
