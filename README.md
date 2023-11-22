@@ -1,22 +1,48 @@
-<h1 id="pjTitle">(n)on-blogging</h1>
+![logo](https://github.com/hyunhokimm/non-blogging/assets/129264045/b7110646-a76c-4bd0-ba7c-554016898595)
 
-<p id="pjMember">이은실, 양현정, 명길식, 김현호 의 팀프로젝트 😊</p>
-
+<br />
 <h3 id="infoProject">📜(n)on-blogging?</h3>
 <p id="introProject">
-blogging is happy. enjoy✌️<br />
+blogging is happy. enjoy✌️
+<hr />
 '블로깅은 즐거워~'를 모티브로 하는<br />
 (n)on blogging은<br />
 블로깅에 대한 부담을 줄여줍니다.
-여러분은 다른 사람들과의 Communication을 통해 행복할 것이고.<br />(n)on blogging은 당신을 도울 것입니다.<br />
------<br />
+여러분은 다른 사람들과의 소통을 통해 행복할 것이고.<br />(n)on blogging은 당신을 도울 것입니다.<br />
+<hr />
 With the motif of ‘blogging is fun~’<br />
 (n)on blogging<br />
 It reduces the burden of blogging.
 You will be happy through communication with other people.<br />(n)on blogging will help you.
+<hr />
 ✿ Enjoy & Happy to BLog '◡'✿</p>
 
-<h3 id="useTechStack">✏️사용 기술 및 툴</h3>
+<br />
+<h3 id="pjMember">🫱🏻‍🫲🏻Member</h3>
+<div id="hh" style="text-weight: bold">김현호</div>
+  <ul>
+    <li>Full</li>
+    <li><img src="https://img.shields.io/badge/-181717?style=flat-square&logo=GitHub&logoColor=white"/>
+: <a href="https://github.com/hyunhokimm" target="_blank">@hyunhokimm</a></li>
+  </ul>
+<div id="KrillM" style="text-weight: bold">명길식</div>
+  <ul>
+    <li>BACK</li>
+    <li><img src="https://img.shields.io/badge/-181717?style=flat-square&logo=GitHub&logoColor=white"/>: <a href="https://github.com/KrillM" target="_blank">@KrillM</li>
+  </ul>
+<div id="hyeoonjeoong" style="text-weight: bold">양현정</div>
+  <ul>
+    <li>FRONT</li>
+    <li><img src="https://img.shields.io/badge/-181717?style=flat-square&logo=GitHub&logoColor=white"/>: <a href="https://github.com/hyeoonjeoong" target="_blank">@hyeoonjeoong</li>
+  </ul>
+<div id="siri" style="text-weight: bold">이은실</div>
+  <ul>
+    <li>BACK</li>
+    <li><img src="https://img.shields.io/badge/-181717?style=flat-square&logo=GitHub&logoColor=white"/>: <a href="https://github.com/heysirilee" target="_blank">@heysirilee</li>
+  </ul>
+
+<br />
+<h3 id="useTechStack">✏️Technologies and tools used</h3>
 <div>
   <p>EJS</p>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
@@ -36,22 +62,20 @@ You will be happy through communication with other people.<br />(n)on blogging w
   <img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=flat&logo=Visual%20Studio%20Code&logoColor=white" />
 </div>
 
-<h3 id="getStart">✏️설치 방법</h3>
-
-<p>FrontEnd 서버 실행</p>
+<br />
+<h3 id="getStart">✏️Installation method</h3>
+<p>Develop 서버 실행</p>
   <pre><code>
-    npm init
-    npm install nodemon --save-dev
+    npm i
     npm run dev
   </code></pre>
-<p>BackEnd 서버 실행</p>
+<p>Production 서버 실행</p>
    <pre><code>
-    npm init
-    npm install nodemon --save-dev
+    npm i
     npm run start
     </code></pre>
 
-<h3 id="folderStructure">🗂️폴더 구조</h3>
+<h3 id="folderStructure">🗂️Folder Structure</h3>
     <pre><code>
     📦non-blogging
  ┣ 📂config
@@ -103,8 +127,4 @@ You will be happy through communication with other people.<br />(n)on blogging w
  ┗ 📜README.md
     </code></pre>
 
-# 여기서 부터
-
-npm i 로 패키지 모듈 다운로드
-
-<p>And Happy coding, everyone ✌️</p>
+<h2>And Happy coding, everyone ✌️</h2>
