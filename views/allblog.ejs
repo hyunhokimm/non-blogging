@@ -109,6 +109,8 @@
 
     }
 
+
+
     /* .profileBox{
       position: fixed;
       top: 10px;
@@ -196,7 +198,7 @@
           <div class="profileBox col-md-2 d-none d-lg-block">
             <div class="myBox row g-0 flex-md-row mb-4 h-md-250 position-fixed " id="myBox" style="width: 160px; height: 200px;  background-color: #ece8e4;">
               <div class="col p-4  d-flex flex-column position-static">
-                <h3 class="mb-0">Hi,<br /> loopy!</h3><br />
+                <h3 class="mb-0">Hi,<br /> there!</h3><br />
                 <p class="card-text mb-auto">친구들의<br />블로그를 <br />둘러보세요!</p>
               </div>
               <div class="col-auto d-none d-lg-block">
@@ -204,29 +206,30 @@
             </div>
           </div>
 
-          <% blogs.forEach((blog) => { %>
-            <div class="col-md-5">
-              <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <h3 class="mb-0"><%= blog.title %></h3>
-                  <p class="card-text mb-auto"><%= removeHtmlTags(blog.content) %></p>
-                  <a href="<%= blog.noteId %>" class="btn btn-outline-secondary">Go</a>
-                </div>
-          
-                <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
-                  <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
+          <div class="col-md-10">
+            <!-- 부모 요소 추가 -->
+            <div class="row " style="justify-content: space-around;">
+              <% blogs.forEach((blog) => { %>
+              <div class="col-md-5 mb-4 px-0">
+                <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0"><%= blog.title %></h3>
+                    <p class="card-text mb-auto"><%= removeHtmlTags(blog.content) %></p>
+                    <a href="<%= blog.noteId %>" class="btn btn-outline-secondary">Go</a>
+                  </div>
+
+                  <div class="col-auto d-flex align-items-center justify-content-center" style="background-color: #e0e0e0; width: 200px; height: 250px; overflow: hidden;">
+                    <img src="http://<%=blog.img%>" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" alt="썸네일" aria-label="Placeholder: Thumbnail" focusable="false">
+                  </div>
                 </div>
               </div>
+              <% }); %>
             </div>
-          <% }); %>
-          
-          
+          </div>
+        </div>
+      </div>
 
 
-
-
-
-     
 
 
 
