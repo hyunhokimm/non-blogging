@@ -2,7 +2,7 @@ const { user } = require("../model");
 const crypto = require("crypto");
 
 exports.signup = (req, res) => {
-  res.render("signup");
+  return res.render("signup");
 };
 
 // 회원가입 진행
