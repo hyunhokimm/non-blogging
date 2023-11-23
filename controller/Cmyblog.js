@@ -1,8 +1,6 @@
-const { notebook } = require("../model");
-const { user } = require("../model");
+const { user, notebook, comment } = require("../model");
 
 // 사용자 페이지
-
 exports.userPage = async (req, res) => {
   try {
     const email = req.session.user;
@@ -45,6 +43,12 @@ exports.userOneNote = async (req, res, next, noteid) => {
 
     const userEmail = req.session.user;
 
+    const comments = await comment.findAll({
+      where: { noteId: req.params.noteId },
+      include: [{ model: user, attributes: ["nickname"] }],
+      order: [["noteId", "ASC"]],
+    });
+
     let noteOne = await notebook.findOne({
       attributes: ["noteId", "title", "content", "img", "connectUser"], // 선택할 열을 지정합니다
       where: {
@@ -60,6 +64,7 @@ exports.userOneNote = async (req, res, next, noteid) => {
     res.render("note", {
       note: noteOne,
       user: userEmail,
+      comment: comments
     });
   } catch (error) {
     console.error(error);

@@ -1,4 +1,4 @@
-const { notebook, user, comment } = require("../model");
+const { notebook, user } = require("../model");
 const { home } = require("./Chome");
 const { userPage } = require("./Cmyblog");
 
@@ -45,12 +45,6 @@ exports.note = async (req, res, next) => {
     const email = req.session.user;
     console.log(email);
 
-    const comments = await comment.findAll({
-      where: { noteId: req.params.noteId },
-      include: [{ model: user, attributes: ["nickname"] }],
-      order: [["noteId", "ASC"]],
-    });
-
     const note = await notebook.findOne({
       attributes: [
         "noteId",
@@ -66,7 +60,7 @@ exports.note = async (req, res, next) => {
       },
     });
     console.log(note);
-    res.render("note", { note: note, user, comment: comments });
+    res.render("note", { note: note, user });
   } catch (error) {
     next(error);
   }
