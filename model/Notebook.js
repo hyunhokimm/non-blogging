@@ -21,7 +21,7 @@ function notebook(sequelize, DataTypes) {
       },
       // 이미지
       img: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(500),
         allowNull: false,
       },
       // 노트 공개 여부 (default: public /  1: public, 0: private)
@@ -37,6 +37,7 @@ function notebook(sequelize, DataTypes) {
         references: {
           model: "User",
           key: "email",
+          onDelete: "CASCADE",
         },
       },
     },

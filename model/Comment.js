@@ -18,6 +18,7 @@ function comment(Sequelize, DataTypes) {
         references: {
           model: "note",
           key: "noteId",
+          onDelete: "CASCADE",
         },
       },
       email: {
@@ -26,6 +27,7 @@ function comment(Sequelize, DataTypes) {
         references: {
           model: "user",
           key: "email",
+          onDelete: "CASCADE",
         },
       },
     },
