@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { user } = require("../model");
 
-// 프로필 화면 접근
+// 프로필 화면 보여주기
 exports.profilePage = (req, res) => {
     if(!req.session.user){
         res.render("signup");
@@ -25,7 +25,7 @@ exports.profilePage = (req, res) => {
     })
 }
 
-// 프로필 업데이트
+// 프로필 업데이트 
 exports.updateProfile = (req, res) => {
     if(!req.session.user){
         res.render("signup");
@@ -66,6 +66,7 @@ exports.updateProfile = (req, res) => {
     });
 }
 
+//비밀번호 암호화
 function hashPassword(password) {
     const salt = crypto.randomBytes(16).toString("hex");
     const hash = crypto

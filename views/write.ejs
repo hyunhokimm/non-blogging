@@ -119,13 +119,6 @@
       </section>
 
       <footer><%- include ('fragment/footer') %></footer>
-      <!-- <footer>
-        <div id="footer" style="text-align: center">
-          <p>non-blogging | 사업자등록번호 : 000-00-00000</p>
-          <p>주소 : 서울특별시 용산구 --동 | 대표번호 1644-0000</p>
-          <p>Copyright(c) 2023 non-blogging. All Rights Reserved.</p>
-        </div>
-      </footer> -->
 
       <script>
         const fileDOM = document.getElementById("file");
@@ -134,22 +127,21 @@
 
         const form = new FormData();
 
+        //img 클릭시 img 파일 제거
         const deleteImg = () => {
           selectImg.src = "";
         };
 
         function updateDisplayedTitle(value) {
-          // Assuming you have a span with id "displayedTitle" to show the title
           document.getElementById("displayedTitle").textContent = value;
         }
 
+        // img 파일과 텍스트 데이터 post 요청
         const blogging = () => {
           document.getElementById("err").innerHTML = "";
           const title = document.getElementById("title").value;
           const content = $("#summernote").summernote("code");
           const blog = { title, content };
-
-          // form.append('blog',JSON.stringify(blog))
 
           form.append("blog", JSON.stringify(blog));
 
@@ -165,7 +157,7 @@
               console.log(err);
             });
         };
-
+        //썸머노트 에디터 실행 함수
         $(document).ready(function () {
           $("#summernote").summernote({
             placeholder: "당신의 이야기를 들려주세요.😊",

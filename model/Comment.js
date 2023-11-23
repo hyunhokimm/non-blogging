@@ -1,3 +1,5 @@
+
+//시퀄라이즈 댓글 모델
 function comment(Sequelize, DataTypes) {
   return Sequelize.define(
     "comment",

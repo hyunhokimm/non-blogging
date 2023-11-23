@@ -28,21 +28,9 @@
       background-color: #ece8e4;
     }
 
-    /* .form-control {
-      border-radius: 5px;
-
-    } */
-    /* .custom-margin {
-    margin-left: 10px;
-  } */
     .btnBox {
       display: flex;
     }
-
-    /* ::placeholder {
-      text-align: center;
-      color: #717123;
-    } */
 
     #main {
       text-align: center;
@@ -53,9 +41,6 @@
   </style>
   <body>
     <div id="main" class="mx-auto py-5 mt-5" style="width: 30%">
-      <!-- <a href="" style="display: flex">
-        <img src="/logo.png" width="170px" class="mx-auto" alt="non-blog"
-      /></a> -->
       <a href="/">
         <img
           src="/logo.png"
@@ -75,7 +60,6 @@
           />
           <label for="floatingPassword">ID</label>
         </div>
-        <!-- <input type="text" placeholder="ID" class="mb-2 form-control err" style="border: none" id="email" /> -->
 
         <div class="form-floating" style="margin-bottom: 1rem">
           <input
@@ -85,7 +69,6 @@
             placeholder="PW"
           />
           <label for="floatingPassword">PW</label>
-          <!-- <input type="password" placeholder="PW" class="mb-2 form-control err" style="border: none" id="password" /> -->
         </div>
         <div id="noValue"></div>
         <div class="btnBox text-center mx-auto py-3" style="width: fit-content">
@@ -137,8 +120,8 @@
         console.log(data);
 
         axios({
-          method: "post", //^^
-          url: "/user/login", //^^ 컨트롤러에서 찾을수없어서 에러.. 일단 여기까지...
+          method: "post",
+          url: "/user/login",
           data: data,
         })
           .then((result) => {

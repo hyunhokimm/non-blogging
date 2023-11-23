@@ -1,6 +1,6 @@
 const { user, notebook } = require("../model");
 
-// allblog page
+// 모든 블로그들 페이지 보여주기
 exports.home = async (req, res) => {
   const email = req.session.user;
 

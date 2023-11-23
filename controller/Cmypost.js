@@ -13,7 +13,7 @@ exports.write = (req, res) => {
   return res.render("write", { note: null });
 };
 
-//게시물 등록 페이지
+//게시물 등록 
 exports.createNote = async (content, req, res) => {
   console.log(req.session.user);
 
@@ -38,6 +38,7 @@ exports.createNote = async (content, req, res) => {
   }
 };
 
+
 // 게시물 상세 페이지
 exports.note = async (req, res, next) => {
   try {
@@ -59,7 +60,6 @@ exports.note = async (req, res, next) => {
         noteId: noteId,
       },
     });
-    console.log(note);
     res.render("note", { note: note, user });
   } catch (error) {
     next(error);
@@ -97,7 +97,6 @@ exports.editNote = async (req, res, next) => {
       { title, content, img },
       { where: { noteId } }
     );
-    const note = { noteId, title, content, img };
     if (update > 0) {
       // 업데이트 성공
       console.log(`${update} update`);
@@ -128,20 +127,3 @@ exports.deleteNote = async (req, res, next) => {
     next(err);
   }
 };
-
-// exports.uploadNoteProcess = (req, res) => {
-//   const data = {
-//     title: req.body.title,
-//     content: req.body.content,
-//     userId: req.body.email,
-//   };
-//   notebook
-//     .create(data)
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).send("등록 오류 발생");
-//     });
-// };
