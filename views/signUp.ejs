@@ -114,25 +114,28 @@
       </section>
     </div>
     <script>
-      //{ email: varchar, nickname: varchar, password: varchar, checkpassword: varchar }
-
       const err = document.getElementById("err");
 
+      //텍스트 데이터 post 요청
       const signUp = () => {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const chpassword = document.getElementById("chpassword").value;
         const nickname = document.getElementById("nickname").value;
+
+        //이메일 value 에  @ 들어가지 않으면 err 메세지
         if (email.indexOf("@") == -1) {
           console.log(email.indexOf("@"), "err");
           return (err.innerHTML = "이메일 형식으로 입력해 주세요.");
         }
 
+        //칸이 채워지지 않으면 err 메세지
         if (!email || !password || !chpassword || !nickname) {
           return (err.innerHTML = "빈칸을 모두 채워주세요.");
         }
         err.innerHTML = "";
 
+        //패스워드와 패스워드 체크 값이 동일하지 않으면 err 메세지
         if (password != chpassword) {
           err.innerHTML = "비밀번호는 같아야 합니다.";
           setTimeout(() => {

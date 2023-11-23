@@ -1,6 +1,6 @@
 const { user, notebook, comment } = require("../model");
 
-// 사용자 페이지
+// 사용자 페이지 보여주기
 exports.userPage = async (req, res) => {
   try {
     const email = req.session.user;
@@ -31,7 +31,7 @@ exports.userPage = async (req, res) => {
   }
 };
 
-// 하나의 노트 상세페이지
+// 하나의 노트 상세페이지 보여주기
 exports.userOneNote = async (req, res, next, noteid) => {
   try {
     let noteId;
@@ -68,11 +68,11 @@ exports.userOneNote = async (req, res, next, noteid) => {
     });
   } catch (error) {
     console.error(error);
-    // 에러를 적절히 처리합니다. 예를 들어 에러 페이지를 렌더링할 수 있습니다.
     res.status(500).send(error);
   }
 };
 
+//유저 블로그들 페이지 보여주기
 exports.userNotebook = async (req, res) => {
   const currentUser = req.session.user;
 

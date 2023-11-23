@@ -1,12 +1,14 @@
 const { user } = require("../model");
 const crypto = require("crypto");
 
-// login.ejs > main 페이지
+// 로그인 페이지 보여주기
 exports.login = (req, res) => {
   console.log(req.session.user);
   res.render("login");
 };
 
+
+//로그인 함수
 exports.isLogin = (req, res) => {
   const { email, password } = req.body;
 
@@ -27,6 +29,7 @@ exports.isLogin = (req, res) => {
   });
 };
 
+// 비밀번호와 해쉬 비밀번호 비교하기
 function comparePassword(inputPassword, hashedPassword) {
   const [salt, expectedHash] = hashedPassword.split(":");
   const inputHash = crypto

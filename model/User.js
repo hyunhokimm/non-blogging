@@ -1,3 +1,5 @@
+
+//시퀄라이즈 유저 모델
 function user(Sequelize, DataTypes) {
   return Sequelize.define(
     "user",

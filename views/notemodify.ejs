@@ -91,6 +91,7 @@
                   </div>
               <div class="mb-3">
               
+                <!-- html 태그들 없애주는 함수 -->
                 <% function removeHtmlTags(input) { %>
                    <%   return input.replace(/<[^>]*>/g, '');
                    } %>
@@ -119,6 +120,7 @@
         </div>
       </section>
 
+      <!-- footer fragment -->
       <footer><%- include ('fragment/footer') %></footer>
 
      <script>
@@ -127,6 +129,7 @@ const selectImg = document.getElementById("selectedImg");
 const form = new FormData();
 
 
+// 수정 페이지 post 요청
 const modifyblogging = () => {
   document.getElementById("err").innerHTML = "";
   const title = document.getElementById("title").value;
@@ -156,6 +159,7 @@ const imgUrl = selectedImg.src;
   
 };
 
+//썸머노트 불러오기
 $(document).ready(function () {
   $("#summernote").summernote({
     placeholder: "당신의 이야기를 들려주세요.😊",

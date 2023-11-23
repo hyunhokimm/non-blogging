@@ -1,3 +1,5 @@
+
+//시퀄라이즈 블로그 모델
 function notebook(sequelize, DataTypes) {
   return sequelize.define(
     "notebook",
