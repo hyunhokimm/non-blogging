@@ -16,6 +16,7 @@ const {
 const { userPage, userOneNote } = require("../../controller/Cmyblog");
 
 const { userNotebook } = require("../../controller/Cmyblog"); // 수정
+const { uploadComment, getCommentById, updateCommentProcess, deleteComment } = require("../../controller/Ccomment"); // 댓글
 
 // 모든 블로그
 noteRoute.get("/allblog", home);
@@ -67,5 +68,15 @@ noteRoute.get("/notedelete/:noteId", (req, res, next) => {
   console.log(req);
   deleteNote(req, res, next);
 });
+
+// 댓글 달기
+noteRoute.post("/:noteId/comment", uploadComment);
+
+// 댓글 수정
+noteRoute.get("/:noteId/comment/:commentId", getCommentById);
+noteRoute.patch("/:noteId/comment/:commentId", updateCommentProcess);
+
+// 댓글 삭제
+noteRoute.delete("/:noteId/comment/:commentId", deleteComment);
 
 module.exports = noteRoute;

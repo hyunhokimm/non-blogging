@@ -1,12 +1,13 @@
-const { Comment } = require("../model");
+const { comment } = require("../model");
 
 // 댓글 달기
 exports.uploadComment = (req, res) => {
     const { noteId } = req.params;
-    const { commentWrite } = req.body;
+    const { commentWrite, email } = req.body;
 
-    Comment.create({
+    comment.create({
         commentWrite: commentWrite,
+        email: email,
         noteId: noteId,
     }).then((result) => {
         res.json(result);
@@ -18,7 +19,7 @@ exports.uploadComment = (req, res) => {
 
 // 선택한 댓글 읽어오기
 exports.getCommentById = (req, res) => {
-    Comment.findOne({
+    comment.findOne({
         where: {
             commentId: req.params.commentId
         }
@@ -34,7 +35,7 @@ exports.getCommentById = (req, res) => {
 
 // 댓글 수정 기능
 exports.updateCommentProcess = (req, res) => {
-    Comment.update(req.body, {
+    comment.update(req.body, {
         where: {
             commentId: req.params.commentId
         }
@@ -50,7 +51,7 @@ exports.updateCommentProcess = (req, res) => {
 
 // 댓글 삭제 기능
 exports.deleteComment = (req, res) => {
-    Comment.destroy({
+    comment.destroy({
         where: {
             commentId: req.params.commentId
         }
