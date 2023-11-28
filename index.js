@@ -53,6 +53,10 @@ const noteRoute = require("./routes/note");
 app.use("/user", userRoute);
 app.use("/notebook", noteRoute);
 
+app.get("*", (req, res) => {
+  res.render("404");
+});
+
 app.listen(port, function () {
   console.log(`http://localhost:${port}`);
 });

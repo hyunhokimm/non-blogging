@@ -1,11 +1,10 @@
 const express = require("express");
 const userRoute = express.Router();
-const { login, isLogin, logout } = require("../../controller/Clogin");
+const { login, isLogin } = require("../../controller/Clogin");
 const { signup, signupProcess } = require("../../controller/Csignup");
 
 const { user } = require("../../model");
 const { hashPassword } = require("../../controller/Csignup");
-
 
 // 로그인
 userRoute.get("/login", login);
@@ -77,6 +76,5 @@ userRoute.get("/logout", (req, res) => {
 
   return;
 });
-
 
 module.exports = userRoute;

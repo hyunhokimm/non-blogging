@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+  </head>
+  <body>
+    <div style="text-align: center; height: 400px; padding-top: 200px">
+      <h1>현재 없는 페이지 입니다.</h1>
+      <h1>아래의 버튼으로 이동해 주세요.</h1>
+      <button
+        style="
+          margin: 1rem;
+          background-color: burlywood;
+          border: none;
+          font-size: 20px;
+          padding: 1rem;
+          border-radius: 15px;
+          color: white;
+        "
+        type="button"
+        onclick="onMove()"
+      >
+        login
+      </button>
+    </div>
+    <script>
+      onMove = () => {
+        location.href = "/user/login";
+      };
+    </script>
+  </body>
+</html>

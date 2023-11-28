@@ -61,14 +61,14 @@ exports.userOneNote = async (req, res, next, noteid) => {
       return res.status(404).render("write");
     }
 
-    res.render("note", {
+    return res.render("note", {
       note: noteOne,
       user: userEmail,
-      comment: comments
+      comment: comments,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    return res.status(500).send(error);
   }
 };
 
@@ -82,14 +82,14 @@ exports.userNotebook = async (req, res) => {
   try {
     const result = await user.findOne({ where: { email: email } });
     if (result) {
-      notebook.findAll({ where: { currentUser: email } });
+      await notebook.findAll({ where: { currentUser: email } });
       console.log("조회 ", userResult, noteResult);
-      res.render("notebook", { user: userResult, note: noteResult });
+      return res.render("notebook", { user: userResult, note: noteResult });
     } else {
       res.render("login");
     }
   } catch (error) {
     console.log(userErr);
-    res.status(500).send("접근 오류 발생");
+    return res.status(500).send("접근 오류 발생");
   }
 };
